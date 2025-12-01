@@ -1,0 +1,75 @@
+:root {
+  --bg: #0a0a0a;
+  --fg: #fff;
+  --accent: #00ff88;
+  --gray: #888;
+  --border: #222;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'SF Mono', Monaco, monospace;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+}
+
+.container { max-width: 680px; margin: 0 auto; padding: 2rem; }
+
+header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+.logo { font-size: 2rem; font-weight: 700; }
+.logo span { color: var(--accent); }
+
+.hero { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.highlight { color: var(--accent); }
+.subtitle { color: var(--gray); margin-bottom: 2rem; }
+
+.signup-box {
+  background: #151515;
+  border: 2px solid var(--accent);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.signup-box p { color: var(--gray); font-size: 0.875rem; margin-bottom: 1rem; }
+.signup-form { display: flex; flex-direction: column; gap: 0.5rem; }
+.signup-form input {
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-family: inherit;
+}
+.signup-form button {
+  padding: 1rem;
+  background: var(--accent);
+  border: none;
+  color: var(--bg);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.link { color: var(--gray); font-size: 0.875rem; }
+.link:hover { color: var(--accent); }
+
+section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+h2 { text-align: center; margin-bottom: 2rem; }
+.problem-box {
+  background: #151515;
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+}
+.problem-box p { color: var(--gray); margin-bottom: 0.5rem; }
+.problem-box strong { color: var(--fg); }
+
+footer {
+  padding: 2rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+footer a { color: var(--gray); font-size: 0.875rem; }
+footer p { color: var(--gray); font-size: 0.75rem; }

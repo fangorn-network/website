@@ -1,0 +1,151 @@
+/* [project]/app/page.css [app-client] (css) */
+:root {
+  --bg: #0a0a0a;
+  --fg: #fff;
+  --accent: #0f8;
+  --gray: #888;
+  --border: #222;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: SF Mono, Monaco, monospace;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 0;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.hero {
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 0;
+}
+
+.hero h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.highlight {
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--gray);
+  margin-bottom: 2rem;
+}
+
+.signup-box {
+  border: 2px solid var(--accent);
+  background: #151515;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.signup-box p {
+  color: var(--gray);
+  margin-bottom: 1rem;
+  font-size: .875rem;
+}
+
+.signup-form {
+  flex-direction: column;
+  gap: .5rem;
+  display: flex;
+}
+
+.signup-form input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  padding: 1rem;
+  font-family: inherit;
+}
+
+.signup-form button {
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+  border: none;
+  padding: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.link {
+  color: var(--gray);
+  font-size: .875rem;
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+section {
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 0;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.problem-box {
+  border-left: 4px solid var(--accent);
+  background: #151515;
+  padding: 1.5rem;
+}
+
+.problem-box p {
+  color: var(--gray);
+  margin-bottom: .5rem;
+}
+
+.problem-box strong {
+  color: var(--fg);
+}
+
+footer {
+  text-align: center;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 2rem 0;
+  display: flex;
+}
+
+footer a {
+  color: var(--gray);
+  font-size: .875rem;
+}
+
+footer p {
+  color: var(--gray);
+  font-size: .75rem;
+}
+
+/*# sourceMappingURL=app_page_8948f311.css.map*/
