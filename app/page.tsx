@@ -7,6 +7,8 @@ export default function Home() {
   const [email, setEmail] = useState('');
 
   return (
+    <>
+    <div className="grain"></div>
     <div className="container">
       <header>
         <div className="logo"><span>//</span> FANGORN</div>
@@ -14,15 +16,16 @@ export default function Home() {
 
       <section className="hero">
         <h1>
-          Programmable Access Control
-          <span className="highlight"> for Decentralized Storage.</span>
+          Publish once.
+          <span className="highlight"> Set the terms forever.</span>
         </h1>
         <p className="subtitle">
-          Your files. Your rules. Set conditions for access. Cryptography enforces them.
+          You decide who can access your data and under what conditions.
+          Cryptography enforces it. No platform can change the deal.
         </p>
 
         <div className="signup-box">
-          <p>Join the waitlist for early access →</p>
+          <p>Be the first to know when we launch →</p>
           <form className="signup-form">
             <input
               type="email"
@@ -30,7 +33,7 @@ export default function Home() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button type="submit">Get Early Access</button>
+            <button type="submit">Get Updates</button>
           </form>
         </div>
 
@@ -38,10 +41,22 @@ export default function Home() {
       </section>
 
       <section>
-        <h2>The Primitive</h2>
+        <h2>The Problem</h2>
         <div className="problem-box">
-          <p><strong>Access control today is permission-based.</strong> You ask a server. The server decides.</p>
-          <p><strong>Fangorn makes access control cryptographic.</strong> Encrypt under conditions. Proof grants access. No trust required.</p>
+          <p>
+            <strong>Platforms own the relationship between you and your audience.</strong> They
+            control who sees your work, take their cut, and can change the rules whenever they want.
+            Your content lives on their terms, not yours.
+          </p>
+          <p>
+            <strong>Fangorn removes the middleman.</strong> Encrypt your data under conditions you
+            define — age verification, token ownership, proof of humanity, anything. Anyone who
+            proves they meet your conditions gets access. No platform in the loop. No permission
+            required.
+          </p>
+          <p>
+            Powered by threshold encryption. Built for a post-platform world.
+          </p>
         </div>
       </section>
 
@@ -51,5 +66,6 @@ export default function Home() {
         <p>Built by Ideal Labs · Apache 2.0</p>
       </footer>
     </div>
+    </>
   );
 }

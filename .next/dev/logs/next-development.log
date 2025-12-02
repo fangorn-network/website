@@ -1,3 +1,155 @@
-[00:00:10.168] Server  LOG      ✓ Ready in 8s
-[00:00:47.805] Server  LOG      ○ Compiling / ...
-[00:00:52.995] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:07.505] Server  LOG      ✓ Ready in 6.3s
+[00:00:35.108] Server  LOG      ○ Compiling / ...
+[00:00:42.004] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:42.123] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+                    <Home params={Promise} searchParams={Promise}>
+                      <div className="container">
+                        <header>
+                        <section className="hero">
+                          <h1>
+                          <p>
+                          <div className="signup-box">
+                            <p>
+                            <form className="signup-form">
+                              <input
+                                type="email"
+                                placeholder="your@email.com"
+                                value=""
+                                onChange={function onChange}
+-                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
+                              >
+                              ...
+                          ...
+                        ...
+                ...
+              ...
+
+[00:12:38.866] Server  LOG      ✓ Compiled in 303ms
+[00:12:41.939] Server  LOG      ✓ Compiled in 3ms
+[00:12:56.648] Server  LOG      ✓ Compiled in 5ms
+[00:13:00.860] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:13:00.860] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+                    <Home params={Promise} searchParams={Promise}>
+                      <div className="container">
+                        <header>
+                        <section className="hero">
+                          <h1>
+                          <p>
+                          <div className="signup-box">
+                            <p>
+                            <form className="signup-form">
+                              <input
+                                type="email"
+                                placeholder="your@email.com"
+                                value=""
+                                onChange={function onChange}
+-                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
+                              >
+                              ...
+                          ...
+                        ...
+                ...
+              ...
+
+[00:37:40.490] Server  LOG      ✓ Compiled in 1018ms
+[00:37:41.688] Server  LOG      ✓ Compiled in 5ms
+[00:38:08.789] Server  LOG      ✓ Compiled in 4ms
+[01:29:51.059] Server  LOG      ✓ Compiled in 353ms
+[01:29:58.152] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:25.592] Server  LOG      ✓ Compiled in 46ms
+[01:30:30.903] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:43:09.644] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:43:09.644] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+                    <Home params={Promise} searchParams={Promise}>
+                      <div>
+                      <div className="container">
+                        <header>
+                        <section className="hero">
+                          <h1>
+                          <p>
+                          <div className="signup-box">
+                            <p>
+                            <form className="signup-form">
+                              <input
+                                type="email"
+                                placeholder="your@email.com"
+                                value=""
+                                onChange={function onChange}
+-                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
+                              >
+                              ...
+                          ...
+                        ...
+                ...
+              ...
+
+[01:43:14.629] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:43:29.288] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:43:52.196] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:45:24.361] Server  LOG      ✓ Compiled in 197ms
+[01:45:43.512] Server  LOG      ✓ Compiled in 17ms
+[01:45:49.356] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:21:32.178] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -1,4 +1,69 @@
 /* [project]/app/page.css [app-client] (css) */
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: SF Mono, Monaco, monospace;
+  line-height: 1.6;
+}
+
+@keyframes grain {
+  0%, 100% {
+    transform: translate(0);
+  }
+
+  10% {
+    transform: translate(-5%, -10%);
+  }
+
+  20% {
+    transform: translate(-15%, 5%);
+  }
+
+  30% {
+    transform: translate(7%, -25%);
+  }
+
+  40% {
+    transform: translate(-5%, 25%);
+  }
+
+  50% {
+    transform: translate(-15%, 10%);
+  }
+
+  60% {
+    transform: translate(15%);
+  }
+
+  70% {
+    transform: translate(0%, 15%);
+  }
+
+  80% {
+    transform: translate(3%, 20%);
+  }
+
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .85;
+  }
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 :root {
   --bg: #0a0a0a;
   --fg: #fff;
@@ -16,19 +81,132 @@
 body {
   background: var(--bg);
   color: var(--fg);
+  min-height: 100vh;
   font-family: SF Mono, Monaco, monospace;
   line-height: 1.6;
+  position: relative;
+}
+
+body:before {
+  content: "";
+  pointer-events: none;
+  z-index: 100;
+  background: radial-gradient(#0000 0% 50%, #0009 100%);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+body:after {
+  content: "";
+  pointer-events: none;
+  z-index: 101;
+  background: repeating-linear-gradient(0deg, #00000026 0 1px, #0000 1px 2px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.grain {
+  opacity: .08;
+  pointer-events: none;
+  z-index: 102;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  width: 200%;
+  height: 200%;
+  animation: .5s steps(10, end) infinite grain;
+  position: fixed;
+  top: -50%;
+  left: -50%;
 }
 
 .container {
+  z-index: 1;
   max-width: 680px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
 }
 
 header {
   border-bottom: 1px solid var(--border);
   padding: 2rem 0;
+}
+
+.hero h1 {
+  text-shadow: -1px 0 #f006, 1px 0 #0ff6;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  position: relative;
+}
+
+.signup-box {
+  border: 2px solid var(--accent);
+  background: #151515cc;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px #00ff881a, inset 0 0 30px #0000004d;
+}
+
+.signup-form input:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 10px #00ff884d;
+}
+
+.signup-form button {
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+  text-shadow: none;
+  border: none;
+  padding: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all .1s;
+}
+
+.signup-form button:hover {
+  animation: .15s infinite flicker;
+  box-shadow: 0 0 20px #00ff8880, 0 0 40px #0f83;
+}
+
+.link {
+  color: var(--gray);
+  font-size: .875rem;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px #0f89;
+}
+
+h2 {
+  text-align: center;
+  text-shadow: -.5px 0 #ff00004d, .5px 0 #00ffff4d;
+  margin-bottom: 2rem;
+}
+
+.problem-box {
+  border-left: 4px solid var(--accent);
+  background: #151515cc;
+  padding: 1.5rem;
+  box-shadow: inset 0 0 30px #0000004d;
+}
+
+footer a {
+  color: var(--gray);
+  font-size: .875rem;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--accent);
 }
 
 .logo {
