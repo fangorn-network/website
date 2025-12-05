@@ -47,7 +47,7 @@ export default function Page() {
       <nav className="cs-nav">
         <div className="cs-logo">Fangorn</div>
         <div className="cs-nav-links">
-          <a href="https://github.com/aspect-labs/fangorn" target="_blank" rel="noopener noreferrer" className="cs-nav-link">GitHub</a>
+          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">GitHub</a>
           <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">X</a>
           <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer" className="cs-nav-link">Discord</a>
         </div>
