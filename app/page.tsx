@@ -1,71 +1,128 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './page.css';
 
-export default function Home() {
+export default function Page() {
   const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_WAITLIST_URL || 'https://script.google.com/macros/s/AKfycbyk7RMReJQPxdWGQ8JqVi-ECQguE4teqxP7Wq2NUGp97Dd51SiRCMC1t-440DMQXbMC/exec';
+
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      // With no-cors we can't read the response, but if it didn't throw, assume success
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Waitlist signup error:', err);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-    <div className="grain"></div>
-    <div className="container">
-      <header>
-        <div className="logo"><span>//</span> FANGORN</div>
-      </header>
+    <div className="coming-soon">
+      <div className="glow-top" />
+      <div className="glow-bottom" />
 
-      <section className="hero">
-        <h1>
-          Publish once.
-          <span className="highlight"> Set the terms forever.</span>
+      <nav className="cs-nav">
+        <div className="cs-logo">Fangorn</div>
+        <div className="cs-nav-links">
+          <a href="https://github.com/aspect-labs/fangorn" target="_blank" rel="noopener noreferrer" className="cs-nav-link">GitHub</a>
+          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">X</a>
+          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer" className="cs-nav-link">Discord</a>
+        </div>
+      </nav>
+
+      <main className="cs-main">
+        <div className="cs-badge">Coming Soon</div>
+
+        <h1 className="cs-title">
+          Turn access into<br /><em>liquid assets</em>
         </h1>
-        <p className="subtitle">
-          You decide who can access your data and under what conditions.
-          Cryptography enforces it. No platform can change the deal.
+
+        <p className="cs-subtitle">
+          Tokenize access to your content with perpetual royalties.
+          Threshold encryption meets tradeable access rights.
         </p>
 
-        <div className="signup-box">
-          <p>Be the first to know when we launch →</p>
-          <form className="signup-form">
+        <div className="cs-features">
+          <div className="cs-feature">
+            <span className="cs-feature-icon">🔐</span>
+            <span className="cs-feature-text">Threshold Encryption</span>
+          </div>
+          <div className="cs-feature-divider" />
+          <div className="cs-feature">
+            <span className="cs-feature-icon">🎫</span>
+            <span className="cs-feature-text">Tradeable Access</span>
+          </div>
+          <div className="cs-feature-divider" />
+          <div className="cs-feature">
+            <span className="cs-feature-icon">♻️</span>
+            <span className="cs-feature-text">Perpetual Royalties</span>
+          </div>
+        </div>
+
+        {!submitted ? (
+          <form className="cs-form" onSubmit={handleSubmit}>
             <input
               type="email"
-              placeholder="your@email.com"
+              className="cs-input"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
             />
-            <button type="submit">Get Updates</button>
+            <button type="submit" className="cs-button" disabled={loading}>
+              {loading ? 'Joining...' : 'Join Waitlist'}
+            </button>
           </form>
+        ) : (
+          <div className="cs-success">
+            <span className="cs-success-icon">✓</span>
+            <span>You&apos;re on the list. We&apos;ll be in touch.</span>
+          </div>
+        )}
+
+        <p className="cs-note">
+          Be the first to know when we launch.
+        </p>
+
+        {error && (
+          <p className="cs-error">{error}</p>
+        )}
+      </main>
+
+      <footer className="cs-footer">
+        <div className="cs-footer-brand">
+          <span className="cs-footer-logo">Fangorn</span>
         </div>
-
-        <a href="https://github.com/fangorn-network" className="link">View on GitHub →</a>
-      </section>
-
-      <section>
-        <h2>The Problem</h2>
-        <div className="problem-box">
-          <p>
-            <strong>Platforms own the relationship between you and your audience.</strong> They
-            control who sees your work, take their cut, and can change the rules whenever they want.
-            Your content lives on their terms, not yours.
-          </p>
-          <p>
-            <strong>Fangorn removes the middleman.</strong> Encrypt your data under conditions you
-            define — age verification, token ownership, proof of humanity, anything. Anyone who
-            proves they meet your conditions gets access. No platform in the loop. No permission
-            required.
-          </p>
-          <p>
-            Powered by threshold encryption. Built for a post-platform world.
-          </p>
+        <div className="cs-footer-links">
+          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer">X</a>
+          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">Discord</a>
         </div>
-      </section>
-
-      <footer>
-        <a href="https://github.com/fangorn-network">GitHub</a>
-        <a href="https://idealabs.network">Ideal Labs</a>
-        <p>Built by Ideal Labs · Apache 2.0</p>
       </footer>
     </div>
-    </>
   );
 }
