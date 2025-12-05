@@ -67,17 +67,17 @@ export default function Page() {
 
         <div className="cs-features">
           <div className="cs-feature">
-            <span className="cs-feature-icon">🔐</span>
+            {/* <span className="cs-feature-icon">🔐</span> */}
             <span className="cs-feature-text">Threshold Encryption</span>
           </div>
           <div className="cs-feature-divider" />
           <div className="cs-feature">
-            <span className="cs-feature-icon">🎫</span>
+            {/* <span className="cs-feature-icon">🎫</span> */}
             <span className="cs-feature-text">Tradeable Access</span>
           </div>
           <div className="cs-feature-divider" />
           <div className="cs-feature">
-            <span className="cs-feature-icon">♻️</span>
+            {/* <span className="cs-feature-icon">♻️</span> */}
             <span className="cs-feature-text">Perpetual Royalties</span>
           </div>
         </div>

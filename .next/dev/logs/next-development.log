@@ -1,29 +1,77 @@
-[00:00:09.865] Server  LOG      ✓ Ready in 7.9s
-[00:00:12.927] Server  LOG      ○ Compiling / ...
-[00:00:17.329] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:25.137] Server  LOG      ✓ Compiled in 249ms
-[00:02:41.880] Server  LOG      ✓ Compiled in 97ms
-[00:02:49.116] Server  LOG      ✓ Compiled in 9ms
-[00:04:25.340] Server  LOG      ✓ Compiled in 6ms
-[00:05:37.453] Server  LOG      ✓ Compiled in 4ms
-[00:05:39.929] Server  LOG      ✓ Compiled in 3ms
-[00:05:42.847] Server  LOG      ✓ Compiled in 4ms
-[00:05:46.411] Server  LOG      ✓ Compiled in 4ms
-[00:24:57.089] Server  LOG      ✓ Compiled in 250ms
-[00:25:01.997] Server  LOG      ✓ Compiled in 5ms
-[00:25:03.099] Server  LOG      ✓ Compiled in 8ms
-[00:25:14.693] Server  LOG      ✓ Compiled in 5ms
-[00:25:19.270] Server  LOG      ✓ Compiled in 5ms
-[00:25:42.971] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:17.414] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:17.724] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:25.665] Server  LOG      ✓ Compiled in 108ms
-[00:30:15.720] Server  LOG      ✓ Compiled in 172ms
-[00:33:16.789] Server  LOG      ✓ Compiled in 17ms
-[00:35:00.816] Server  LOG      ✓ Compiled in 13ms
-[00:36:41.180] Server  LOG      ✓ Compiled in 525ms
-[00:36:46.620] Server  LOG      ✓ Compiled in 10ms
-[00:36:48.511] Server  LOG      ✓ Compiled in 7ms
-[00:37:02.726] Server  LOG      ✓ Compiled in 10ms
-[00:37:05.023] Server  LOG      ✓ Compiled in 4ms
-[00:37:16.038] Server  LOG      ✓ Compiled in 5ms
+[00:00:09.252] Server  LOG      ✓ Ready in 7.8s
+[00:00:14.858] Server  LOG      ○ Compiling / ...
+[00:00:20.694] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:20.801] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.tsx">
+                    <SegmentTrieNode>
+                    <ClientPageRoot Component={function Page} serverProvidedParams={{...}}>
+                      <Page params={Promise} searchParams={Promise}>
+                        <div className="coming-soon">
+                          <div>
+                          <div>
+                          <nav>
+                          <main className="cs-main">
+                            <div>
+                            <h1>
+                            <p>
+                            <div>
+                            <form className="cs-form" onSubmit={function handleSubmit}>
+                              <input
+                                type="email"
+                                className="cs-input"
+                                placeholder="Enter your email"
+                                value=""
+                                onChange={function onChange}
+                                required={true}
+                                disabled={false}
+-                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
+                              >
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+
+[00:00:49.040] Server  LOG      ✓ Compiled in 67ms
+[00:00:50.471] Server  LOG      ✓ Compiled in 122ms
+[00:00:50.578] Browser ERROR   ./app/page.tsx:75:56
+Parsing ecmascript source code failed
+  73 |           <div className="cs-feature-divider" />
+  74 |           <div className="cs-feature">
+> 75 |             <span className="cs-feature-icon">🎫/span>
+     |                                                        ^
+  76 |             <span className="cs-feature-text">Tradeable Access</span>
+  77 |           </div>
+  78 |           <div className="cs-feature-divider" />
+
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:00:51.874] Server  LOG      ✓ Compiled in 8ms
+[00:00:54.265] Server  LOG      ✓ Compiled in 7ms
