@@ -357,4 +357,20 @@ body {
   }
 }
 
+.btn-launch {
+  background: var(--accent);
+  color: var(--bg-deep);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: DM Mono, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all .15s;
+}
+
+.btn-launch:hover {
+  background: var(--accent-dim);
+}
+
 /*# sourceMappingURL=app_page_8948f311.css.map*/

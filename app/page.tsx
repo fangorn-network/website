@@ -1,7 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import './page.css';
+
+// // Link component
+// const Link = ({ to, children, className, onClick }) => {
+//   const handleClick = (e) => {
+//     e.preventDefault();
+//     if (onClick) onClick(e);
+//     window.location.hash = to;
+//   };
+//   return <a href={`#${to}`} className={className} onClick={handleClick}>{children}</a>;
+// };
 
 export default function Page() {
   const [email, setEmail] = useState('');
@@ -45,11 +56,12 @@ export default function Page() {
       <div className="glow-bottom" />
 
       <nav className="cs-nav">
-        <div className="cs-logo">Fangorn</div>
+        <div className="cs-logo">// Fangorn</div>
         <div className="cs-nav-links">
           <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">GitHub</a>
           <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">X</a>
           <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer" className="cs-nav-link">Discord</a>
+          <Link href="/dashboard" className="cs-button">Launch App</Link>
         </div>
       </nav>
 

@@ -369,3 +369,17 @@ body {
     gap: 4px;
   }
 }
+
+.btn-launch {
+  background: var(--accent);
+  color: var(--bg-deep);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.btn-launch:hover { background: var(--accent-dim); }
