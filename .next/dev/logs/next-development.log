@@ -1,369 +1,65 @@
-[00:00:01.571] Server  LOG      ✓ Ready in 1377ms
-[00:00:04.671] Server  LOG      ○ Compiling /dashboard ...
-[00:00:08.985] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:36.835] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:45.285] Server  LOG      ✓ Compiled in 52ms
-[00:01:49.486] Server  LOG      ✓ Compiled in 13ms
-[00:02:00.857] Server  LOG      ✓ Compiled in 12ms
-[00:02:02.524] Server  LOG      ✓ Compiled in 13ms
-[00:02:08.074] Server  LOG      ✓ Compiled in 13ms
-[00:02:14.668] Server  LOG      ✓ Compiled in 13ms
-[00:02:17.635] Server  LOG      ✓ Compiled in 20ms
-[00:02:18.973] Server  LOG      ✓ Compiled in 32ms
-[00:02:19.082] Browser ERROR   ./app/dashboard/page.tsx:554:59
-Parsing ecmascript source code failed
-  552 |       },
-  553 |     ];
-> 554 |     await litClient.encrypt(file, accessControlConditions)l
-      |                                                           ^
-  555 |
-  556 |     // add to IPFS
-  557 |     // deploy contract (ERC-2981)
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:02:20.655] Browser ERROR   ./app/dashboard/page.tsx:554:59
-Parsing ecmascript source code failed
-  552 |       },
-  553 |     ];
-> 554 |     await litClient.encrypt(file, accessControlConditions)''
-      |                                                           ^^
-  555 |
-  556 |     // add to IPFS
-  557 |     // deploy contract (ERC-2981)
-
-Expected ';', '}' or <eof>
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:02:22.961] Server  LOG      ✓ Compiled in 48ms
-[00:02:41.837] Server  LOG      ✓ Compiled in 13ms
-[00:03:55.939] Server  LOG      ✓ Compiled in 35ms
-[00:03:56.545] Browser ERROR   ./app/dashboard/page.tsx:647:2
-Parsing ecmascript source code failed
-  645 |     </div>
-  646 |   );
-> 647 | }
-      |  ^
-
-Expected '}', got '<eof>'
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:03:56.545] Browser ERROR   ./app/dashboard/page.tsx:608:5
-Parsing ecmascript source code failed
-  606 |
-  607 |     // disconnect lit client
-> 608 |     await litClient.getClient()?.disconnect();
-      |     ^^^^^
-  609 |   };
-  610 |
-  611 |   return (
-
-await isn't allowed in non-async function
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:03:57.442] Browser ERROR   ./app/dashboard/page.tsx:647:4
-Parsing ecmascript source code failed
-  645 |       </div>
-  646 |     );
-> 647 |   }
-      |    ^
-
-Expected '}', got '<eof>'
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:03:57.442] Browser ERROR   ./app/dashboard/page.tsx:608:7
-Parsing ecmascript source code failed
-  606 |
-  607 |       // disconnect lit client
-> 608 |       await litClient.getClient()?.disconnect();
-      |       ^^^^^
-  609 |     };
-  610 |
-  611 |     return (
-
-await isn't allowed in non-async function
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:04:18.367] Server  LOG      ✓ Compiled in 16ms
-[00:04:19.737] Server  LOG      ✓ Compiled in 12ms
-[00:04:23.449] Server  LOG      ✓ Compiled in 13ms
-[00:04:25.944] Server  LOG      ✓ Compiled in 15ms
-[00:04:27.054] Server  LOG      ✓ Compiled in 29ms
-[00:04:27.634] Browser ERROR   ./app/dashboard/page.tsx:559:7
-Parsing ecmascript source code failed
-  557 |       const arrayBuffer = e.target.result; // This is an ArrayBuffer
-  558 |       const byteArray = new Uint8Array(arrayBuffer); // Convert to Uint8Array (byte array)
-> 559 |       await litClient.encrypt(file.btoa(), accessControlConditions)
-      |       ^^^^^
-  560 |     }
-  561 |
-  562 |       // await litClient.encrypt(file.btoa(), accessControlConditions)
-
-await isn't allowed in non-async function
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:04:32.260] Browser ERROR   ./app/dashboard/page.tsx:559:7
-Parsing ecmascript source code failed
-  557 |       const arrayBuffer = e.target.result; // This is an ArrayBuffer
-  558 |       const byteArray = new Uint8Array(arrayBuffer); // Convert to Uint8Array (byte array)
-> 559 |       await litClient.encrypt(byteArray, accessControlConditions)
-      |       ^^^^^
-  560 |     }
-  561 |
-  562 |       // await litClient.encrypt(file.btoa(), accessControlConditions)
-
-await isn't allowed in non-async function
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:05:27.625] Server  LOG      ✓ Compiled in 13ms
-[00:05:45.036] Server  LOG      ✓ Compiled in 17ms
-[00:05:46.937] Server  LOG      ✓ Compiled in 13ms
-[00:05:59.633] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:08.139] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:43.242Z] [36m[DEBUG][0m [core] Storage key "LitNodeClientConfig" is missing. 
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.940Z] [36m[DEBUG][0m [contract-sdk] Validator's URL: https://15.235.83.220:7470
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.941Z] [36m[DEBUG][0m [core] [_getValidatorData] epochInfo:  {"endTime":1765127180,"epochLength":300,"number":92143,"retries":2,"timeout":60}
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.942Z] [36m[DEBUG][0m [core] [_getValidatorData] minNodeCount:  2
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.942Z] [36m[DEBUG][0m [core] [_getValidatorData] Bootstrap urls:  ["https://15.235.83.220:7470","https://15.235.83.220:7472","https://15.235.83.220:7471"]
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.942Z] [36m[DEBUG][0m [core] [_getValidatorData] stakingContract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.943Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7470/web/handshake/
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.944Z] [36m[DEBUG][0m [core] [36m[id: 83be242110de98][0m sendCommandToNode with url https://15.235.83.220:7470/web/handshake/ and data {"challenge":"1beaf9b8ddb72bcf28318392f0deae76023e5b73c740922962051dd2e67e2186","clientPublicKey":"test","epoch":92143}
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.945Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7472/web/handshake/
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.945Z] [36m[DEBUG][0m [core] [36m[id: 83be242110de98][0m sendCommandToNode with url https://15.235.83.220:7472/web/handshake/ and data {"challenge":"f6a4b147c17c39f893d5fa8ab287fe803406ba8be4b59ae9ba6dd2bdb0ffbeec","clientPublicKey":"test","epoch":92143}
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.946Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7471/web/handshake/
-[00:06:09.776] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:44.946Z] [36m[DEBUG][0m [core] [36m[id: 83be242110de98][0m sendCommandToNode with url https://15.235.83.220:7471/web/handshake/ and data {"challenge":"510048c16c7775821bf3c0cdf6e625e76c1e341f77dbd5f8b8b63cfa703ced21","clientPublicKey":"test","epoch":92143}
-[00:06:11.166] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:46.403Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7471 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x250ab4d007257dac8aae53af925d22929a7e93871f8aa4e13003ad6cb8b39faf","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:06:11.166] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:46.405Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7472 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x250ab4d007257dac8aae53af925d22929a7e93871f8aa4e13003ad6cb8b39faf","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:06:11.166] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:46.405Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7470 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x250ab4d007257dac8aae53af925d22929a7e93871f8aa4e13003ad6cb8b39faf","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:06:11.166] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:46.406Z] [36m[DEBUG][0m [core] listening for state change on staking contract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:06:11.166] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:46.407Z] [36m[DEBUG][0m [core] 🔥 lit is ready. "litNodeClient" variable is ready to use globally.
-[00:06:11.166] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:05:46.407Z] [36m[DEBUG][0m [core] current network config {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x250ab4d007257dac8aae53af925d22929a7e93871f8aa4e13003ad6cb8b39faf","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","subnetPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:06:11.166] Browser LOG     Lit connected on network: datil-dev
-[00:07:06.533] Server  LOG      ✓ Compiled in 14ms
-[00:07:27.670] Server  LOG      ✓ Compiled in 29ms
-[00:07:27.773] Browser ERROR   ./app/dashboard/page.tsx:562:7
-Parsing ecmascript source code failed
-  560 |         
-  561 |       }
-> 562 |       await litClient.encrypt(byteArray, accessControlConditions)
-      |       ^
-  563 |       console.log('encrypted the data')
-  564 |     }
-  565 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:07:40.634] Server  LOG      ✓ Compiled in 13ms
-[00:07:56.675] Server  LOG      ✓ Compiled in 12ms
-[00:08:00.115] Server  LOG      ✓ Compiled in 33ms
-[00:08:00.218] Browser ERROR   ./app/dashboard/page.tsx:563:23
-Parsing ecmascript source code failed
-  561 |       console.log('encrypted the data') 
-  562 |       } catch (err) {
-> 563 |         console.error('Error during encryption: + error);
-      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  564 |       }
-  565 |     }
-  566 |
-
-Unterminated string constant
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:08:05.177] Server  LOG      ✓ Compiled in 14ms
-[00:08:17.036] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:08:29.132] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.045Z] [36m[DEBUG][0m [core] Storage key "LitNodeClientConfig" is missing. 
-[00:08:29.634] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.589Z] [36m[DEBUG][0m [contract-sdk] Validator's URL: https://15.235.83.220:7470
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.590Z] [36m[DEBUG][0m [core] [_getValidatorData] epochInfo:  {"endTime":1765127590,"epochLength":300,"number":92144,"retries":2,"timeout":60}
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.590Z] [36m[DEBUG][0m [core] [_getValidatorData] minNodeCount:  2
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.591Z] [36m[DEBUG][0m [core] [_getValidatorData] Bootstrap urls:  ["https://15.235.83.220:7470","https://15.235.83.220:7472","https://15.235.83.220:7471"]
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.591Z] [36m[DEBUG][0m [core] [_getValidatorData] stakingContract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.592Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7470/web/handshake/
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.592Z] [36m[DEBUG][0m [core] [36m[id: cbde1c30c150b8][0m sendCommandToNode with url https://15.235.83.220:7470/web/handshake/ and data {"challenge":"bc4363e0e9bb7d4b77f7326f0374811638a02535311f099585654cb27d2aee2a","clientPublicKey":"test","epoch":92143}
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.593Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7472/web/handshake/
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.594Z] [36m[DEBUG][0m [core] [36m[id: cbde1c30c150b8][0m sendCommandToNode with url https://15.235.83.220:7472/web/handshake/ and data {"challenge":"fe00c900bfcb1ca56b1f207270cd50c7ad7236652a777c5ef7e66c7ad4d76933","clientPublicKey":"test","epoch":92143}
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.595Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7471/web/handshake/
-[00:08:29.635] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.596Z] [36m[DEBUG][0m [core] [36m[id: cbde1c30c150b8][0m sendCommandToNode with url https://15.235.83.220:7471/web/handshake/ and data {"challenge":"e4c42e4c105cd3a97475ed87a12c049434940a0490805a6bfbcfb88b83093834","clientPublicKey":"test","epoch":92143}
-[00:08:29.917] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.864Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7470 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x97d908c89ab2dd0ee051fd3837fc8bc1ee545e7aac6990e1d0c3ff23cce3f698","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:08:29.917] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.906Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7471 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x97d908c89ab2dd0ee051fd3837fc8bc1ee545e7aac6990e1d0c3ff23cce3f698","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:08:29.917] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.907Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7472 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x97d908c89ab2dd0ee051fd3837fc8bc1ee545e7aac6990e1d0c3ff23cce3f698","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:08:29.917] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.907Z] [36m[DEBUG][0m [core] listening for state change on staking contract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:08:29.917] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.908Z] [36m[DEBUG][0m [core] 🔥 lit is ready. "litNodeClient" variable is ready to use globally.
-[00:08:29.917] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:08:15.908Z] [36m[DEBUG][0m [core] current network config {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x97d908c89ab2dd0ee051fd3837fc8bc1ee545e7aac6990e1d0c3ff23cce3f698","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","subnetPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:08:29.917] Browser LOG     Lit connected on network: datil-dev
-[00:08:29.917] Browser ERROR   Error during encryption: TypeError: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$lit$2d$protocol$2f$lit$2d$node$2d$client$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.encryptString is not a function
-[00:11:10.495] Server  LOG      ✓ Compiled in 333ms
-[00:11:46.560] Server  LOG      ✓ Compiled in 14ms
-[00:11:59.574] Server  LOG      ✓ Compiled in 13ms
-[00:12:01.188] Server  LOG      ✓ Compiled in 13ms
-[00:12:08.434] Server  LOG      ✓ Compiled in 15ms
-[00:12:11.178] Server  LOG      ✓ Compiled in 14ms
-[00:12:13.937] Server  LOG      ✓ Compiled in 14ms
-[00:12:22.705] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:12:33.117] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.250Z] [36m[DEBUG][0m [core] Storage key "LitNodeClientConfig" is missing. 
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.691Z] [36m[DEBUG][0m [contract-sdk] Validator's URL: https://15.235.83.220:7470
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.691Z] [36m[DEBUG][0m [core] [_getValidatorData] epochInfo:  {"endTime":1765127590,"epochLength":300,"number":92144,"retries":2,"timeout":60}
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.692Z] [36m[DEBUG][0m [core] [_getValidatorData] minNodeCount:  2
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.692Z] [36m[DEBUG][0m [core] [_getValidatorData] Bootstrap urls:  ["https://15.235.83.220:7470","https://15.235.83.220:7472","https://15.235.83.220:7471"]
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.693Z] [36m[DEBUG][0m [core] [_getValidatorData] stakingContract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.694Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7470/web/handshake/
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.694Z] [36m[DEBUG][0m [core] [36m[id: 33d924e9721ed][0m sendCommandToNode with url https://15.235.83.220:7470/web/handshake/ and data {"challenge":"fbe470b3e25b2371e8f76b24e8c36c7d21af8107e42a3d6fc27f907d9755a7f5","clientPublicKey":"test","epoch":92144}
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.696Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7472/web/handshake/
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.696Z] [36m[DEBUG][0m [core] [36m[id: 33d924e9721ed][0m sendCommandToNode with url https://15.235.83.220:7472/web/handshake/ and data {"challenge":"b33a255622f025576444668e4f96e5140fac0bb184f51c358ecaa1768670a2fd","clientPublicKey":"test","epoch":92144}
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.697Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7471/web/handshake/
-[00:12:33.544] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.698Z] [36m[DEBUG][0m [core] [36m[id: 33d924e9721ed][0m sendCommandToNode with url https://15.235.83.220:7471/web/handshake/ and data {"challenge":"91901d4e7146c4f49aa8c840e6eb3d88ab719d80e7a45b63b57ee3db21a70e29","clientPublicKey":"test","epoch":92144}
-[00:12:33.838] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:42.997Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7470 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x5520f09f9ea336911dc989fe4a1d9153481c67de76235e058a178c91617b60e1","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:12:33.838] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:43.009Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7472 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x5520f09f9ea336911dc989fe4a1d9153481c67de76235e058a178c91617b60e1","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:12:33.838] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:43.009Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7471 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x5520f09f9ea336911dc989fe4a1d9153481c67de76235e058a178c91617b60e1","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:12:33.838] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:43.010Z] [36m[DEBUG][0m [core] listening for state change on staking contract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:12:33.838] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:43.011Z] [36m[DEBUG][0m [core] 🔥 lit is ready. "litNodeClient" variable is ready to use globally.
-[00:12:33.838] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:12:43.011Z] [36m[DEBUG][0m [core] current network config {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x5520f09f9ea336911dc989fe4a1d9153481c67de76235e058a178c91617b60e1","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","subnetPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:12:33.838] Browser LOG     Lit connected on network: datil-dev
-[00:12:33.838] Browser ERROR   Error during encryption: InvalidParamType: Invalid params: You must pass either accessControlConditions, evmContractConditions, solRpcConditions or unifiedAccessControlConditions
-[00:12:57.499] Server  LOG      ✓ Compiled in 18ms
-[00:12:57.604] Browser ERROR   ./app/dashboard/lit.tsx:35:45
-Parsing ecmascript source code failed
-  33 |    * @returns An object containing the ciphertext and dataToEncryptHash.
-  34 |    */
-> 35 |   async encrypt(message: string, condition: ): Promise<{ ciphertext: string, dataToEncryptHash: string }> {
-     |                                             ^
-  36 |     if (!this.litNodeClient) {
-  37 |       throw new Error("Lit Node Client is not connected. Call .connect() first.");
-  38 |     }
-
-Unexpected token `)`. Expected an identifier, void, yield, null, await, break, a string literal, a numeric literal, true, false, `, -, import, this, typeof, {, [, (
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/lit.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/lit.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:14:04.629] Server  LOG      ✓ Compiled in 11ms
-[00:14:11.264] Server  LOG      ✓ Compiled in 18ms
-[00:14:16.762] Server  LOG      ✓ Compiled in 10ms
-[00:14:16.859] Browser ERROR   ./app/dashboard/lit.tsx:40:11
-Ecmascript file had an error
-  38 |     }
-  39 |
-> 40 |     const accessControlConditions = [
-     |           ^^^^^^^^^^^^^^^^^^^^^^^
-  41 |       {
-  42 |         contractAddress: "",
-  43 |         standardContractType: "",
-
-the name `accessControlConditions` is defined multiple times
-
-Import traces:
-  Client Component Browser:
-    ./app/dashboard/lit.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Client Component Browser]
-    ./app/dashboard/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/dashboard/lit.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Client Component SSR]
-    ./app/dashboard/page.tsx [Server Component]
-[00:14:26.798] Server  LOG      ✓ Compiled in 18ms
-[00:14:38.900] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:14:48.483] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:10.623Z] [36m[DEBUG][0m [core] Storage key "LitNodeClientConfig" is missing. 
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.298Z] [36m[DEBUG][0m [contract-sdk] Validator's URL: https://15.235.83.220:7470
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.299Z] [36m[DEBUG][0m [core] [_getValidatorData] epochInfo:  {"endTime":1765127989,"epochLength":300,"number":92145,"retries":2,"timeout":60}
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.300Z] [36m[DEBUG][0m [core] [_getValidatorData] minNodeCount:  2
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.300Z] [36m[DEBUG][0m [core] [_getValidatorData] Bootstrap urls:  ["https://15.235.83.220:7470","https://15.235.83.220:7472","https://15.235.83.220:7471"]
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.300Z] [36m[DEBUG][0m [core] [_getValidatorData] stakingContract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.301Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7470/web/handshake/
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.301Z] [36m[DEBUG][0m [core] [36m[id: 6bc1365a28c828][0m sendCommandToNode with url https://15.235.83.220:7470/web/handshake/ and data {"challenge":"3a66e915d3d816687175ead8924f2bf05dfee0ddb097fd91283aeb45d4e24036","clientPublicKey":"test","epoch":92144}
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.303Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7472/web/handshake/
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.303Z] [36m[DEBUG][0m [core] [36m[id: 6bc1365a28c828][0m sendCommandToNode with url https://15.235.83.220:7472/web/handshake/ and data {"challenge":"88cc0e9be42cdba0575e5ce76030e587cc443139dd8ac25cfb5631385ebd4f01","clientPublicKey":"test","epoch":92144}
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.304Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7471/web/handshake/
-[00:14:49.106] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.305Z] [36m[DEBUG][0m [core] [36m[id: 6bc1365a28c828][0m sendCommandToNode with url https://15.235.83.220:7471/web/handshake/ and data {"challenge":"25fefbb355bef8b4c9b01397c39a9ad5c6543529d338cdf55852e6a4cf53d4e0","clientPublicKey":"test","epoch":92144}
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.583Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7470 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xd9ffea9eef7b322465417f19e8ba9d66da7d765cb7516c909bcd2b1fde699583","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.596Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7472 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xd9ffea9eef7b322465417f19e8ba9d66da7d765cb7516c909bcd2b1fde699583","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.626Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7471 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xd9ffea9eef7b322465417f19e8ba9d66da7d765cb7516c909bcd2b1fde699583","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.627Z] [36m[DEBUG][0m [core] listening for state change on staking contract:  0xD4507CD392Af2c80919219d7896508728f6A623F
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.627Z] [36m[DEBUG][0m [core] 🔥 lit is ready. "litNodeClient" variable is ready to use globally.
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.627Z] [36m[DEBUG][0m [core] current network config {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xd9ffea9eef7b322465417f19e8ba9d66da7d765cb7516c909bcd2b1fde699583","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","subnetPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
-[00:14:49.538] Browser LOG     Lit connected on network: datil-dev
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.668Z] [36m[DEBUG][0m [core] Hashing access control conditions:  [{"contractAddress":"","chain":"ethereum","standardContractType":"","method":"eth_getBalance","parameters":[":userAddress","latest"],"returnValueTest":{"comparator":">=","value":"1000000000000"}}]
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.669Z] [36m[DEBUG][0m [core] hashOfConditions {}
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.669Z] [36m[DEBUG][0m [core] hashOfConditionsStr 4fc0cc9ac4a1074ab45c43e306b22be3c86c1e17160e30d64187ac536e6b243b
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.669Z] [36m[DEBUG][0m [core] hashOfPrivateData {}
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.669Z] [36m[DEBUG][0m [core] hashOfPrivateDataStr 77fd5cebf646bfa4e950626a0ba7a366b9335e741cad715e35b65ad51f09e3c7
-[00:14:49.538] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-07T17:15:11.669Z] [36m[DEBUG][0m [core] identityParam lit-accesscontrolcondition://4fc0cc9ac4a1074ab45c43e306b22be3c86c1e17160e30d64187ac536e6b243b/77fd5cebf646bfa4e950626a0ba7a366b9335e741cad715e35b65ad51f09e3c7
-[00:14:49.538] Browser WARN    using deprecated parameters for `initSync()`; pass a single object instead
-[00:14:49.538] Browser LOG     encrypted the data
+[00:00:32.623] Server  LOG      ✓ Ready in 27.6s
+[00:01:12.446] Server  LOG      ○ Compiling / ...
+[00:01:18.806] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:39.752] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:44.448] Server  LOG      ○ Compiling /dashboard ...
+[00:56:47.164] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.240Z] [36m[DEBUG][0m [core] Storage key "LitNodeClientConfig" is missing. 
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.835Z] [36m[DEBUG][0m [contract-sdk] Validator's URL: https://15.235.83.220:7470
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.836Z] [36m[DEBUG][0m [core] [_getValidatorData] epochInfo:  {"endTime":1765211234,"epochLength":300,"number":92350,"retries":2,"timeout":60}
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.836Z] [36m[DEBUG][0m [core] [_getValidatorData] minNodeCount:  2
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.836Z] [36m[DEBUG][0m [core] [_getValidatorData] Bootstrap urls:  ["https://15.235.83.220:7470","https://15.235.83.220:7472","https://15.235.83.220:7471"]
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.837Z] [36m[DEBUG][0m [core] [_getValidatorData] stakingContract:  0xD4507CD392Af2c80919219d7896508728f6A623F
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.837Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7470/web/handshake/
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.838Z] [36m[DEBUG][0m [core] [36m[id: f0eb31b94bb148][0m sendCommandToNode with url https://15.235.83.220:7470/web/handshake/ and data {"challenge":"d177f53212e01077ecfc47da8dc4c82bd96cabd91f05572077a4770e51588280","clientPublicKey":"test","epoch":92350}
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.838Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7472/web/handshake/
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.839Z] [36m[DEBUG][0m [core] [36m[id: f0eb31b94bb148][0m sendCommandToNode with url https://15.235.83.220:7472/web/handshake/ and data {"challenge":"89922504bdbbdf660a9bb23168c7d25afb23f36facd7a436fc62bfdf06cb934d","clientPublicKey":"test","epoch":92350}
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.839Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7471/web/handshake/
+[00:56:47.704] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:57.839Z] [36m[DEBUG][0m [core] [36m[id: f0eb31b94bb148][0m sendCommandToNode with url https://15.235.83.220:7471/web/handshake/ and data {"challenge":"8dacf1f6e763ed80dac5958ce03d6879401440fe3a0d5eda4ab908a178b5035f","clientPublicKey":"test","epoch":92350}
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.126Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7470 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xc295b1fceb7c90f9aaf491ab3f04a63667f90c8dc0ef001ca549f8c9dec16492","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.161Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7472 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xc295b1fceb7c90f9aaf491ab3f04a63667f90c8dc0ef001ca549f8c9dec16492","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.161Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7471 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xc295b1fceb7c90f9aaf491ab3f04a63667f90c8dc0ef001ca549f8c9dec16492","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.161Z] [36m[DEBUG][0m [core] listening for state change on staking contract:  0xD4507CD392Af2c80919219d7896508728f6A623F
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.162Z] [36m[DEBUG][0m [core] 🔥 lit is ready. "litNodeClient" variable is ready to use globally.
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.162Z] [36m[DEBUG][0m [core] current network config {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0xc295b1fceb7c90f9aaf491ab3f04a63667f90c8dc0ef001ca549f8c9dec16492","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","subnetPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[00:56:48.187] Browser LOG     Lit connected on network: datil-dev
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.228Z] [36m[DEBUG][0m [core] Hashing access control conditions:  [{"contractAddress":"","chain":"ethereum","standardContractType":"","method":"eth_getBalance","parameters":[":userAddress","latest"],"returnValueTest":{"comparator":">=","value":"1000000000000"}}]
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.228Z] [36m[DEBUG][0m [core] hashOfConditions {}
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.228Z] [36m[DEBUG][0m [core] hashOfConditionsStr 4fc0cc9ac4a1074ab45c43e306b22be3c86c1e17160e30d64187ac536e6b243b
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.230Z] [36m[DEBUG][0m [core] hashOfPrivateData {}
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.230Z] [36m[DEBUG][0m [core] hashOfPrivateDataStr d4440eb53b05e3af5c97bd00e5bffa9d946f15daf6d9116edc353db606950990
+[00:56:48.187] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T16:27:58.230Z] [36m[DEBUG][0m [core] identityParam lit-accesscontrolcondition://4fc0cc9ac4a1074ab45c43e306b22be3c86c1e17160e30d64187ac536e6b243b/d4440eb53b05e3af5c97bd00e5bffa9d946f15daf6d9116edc353db606950990
+[00:56:48.187] Browser WARN    using deprecated parameters for `initSync()`; pass a single object instead
+[00:56:48.187] Browser LOG     encrypted the data
+[01:30:30.039] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:32:10.637] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.180Z] [36m[DEBUG][0m [core] Storage key "LitNodeClientConfig" is missing. 
+[01:32:11.338] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.942Z] [36m[DEBUG][0m [contract-sdk] Validator's URL: https://15.235.83.220:7470
+[01:32:11.338] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.943Z] [36m[DEBUG][0m [core] [_getValidatorData] epochInfo:  {"endTime":1765213664,"epochLength":300,"number":92356,"retries":2,"timeout":60}
+[01:32:11.338] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.944Z] [36m[DEBUG][0m [core] [_getValidatorData] minNodeCount:  2
+[01:32:11.338] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.944Z] [36m[DEBUG][0m [core] [_getValidatorData] Bootstrap urls:  ["https://15.235.83.220:7470","https://15.235.83.220:7472","https://15.235.83.220:7471"]
+[01:32:11.338] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.944Z] [36m[DEBUG][0m [core] [_getValidatorData] stakingContract:  0xD4507CD392Af2c80919219d7896508728f6A623F
+[01:32:11.339] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.945Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7470/web/handshake/
+[01:32:11.339] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.945Z] [36m[DEBUG][0m [core] [36m[id: d7f78aec5d19a8][0m sendCommandToNode with url https://15.235.83.220:7470/web/handshake/ and data {"challenge":"8db6214059f3e9f8311129338fb6fb97333fcba1215f85381259e2bcd79af2e8","clientPublicKey":"test","epoch":92356}
+[01:32:11.339] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.946Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7472/web/handshake/
+[01:32:11.339] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.947Z] [36m[DEBUG][0m [core] [36m[id: d7f78aec5d19a8][0m sendCommandToNode with url https://15.235.83.220:7472/web/handshake/ and data {"challenge":"4c689efaa3065fe29854e90dd3b329778f8fbfabdc6ae643a6b9f46dc4465933","clientPublicKey":"test","epoch":92356}
+[01:32:11.339] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.947Z] [36m[DEBUG][0m [core] handshakeWithNode https://15.235.83.220:7471/web/handshake/
+[01:32:11.339] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:33.947Z] [36m[DEBUG][0m [core] [36m[id: d7f78aec5d19a8][0m sendCommandToNode with url https://15.235.83.220:7471/web/handshake/ and data {"challenge":"c52c6369f7862035af2f0bb4765e34b2e2c38f7c56bba8a8ad4142a7536249fb","clientPublicKey":"test","epoch":92356}
+[01:32:11.767] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.264Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7470 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x89afe6d8e2aa0566aec01f003a0ab5f586f0f0851ff202d1f1a48ed754e1bbac","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.265Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7472 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x89afe6d8e2aa0566aec01f003a0ab5f586f0f0851ff202d1f1a48ed754e1bbac","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.266Z] [36m[DEBUG][0m [core] Handshake with https://15.235.83.220:7471 returned keys:  {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x89afe6d8e2aa0566aec01f003a0ab5f586f0f0851ff202d1f1a48ed754e1bbac","networkPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","serverPubKey":"","subnetPubKey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.266Z] [36m[DEBUG][0m [core] listening for state change on staking contract:  0xD4507CD392Af2c80919219d7896508728f6A623F
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.267Z] [36m[DEBUG][0m [core] 🔥 lit is ready. "litNodeClient" variable is ready to use globally.
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.267Z] [36m[DEBUG][0m [core] current network config {"hdRootPubkeys":["03ab0ccc2dc8a3d9c2de9a7421b171475a09e60cb546fe446a9d0c3aadb8f639ae","03b6300abf338b504b7b49eb83b59554d12232b9f390f6bb5bf06150b812678b53","039911489c48624554fef51f37323053953def50ed3b40e69620d0a6bcb4ffdc2f","034feeda3a7912131c980ae8b6376611dd5052d574979247d64da8bb1446e240d7","023dd81dba4b89da5e4c3dec5da93ba0e1addc0eafbe03487450c42e28628570d1","0346ac7da954f1b8ee891b79eb8cf45bafef62c85dffc1dc41e4b755bc0428689f","0222be55763b2339daf0c149e5e6e927894e0667671de47a591fc24f38eef48cd3","0313cce430e8c79053e02460e880ec36f1d64763617b47e0a2f83d06caae86c27a","023e4f4020ea03b0631b02cbb595631e6bbbd563f1fe9f1cf953b29ea8a2d26a85","0332914fa7b8ca6083139bb969650c26b092fe9990ef188daada9e4049bef58899"],"latestBlockhash":"0x89afe6d8e2aa0566aec01f003a0ab5f586f0f0851ff202d1f1a48ed754e1bbac","networkPubKeySet":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","networkPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6","subnetPubkey":"82b7ec4aac62a87aba55f6920862e021df37c445a075e72d87a64c3573aea67cfbb59a7be671e785fb3cb05d242cf2e6"}
+[01:32:11.768] Browser LOG     Lit connected on network: datil-dev
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.306Z] [36m[DEBUG][0m [core] Hashing access control conditions:  [{"contractAddress":"","chain":"ethereum","standardContractType":"","method":"eth_getBalance","parameters":[":userAddress","latest"],"returnValueTest":{"comparator":">=","value":"1000000000000"}}]
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.307Z] [36m[DEBUG][0m [core] hashOfConditions {}
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.307Z] [36m[DEBUG][0m [core] hashOfConditionsStr 4fc0cc9ac4a1074ab45c43e306b22be3c86c1e17160e30d64187ac536e6b243b
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.307Z] [36m[DEBUG][0m [core] hashOfPrivateData {}
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.307Z] [36m[DEBUG][0m [core] hashOfPrivateDataStr 627d162cf2344ccb03c208c218669a6568cfd7c1022a0c32d51ebe762194f0ec
+[01:32:11.768] Browser DEBUG   [Lit-JS-SDK v7.3.1] [2025-12-08T17:06:34.307Z] [36m[DEBUG][0m [core] identityParam lit-accesscontrolcondition://4fc0cc9ac4a1074ab45c43e306b22be3c86c1e17160e30d64187ac536e6b243b/627d162cf2344ccb03c208c218669a6568cfd7c1022a0c32d51ebe762194f0ec
+[01:32:11.768] Browser WARN    using deprecated parameters for `initSync()`; pass a single object instead
+[01:32:11.768] Browser LOG     encrypted the data
+[01:36:40.673] Server  LOG      ✓ Compiled in 748ms
+[01:37:19.366] Server  LOG      ✓ Compiled in 52ms
+[01:37:21.208] Server  LOG      ✓ Compiled in 38ms
+[01:38:13.876] Server  LOG      ✓ Compiled in 31ms
+[01:38:20.775] Server  LOG      ✓ Compiled in 27ms

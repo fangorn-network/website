@@ -557,16 +557,17 @@ export default function Page() {
       const arrayBuffer = e.target?.result as ArrayBuffer
       const byteArray = new Uint8Array(arrayBuffer)
       try {
-        await litClient.encrypt(new TextDecoder().decode(byteArray), accessControlConditions)
+        let ciphertext = await litClient.encrypt(new TextDecoder().decode(byteArray), accessControlConditions)
         console.log('encrypted the data')
+        // this is where stuff should happen
+        // Coleman
+
       } catch (err) {
         console.error('Error during encryption: ' + err);
       }
     }
 
     reader.readAsArrayBuffer(file);
-
-    // await litClient.encrypt(file.btoa(), accessControlConditions)
 
     // add to IPFS
     // deploy contract (ERC-2981)
