@@ -1,4 +1,6 @@
 {
-  "/api/storacha-delegation/[did]/route": "app/api/storacha-delegation/[did]/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/asset/[id]/page": "app/asset/[id]/page.js",
+  "/asset/page": "app/asset/page.js",
   "/dashboard/page": "app/dashboard/page.js"
 }
