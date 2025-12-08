@@ -14,7 +14,7 @@ interface SidebarProps {
 
 export const AppSidebar = ({ wallet, activeView, onViewChange }: SidebarProps) => (
   <aside className="sidebar">
-    <div className="logo">// Fangorn</div>
+    <div className="logo">Fangorn</div>
     <div className="logo-sub">Liquid Access Rights</div>
 
     <nav className="nav">

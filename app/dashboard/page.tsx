@@ -8,6 +8,9 @@ import { Sidebar } from 'lucide-react';
 import { UploadConfig, UploadModal } from './uploadModal';
 import { AppSidebar } from './sidebar';
 import Lit from './lit';
+import { create } from '@storacha/client';
+import uploadToStoracha from './upload';
+import { useStoracha } from '../hooks/useStoracha';
 
 // ============================================
 // TYPES
@@ -523,7 +526,10 @@ const LibraryView = () => (
 // MAIN PAGE
 // ============================================
 export default function Page() {
+  
   const wallet = useWallet();
+  const { upload, uploading } = useStoracha();
+
   const [activeView, setActiveView] = useState<'dashboard' | 'library'>('dashboard');
   const [assets, setAssets] = useState<Asset[]>(MOCK_ASSETS);
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -557,10 +563,43 @@ export default function Page() {
       const arrayBuffer = e.target?.result as ArrayBuffer
       const byteArray = new Uint8Array(arrayBuffer)
       try {
-        let ciphertext = await litClient.encrypt(new TextDecoder().decode(byteArray), accessControlConditions)
-        console.log('encrypted the data')
+
+
+        setIsDeploying(true);
+
+        setDeployStatus('Encrypting file...');
+        let { ciphertext, dataToEncryptHash } = await litClient.encrypt(new TextDecoder().decode(byteArray), accessControlConditions)
+        // console.log('encrypted the data' + ciphertext)
+
+
+        setDeployStatus('Uploading to Storage...');
+        // build the storacha client 
+        // TODO: this should probably be a hook or something
+        // if we intg a zk-login or similar, can reuse the email easily
+        // const client = await create();
+        // console.log('connected to client')
+        // const account = await client.login("driemworks@idealabs.network");
+        // const spaces = client.spaces();
+        // console.log('spaces:', spaces);
+
+        // // // List spaces associated with account
+        // // const spaces = await account.provision(); // or check client.spaces() after login
+
+        // // await client.setCurrentSpace(spaces[0].did());
+        // // await account.plan.wait();
+        // console.log('logged in')
+        // // don't need to set space since it's the first and only one
+        // const _space = await client.createSpace("FANGORN", { account })
+        // // upload the data
+        // const uploadFile = new File([ciphertext], file.name)
+        // const cid = await client.uploadFile(uploadFile)
+        // const cid = uploadToStoracha(ciphertext, file.name);
+        const cid = await upload(ciphertext, file.name)
+        console.log("Upload to storacha with CID " + cid);
+        // await new Promise(r => setTimeout(r, 1500));
         // this is where stuff should happen
         // Coleman
+
 
       } catch (err) {
         console.error('Error during encryption: ' + err);
@@ -572,14 +611,6 @@ export default function Page() {
     // add to IPFS
     // deploy contract (ERC-2981)
     // register asset (global registry)
-
-    setIsDeploying(true);
-
-    setDeployStatus('Encrypting file...');
-    await new Promise(r => setTimeout(r, 1000));
-
-    setDeployStatus('Uploading to IPFS...');
-    await new Promise(r => setTimeout(r, 1500));
 
     setDeployStatus('Deploying contract...');
     await new Promise(r => setTimeout(r, 2000));
