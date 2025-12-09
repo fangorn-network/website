@@ -65,10 +65,11 @@ contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         uint256 nftPrice_,
         uint96 royaltyAmount_,
         bool isLimitedAmount_
-        )  ERC721(
-            isLimitedAmount_ ? "LimitedThresholdEncryptedAsset" : "UnlimitiedThresholdEncryptedAsset",
-            isLimitedAmount_ ? "LTEA" : "UTEA"
-        ) Ownable(msg.sender) {
+    ) ERC721(
+        isLimitedAmount_ ? "LimitedThresholdEncryptedAsset" : "UnlimitiedThresholdEncryptedAsset",
+        isLimitedAmount_ ? "LTEA" : "UTEA"
+      ) 
+      Ownable(msg.sender) {
         require(royaltyAmount_ <= 10000, "Fee exceeds 100%");
         _setDefaultRoyalty(owner(), royaltyAmount_);
         _price = nftPrice_;
@@ -93,11 +94,13 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
 
     error NoTokenSupplyLeft();
 
+    mapping(address => uint256) _tokensMinted;
+
     constructor(
         uint256 nftPrice_,
         uint96 royaltyAmount_,
         uint256 maxSupply_
-        )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, true) {
+    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, true) {
         require(maxSupply_ > 0, "Max supply must be greater than zero");
         _maxSupply = maxSupply_;
     }
@@ -107,8 +110,13 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
             require (msg.value >= _price, "Insufficient Funds to purchase token");
             uint256 tokenId = _tokenIdCounter;
             _safeMint(_recipient, tokenId);
+             // Refund excess payment
             emit TokenMinted(tokenId, _recipient, _price);
             _tokenIdCounter += 1;
+            if (msg.value > _price) {
+                (bool success, ) = payable(msg.sender).call{value: msg.value - _price}("");
+                require(success, "Refund failed");
+            }
             return tokenId;
         } else {
             revert NoTokenSupplyLeft();
@@ -130,10 +138,11 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
 }
 
 contract UnlimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
+
     constructor(
         uint256 nftPrice_,
         uint96 royaltyAmount_
-        )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false) {}
+    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false) {}
 
     function tryPurchaseToken(address _recipient) public payable returns (uint256) {
         require (msg.value >= _price, "Insufficient Funds to purchase token");
@@ -141,6 +150,11 @@ contract UnlimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
         _safeMint(_recipient, tokenId);
         emit TokenMinted(tokenId, _recipient, _price);
         _tokenIdCounter += 1;
+        if (msg.value > _price) {
+            (bool success, ) = payable(msg.sender).call{value: msg.value - _price}("");
+            require(success, "Refund failed");
+        }
         return tokenId;
     }
+
 }
