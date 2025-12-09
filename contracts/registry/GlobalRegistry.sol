@@ -87,6 +87,14 @@ contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         _overridePrice = false;
     }
 
+    function setNewDefaultPrice(uint256 defaultPrice_) public onlyOwner {
+        _defaultPrice = defaultPrice_;
+    }
+
+    function setNewDefaultRoyalty(uint96 newDefaultRoyalty_) public onlyOwner {
+        _setDefaultRoyalty(owner(), newDefaultRoyalty_);
+    }
+
     function overrideRoyalties(uint96 overridenRoyalty_) public onlyOwner {
         require(overridenRoyalty_ <= 10000, "Fee exceeds 100%");
         _overrideRoyalties = true;
