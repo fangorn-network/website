@@ -33,45 +33,45 @@ interface Asset {
 // MOCK DATA
 // ============================================
 const MOCK_ASSETS: Asset[] = [
-  {
-    id: '1',
-    title: 'The Forest Protocol',
-    type: 'PDF',
-    cid: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
-    contractAddress: '0x7a3d8f2c9b4e1a6d5c3f8e2b9a4d7c1e6f3b8a2c',
-    minted: 89,
-    maxSupply: 500,
-    price: 0.05,
-    royalty: 10,
-    earned: 1.82,
-    createdAt: '2024-12-01',
-  },
-  {
-    id: '2',
-    title: 'Design System v2',
-    type: 'Directory',
-    cid: 'bafybeiff7etrfgsfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fdef',
-    contractAddress: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b',
-    minted: 43,
-    maxSupply: 100,
-    price: 0.12,
-    royalty: 10,
-    earned: 0.89,
-    createdAt: '2024-11-28',
-  },
-  {
-    id: '3',
-    title: 'Ambient Collection',
-    type: 'Audio',
-    cid: 'bafybeighmjfgsfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzzz',
-    contractAddress: '0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e',
-    minted: 15,
-    maxSupply: 50,
-    price: 0.08,
-    royalty: 10,
-    earned: 0.14,
-    createdAt: '2024-11-15',
-  },
+  // {
+  //   id: '1',
+  //   title: 'The Forest Protocol',
+  //   type: 'PDF',
+  //   cid: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
+  //   contractAddress: '0x7a3d8f2c9b4e1a6d5c3f8e2b9a4d7c1e6f3b8a2c',
+  //   minted: 89,
+  //   maxSupply: 500,
+  //   price: 0.05,
+  //   royalty: 10,
+  //   earned: 1.82,
+  //   createdAt: '2024-12-01',
+  // },
+  // {
+  //   id: '2',
+  //   title: 'Design System v2',
+  //   type: 'Directory',
+  //   cid: 'bafybeiff7etrfgsfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fdef',
+  //   contractAddress: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b',
+  //   minted: 43,
+  //   maxSupply: 100,
+  //   price: 0.12,
+  //   royalty: 10,
+  //   earned: 0.89,
+  //   createdAt: '2024-11-28',
+  // },
+  // {
+  //   id: '3',
+  //   title: 'Ambient Collection',
+  //   type: 'Audio',
+  //   cid: 'bafybeighmjfgsfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzzz',
+  //   contractAddress: '0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e',
+  //   minted: 15,
+  //   maxSupply: 50,
+  //   price: 0.08,
+  //   royalty: 10,
+  //   earned: 0.14,
+  //   createdAt: '2024-11-15',
+  // },
 ];
 
 // ============================================
@@ -87,8 +87,9 @@ const AssetDetailModal = ({ asset, onClose }: AssetDetailModalProps) => {
 
   if (!asset) return null;
 
-  // const shareUrl = `https://fangorn.network/asset/${asset.id}`;
-  const shareUrl = `http://localhost:3000/asset/${asset.id}`;
+  // TODO: should be based on prod v.s. local
+  // const shareUrl = `https://fangorn.network/asset/${asset.c  id}`;
+  const shareUrl = `http://localhost:3000/asset/${asset.cid}`;
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(shareUrl);
@@ -305,7 +306,7 @@ const LibraryView = () => (
 // MAIN PAGE
 // ============================================
 export default function Page() {
-  
+
   const wallet = useWallet();
   const { upload, uploading } = useStoracha();
 
@@ -317,10 +318,6 @@ export default function Page() {
   const [deployStatus, setDeployStatus] = useState('');
 
   const handleUpload = async (file: File, config: UploadConfig) => {
-    // connect to LIT network
-    const chain = 'ethereum'
-    let litClient = new Lit(chain)
-    await litClient.connect();
     // TODO: encrypt the file for an erc-2981 token
     // for now it's just a positive eth balance
     const accessControlConditions = [
@@ -338,9 +335,17 @@ export default function Page() {
     ];
 
     const reader = new FileReader();
+
     reader.onload = async (e) => {
       const arrayBuffer = e.target?.result as ArrayBuffer
       const byteArray = new Uint8Array(arrayBuffer)
+      
+      // TODO: should probably build a `useLit()` hook
+      // connect to LIT network
+      const chain = 'ethereum'
+      let litClient = new Lit(chain)
+      await litClient.connect();
+
       try {
         setIsDeploying(true);
         setDeployStatus('Encrypting file...');
@@ -350,49 +355,62 @@ export default function Page() {
         console.log("Upload to storacha with CID " + cid);
         // this is where stuff should happen
         // Coleman
+        // this can probably just be one call
+        setDeployStatus('Deploying contract...');
+        await new Promise(r => setTimeout(r, 2000));
+        setDeployStatus('Registering asset...');
+        await new Promise(r => setTimeout(r, 800));
 
+        const newAsset: Asset = {
+          id: String(Date.now()),
+          title: config.title,
+          type: file.type.includes('pdf') ? 'PDF' :
+            file.type.includes('audio') ? 'Audio' :
+              file.type.includes('video') ? 'Video' :
+                file.type.includes('image') ? 'Image' : 'Directory',
+          cid: cid,
+          contractAddress: '0x' + Array(40).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+          minted: 0,
+          maxSupply: config.maxSupply ? parseInt(config.maxSupply) : null,
+          price: parseFloat(config.price),
+          royalty: parseInt(config.royalty),
+          earned: 0,
+          createdAt: new Date().toISOString().split('T')[0],
+        };
+
+        setAssets(prev => [newAsset, ...prev]);
 
       } catch (err) {
         console.error('Error during encryption: ' + err);
+      } finally {
+      // disconnect lit client
+      await litClient.getClient()?.disconnect();
       }
     }
 
     reader.readAsArrayBuffer(file);
 
-    setDeployStatus('Deploying contract...');
-    await new Promise(r => setTimeout(r, 2000));
+    // const newAsset: Asset = {
+    //   id: String(Date.now()),
+    //   title: config.title,
+    //   type: file.type.includes('pdf') ? 'PDF' :
+    //     file.type.includes('audio') ? 'Audio' :
+    //       file.type.includes('video') ? 'Video' :
+    //         file.type.includes('image') ? 'Image' : 'Directory',
+    //   cid: 'bafybei' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+    //   contractAddress: '0x' + Array(40).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+    //   minted: 0,
+    //   maxSupply: config.maxSupply ? parseInt(config.maxSupply) : null,
+    //   price: parseFloat(config.price),
+    //   royalty: parseInt(config.royalty),
+    //   earned: 0,
+    //   createdAt: new Date().toISOString().split('T')[0],
+    // };
 
-    setDeployStatus('Registering asset...');
-    await new Promise(r => setTimeout(r, 800));
-
-    // TODO: this file selection is weird
-    // TODO: get real parameters (cid, contract, etc)
-    // the cid generation is fake
-    // the contract address is fake
-    const newAsset: Asset = {
-      id: String(Date.now()),
-      title: config.title,
-      type: file.type.includes('pdf') ? 'PDF' :
-        file.type.includes('audio') ? 'Audio' :
-          file.type.includes('video') ? 'Video' :
-            file.type.includes('image') ? 'Image' : 'Directory',
-      cid: 'bafybei' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-      contractAddress: '0x' + Array(40).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
-      minted: 0,
-      maxSupply: config.maxSupply ? parseInt(config.maxSupply) : null,
-      price: parseFloat(config.price),
-      royalty: parseInt(config.royalty),
-      earned: 0,
-      createdAt: new Date().toISOString().split('T')[0],
-    };
-
-    setAssets(prev => [newAsset, ...prev]);
+    // setAssets(prev => [newAsset, ...prev]);
     setIsDeploying(false);
     setDeployStatus('');
     setShowUploadModal(false);
-
-    // disconnect lit client
-    await litClient.getClient()?.disconnect();
   };
 
   return (

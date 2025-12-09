@@ -2,63 +2,22 @@
 
 import React, { useState } from 'react';
 import './page.css';
-
-// ============================================
-// TYPES
-// ============================================
-interface AssetData {
-    id: string;
-    title: string;
-    description: string;
-    type: string;
-    fileSize: string;
-    cid: string;
-    contractAddress: string;
-    registryId: string;
-    contentType: string;
-    createdAt: string;
-    price: number;
-    priceUsd: number;
-    minted: number;
-    maxSupply: number | null;
-    royalty: number;
-    creator: {
-        address: string;
-        name: string;
-        avatar?: string;
-    };
-}
-
-interface WalletState {
-    address: string | null;
-    connecting: boolean;
-    connect: () => Promise<void>;
-    disconnect: () => void;
-}
-
-// ============================================
-// UTILS
-// ============================================
-const shortenAddress = (address: string): string => {
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-};
-
-const shortenCid = (cid: string): string => {
-    return `${cid.slice(0, 32)}...`;
-};
+import { useWallet } from '@/app/hooks/useWallet';
+import { shortenAddress, shortenCid } from './utils';
+import { AssetData } from '@/app/common/types';
 
 // ============================================
 // MOCK DATA
 // ============================================
 const MOCK_ASSET: AssetData = {
-    id: 'fangorn-asset-0047',
+    // id: 'fangorn-asset-0047',
     title: 'The Forest Protocol',
     description: 'A comprehensive guide to building decentralized access control systems using threshold cryptography. Covers witness encryption fundamentals, policy-based access patterns, and practical implementation strategies for token-gated content distribution.',
     type: 'PDF',
     fileSize: '2.4 MB',
     cid: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
     contractAddress: '0x7a3d8f2c9b4e1a6d5c3f8e2b9a4d7c1e6f3b2c4e',
-    registryId: 'fangorn:asset:0x7a3d...0047',
+    // registryId: 'fangorn:asset:0x7a3d...0047',
     contentType: 'application/pdf',
     createdAt: 'Dec 1, 2024',
     price: 0.05,
@@ -76,14 +35,14 @@ const MOCK_ASSET: AssetData = {
 // HEADER
 // ============================================
 interface HeaderProps {
-    wallet: WalletState;
+    wallet: ReturnType<typeof useWallet>;
     onLogoClick?: () => void;
 }
 
 const Header = ({ wallet, onLogoClick }: HeaderProps) => (
     <header className="asset-header">
         <button className="header-logo" onClick={onLogoClick}>
-      // Fangorn
+            Fangorn
             <span className="header-logo-sub">Liquid Access Rights</span>
         </button>
 
@@ -166,10 +125,10 @@ const Metadata = ({ asset }: MetadataProps) => (
                 </a>
             </span>
         </div>
-        <div className="meta-row">
+        {/* <div className="meta-row">
             <span className="meta-label">Registry ID</span>
             <span className="meta-value">{asset.registryId}</span>
-        </div>
+        </div> */}
         <div className="meta-row">
             <span className="meta-label">Content Type</span>
             <span className="meta-value">{asset.contentType}</span>
@@ -195,7 +154,7 @@ const PriceSection = ({ asset }: PriceSectionProps) => (
             {asset.price}
             <span className="price-currency">ETH</span>
         </div>
-        <div className="price-usd">≈ ${asset.priceUsd.toFixed(2)} USD</div>
+        <div className="price-usd">≈ ${asset.priceUsd?.toFixed(2)} USD</div>
     </div>
 );
 
@@ -254,8 +213,8 @@ const NotConnectedCard = ({ asset, onConnect }: NotConnectedCardProps) => (
         </button>
 
         <div className="purchase-note">
-            Purchasing mints an ERC-721 token that grants decryption access.
-            Token can be resold on any NFT marketplace.
+            Purchasing mints an ERC-721/ERC-2981 (TODO) token that grants decryption access.
+            Token can be resold on any NFT marketplace (limitations apply).
         </div>
     </div>
 );
@@ -284,7 +243,7 @@ const NoTokenCard = ({ asset, onBuy, isBuying }: NoTokenCardProps) => (
         <button className="btn-secondary">View on OpenSea</button>
 
         <div className="purchase-note">
-            Purchasing mints an ERC-721 token that grants decryption access.
+            Purchasing mints an ERC-721/ERC-2981 (TODO) token that grants decryption access.
             Token can be resold on any NFT marketplace.
         </div>
     </div>
@@ -333,10 +292,13 @@ interface AssetPageProps {
     onLogoClick?: () => void;
 }
 
+// function fetchAsset(assetId) {
+
+// }
+
 export default function AssetPage({ assetId, onLogoClick }: AssetPageProps) {
     // Wallet state
-    const [walletAddress, setWalletAddress] = useState<string | null>(null);
-    const [connecting, setConnecting] = useState(false);
+    const wallet = useWallet();
 
     // Access state
     const [hasToken, setHasToken] = useState(false);
@@ -348,34 +310,7 @@ export default function AssetPage({ assetId, onLogoClick }: AssetPageProps) {
     const [decryptStatus, setDecryptStatus] = useState('');
 
     // In real app, fetch asset by assetId
-    const asset = MOCK_ASSET;
-
-    const wallet: WalletState = {
-        address: walletAddress,
-        connecting,
-        connect: async () => {
-            setConnecting(true);
-            if (typeof window !== 'undefined' && (window as any).ethereum) {
-                try {
-                    const accounts = await (window as any).ethereum.request({
-                        method: 'eth_requestAccounts'
-                    });
-                    setWalletAddress(accounts[0]);
-                    // TODO: Check if wallet owns a token for this asset
-                } catch (err) {
-                    console.error('Failed to connect:', err);
-                }
-            } else {
-                await new Promise(r => setTimeout(r, 1000));
-                setWalletAddress('0x7a3d8f2c9b4e1a6d5c3f8e2b9a4d7c1e6f3b8a2c');
-            }
-            setConnecting(false);
-        },
-        disconnect: () => {
-            setWalletAddress(null);
-            setHasToken(false);
-        },
-    };
+    const asset = MOCK_ASSET
 
     const handleBuy = async () => {
         setIsBuying(true);
@@ -412,7 +347,7 @@ export default function AssetPage({ assetId, onLogoClick }: AssetPageProps) {
 
             <main className="asset-main">
                 <div className="asset-info">
-                    <Preview asset={asset} hasAccess={hasToken && !!walletAddress} />
+                    <Preview asset={asset} hasAccess={hasToken && !!wallet.address} />
                     <h1 className="asset-title">{asset.title}</h1>
                     <CreatorInfo creator={asset.creator} />
                     <p className="asset-description">{asset.description}</p>
@@ -420,7 +355,7 @@ export default function AssetPage({ assetId, onLogoClick }: AssetPageProps) {
                 </div>
 
                 <div className="purchase-column">
-                    {!walletAddress ? (
+                    {!wallet.address ? (
                         <NotConnectedCard asset={asset} onConnect={wallet.connect} />
                     ) : !hasToken ? (
                         <NoTokenCard asset={asset} onBuy={handleBuy} isBuying={isBuying} />

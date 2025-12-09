@@ -56,7 +56,7 @@ export default function Page() {
       <div className="glow-bottom" />
 
       <nav className="cs-nav">
-        <div className="cs-logo">// Fangorn</div>
+        <div className="cs-logo">Fangorn</div>
         <div className="cs-nav-links">
           <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">GitHub</a>
           <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">X</a>

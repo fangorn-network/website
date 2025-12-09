@@ -1,5 +1,5 @@
 {
-  "name": "fangorn-website",
+  "name": "app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,9 +13,9 @@
     "@lit-protocol/constants": "^8.0.8",
     "@lit-protocol/encryption": "^7.3.1",
     "@lit-protocol/lit-node-client": "^7.3.1",
+    "@openzeppelin/contracts": "^5.4.0",
     "@storacha/client": "^1.8.21",
     "@web3-storage/w3up-client": "^17.3.0",
-    "@openzeppelin/contracts": "^5.4.0",
     "ethers": "^5.8.0",
     "lucide-react": "^0.554.0",
     "multiformats": "^13.4.1",
@@ -26,12 +26,15 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@typechain/ethers-v5": "^11.1.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "hardhat": "^2.27.1",
     "tailwindcss": "^4",
+    "typechain": "^8.3.2",
     "typescript": "^5"
   }
 }
