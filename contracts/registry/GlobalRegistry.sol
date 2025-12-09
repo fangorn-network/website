@@ -50,14 +50,17 @@ contract GlobalRegistry {
     }
 }
 
-// contract to be deployed after registering new CT
 contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
-    uint256 internal _price;
+    uint256 internal _defaultPrice;
     uint256 internal _tokenIdCounter;
+    bool internal _overridePrice;
+    uint256 internal _overriddenPrice;
+    bool internal _overrideRoyalties;
+    uint96 internal _overriddenRoyalties;
 
     event TokenMinted(
         uint256 indexed tokenId,
-        address indexed recipient,
+        address indexed buyer,
         uint256 price
     );
 
@@ -72,7 +75,45 @@ contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
       Ownable(msg.sender) {
         require(royaltyAmount_ <= 10000, "Fee exceeds 100%");
         _setDefaultRoyalty(owner(), royaltyAmount_);
-        _price = nftPrice_;
+        _defaultPrice = nftPrice_;
+    }
+
+    function overridePrice(uint256 newPrice_) public onlyOwner {
+        _overridePrice = true;
+        _overriddenPrice = newPrice_;
+    }
+
+    function useDefaultPrice() public onlyOwner() {
+        _overridePrice = false;
+    }
+
+    function overrideRoyalties(uint96 overridenRoyalty_) public onlyOwner {
+        require(overridenRoyalty_ <= 10000, "Fee exceeds 100%");
+        _overrideRoyalties = true;
+        _overriddenRoyalties = overridenRoyalty_;
+    }
+
+    function useDefaultRoyalty() public onlyOwner {
+        _overrideRoyalties = false;
+    }
+
+    function mintToken() internal returns (uint256) {
+        uint256 tokenId = _tokenIdCounter;
+        address buyer = msg.sender;
+        uint256 amountOffered = msg.value;
+        uint256 price = _overridePrice ? _overriddenPrice : _defaultPrice;
+        require (amountOffered >= price, "Insufficient Funds to purchase token");
+        if (_overrideRoyalties) {
+            _setTokenRoyalty(tokenId, buyer, _overriddenRoyalties);
+        }
+        _safeMint(buyer, tokenId);
+        if (amountOffered > price) {
+            (bool success, ) = payable(msg.sender).call{value: amountOffered - price}("");
+            require(success, "Refund failed");
+        }
+        emit TokenMinted(tokenId, buyer, price);
+
+        return tokenId;
     }
 
     /**
@@ -89,12 +130,15 @@ contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
 
 }
 
+// Contract to be deployed after registering new CT.
+// Limited Supply only. There is no way to go between a
+// Limited Supply NFT to an unlimited supply.
+// However, one can set new max tokens or increase
+// supply as needed
 contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
     uint256 private _maxSupply;
 
     error NoTokenSupplyLeft();
-
-    mapping(address => uint256) _tokensMinted;
 
     constructor(
         uint256 nftPrice_,
@@ -105,29 +149,29 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
         _maxSupply = maxSupply_;
     }
 
-    function tryPurchaseToken(address _recipient) public payable returns (uint256) {
+    function tryPurchaseToken() public payable returns (uint256) {
         if (this.availableTokens() > 0) {
-            require (msg.value >= _price, "Insufficient Funds to purchase token");
-            uint256 tokenId = _tokenIdCounter;
-            _safeMint(_recipient, tokenId);
-             // Refund excess payment
-            emit TokenMinted(tokenId, _recipient, _price);
-            _tokenIdCounter += 1;
-            if (msg.value > _price) {
-                (bool success, ) = payable(msg.sender).call{value: msg.value - _price}("");
-                require(success, "Refund failed");
-            }
+            uint256 tokenId = mintToken();
             return tokenId;
         } else {
             revert NoTokenSupplyLeft();
         }
     }
 
-    function increaseMaxTokensByAmount(uint256 _tokensToAdd) public onlyOwner {
-        _maxSupply += _tokensToAdd;
+    function increaseMaxTokensByAmount(uint256 _amountToIncrease) public onlyOwner {
+        _maxSupply += _amountToIncrease;
+    }
+
+    function decreaseMaxTokensByAmount(uint256 _amountToDecrease) public onlyOwner {
+        uint256 newMaxTokens =_maxSupply - _amountToDecrease;
+        require(newMaxTokens > 0, "You cannot have a zero max supply amount");
+        require(newMaxTokens >= _tokenIdCounter, "You cannot have less supply than there are already existing NFTs");
+        _maxSupply = newMaxTokens;
     }
 
     function setNewMaxTokens(uint256 _newMaxTokens) public onlyOwner {
+        require(_newMaxTokens > 0, "You cannot have a zero max supply amount");
+        require(_newMaxTokens >= _tokenIdCounter, "You cannot have less supply than there are already existing NFTs");
         _maxSupply = _newMaxTokens;
     }
 
@@ -137,6 +181,9 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
 
 }
 
+// Contract to be deployed after registering new CT.
+// Since there is no need to keep count of NFTs
+// we can save 256 bits of memory by not having maxSupply_
 contract UnlimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
 
     constructor(
@@ -144,16 +191,8 @@ contract UnlimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
         uint96 royaltyAmount_
     )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false) {}
 
-    function tryPurchaseToken(address _recipient) public payable returns (uint256) {
-        require (msg.value >= _price, "Insufficient Funds to purchase token");
-        uint256 tokenId = _tokenIdCounter;
-        _safeMint(_recipient, tokenId);
-        emit TokenMinted(tokenId, _recipient, _price);
-        _tokenIdCounter += 1;
-        if (msg.value > _price) {
-            (bool success, ) = payable(msg.sender).call{value: msg.value - _price}("");
-            require(success, "Refund failed");
-        }
+    function tryPurchaseToken() public payable returns (uint256) {
+        uint256 tokenId = mintToken();
         return tokenId;
     }
 
