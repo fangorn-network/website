@@ -4,15 +4,11 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 
 abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
-    uint256 internal _defaultPrice;
+    uint256 internal _assetPrice;
     uint256 internal _tokenIdCounter;
-    bool internal _overridePrice;
-    uint256 internal _overriddenPrice;
-    bool internal _overrideRoyalties;
-    uint96 internal _overriddenRoyalties;
+    uint96 internal _royaltyAmount;
     address public _delegatorAddress;
 
     event TokenMinted(
@@ -50,9 +46,9 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         isLimitedAmount_ ? "LTEA" : "UTEA"
       ) 
       Ownable(owner_) {
-        require(royaltyAmount_ <= 10000, "Fee exceeds 100%");
         _setDefaultRoyalty(owner(), royaltyAmount_);
-        _defaultPrice = nftPrice_;
+        _royaltyAmount = royaltyAmount_;
+        _assetPrice = nftPrice_;
         _delegatorAddress = delegatorAddress_;
     }
 
@@ -65,53 +61,27 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         _delegatorAddress = newDelegator;
     }
 
-    function overridePrice(uint256 newPrice_) public onlyOwnerOrDelegator {
-        _overridePrice = true;
-        _overriddenPrice = newPrice_;
-
-        emit PriceChange(_defaultPrice, newPrice_);
+    function updatePrice(uint256 newPrice_) public onlyOwnerOrDelegator {
+        emit PriceChange(_assetPrice, newPrice_);
+        _assetPrice = newPrice_;
     }
 
-    function useDefaultPrice() public onlyOwnerOrDelegator() {
-        _overridePrice = false;
-        emit PriceChange(_defaultPrice, _overriddenPrice);
-    }
-
-    function setNewDefaultPrice(uint256 defaultPrice_) public onlyOwnerOrDelegator {
-        emit PriceChange(_defaultPrice, defaultPrice_);
-        _defaultPrice = defaultPrice_;
-    }
-
-    function setNewDefaultRoyalty(uint96 newDefaultRoyalty_) public onlyOwnerOrDelegator {
-        require(newDefaultRoyalty_ <= 10000, "Fee exceeds 100%");
-        // emit RoyaltyChange(, newRoyalty);
-        _setDefaultRoyalty(owner(), newDefaultRoyalty_);
-    }
-
-    function overrideRoyalties(uint96 overriddenRoyalty_) public onlyOwnerOrDelegator {
-        require(overriddenRoyalty_ <= 10000, "Fee exceeds 100%");
-        _overrideRoyalties = true;
-        _overriddenRoyalties = overriddenRoyalty_;
-    }
-
-    function useDefaultRoyalty() public onlyOwnerOrDelegator {
-        _overrideRoyalties = false;
+    function updateRoyaltyAmount(uint96 newRoyalty_) public onlyOwnerOrDelegator {
+        _setDefaultRoyalty(owner(), newRoyalty_);
+        emit RoyaltyChange(_royaltyAmount, newRoyalty_);
+        _royaltyAmount = newRoyalty_;
     }
 
     function mintToken(address buyer) internal returns (uint256) {
         uint256 tokenId = _tokenIdCounter;
         uint256 amountOffered = msg.value;
-        uint256 price = _overridePrice ? _overriddenPrice : _defaultPrice;
-        require (amountOffered >= price, "Insufficient Funds to purchase token");
-        if (_overrideRoyalties) {
-            _setTokenRoyalty(tokenId, owner(), _overriddenRoyalties);
-        }
+        require (amountOffered >= _assetPrice, "Insufficient Funds to purchase token");
         _safeMint(buyer, tokenId);
-        if (amountOffered > price) {
-            (bool success, ) = payable(msg.sender).call{value: amountOffered - price}("");
+        if (amountOffered > _assetPrice) {
+            (bool success, ) = payable(msg.sender).call{value: amountOffered - _assetPrice}("");
             require(success, "Refund failed");
         }
-        emit TokenMinted(tokenId, buyer, price);
+        emit TokenMinted(tokenId, buyer, _assetPrice);
         _tokenIdCounter++;
 
         return tokenId;
@@ -167,7 +137,7 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
     }
 
     function tryPurchaseToken(address buyer) external payable returns (uint256) {
-        if (internalAvailableTokens() > 0) {
+        if (_internalAvailableTokens() > 0) {
             uint256 tokenId = mintToken(buyer);
             return tokenId;
         } else {
@@ -181,23 +151,26 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
 
     function decreaseMaxTokensByAmount(uint256 _amountToDecrease) public onlyOwnerOrDelegator {
         uint256 newMaxTokens =_maxSupply - _amountToDecrease;
-        require(newMaxTokens > 0, "You cannot have a <= max supply amount. Please ensure that the maximum supply - your decrement is >0.");
-        require(newMaxTokens >= _tokenIdCounter, "You cannot have less supply than there are already existing NFTs");
+        _verifyMaxTokenAmount(newMaxTokens);
         _maxSupply = newMaxTokens;
     }
 
     function setNewMaxTokens(uint256 _newMaxTokens) public onlyOwnerOrDelegator {
-        require(_newMaxTokens > 0, "You cannot have a zero max supply amount");
-        require(_newMaxTokens >= _tokenIdCounter, "You cannot have less supply than there are already existing NFTs");
+        _verifyMaxTokenAmount(_newMaxTokens);
         _maxSupply = _newMaxTokens;
     }
 
-    function internalAvailableTokens() internal view returns(uint256) {
+    function availableTokens() public view returns(uint256) {
+        return _internalAvailableTokens();
+    }
+
+    function _internalAvailableTokens() internal view returns(uint256) {
         return _maxSupply - _tokenIdCounter;
     }
 
-    function availableTokens() public view returns(uint256) {
-        return _maxSupply - _tokenIdCounter;
+    function _verifyMaxTokenAmount(uint256 maxTokens) private view {
+        require(maxTokens > 0, "Ensure maxTokens > 0");
+        require(maxTokens >= _tokenIdCounter, "Ensure maxTokens > # of existing tokens");
     }
 
 }

@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+
 import "./UserRegistry.sol";
 
 contract GlobalRegistry is Ownable{
@@ -13,66 +12,91 @@ contract GlobalRegistry is Ownable{
 
     mapping(address => address) public globalRegistry;
 
-    event RegistryCreated(address indexed owner, address indexed registryAddress, string authorName);
-    event AssetRegistered(address indexed registryOwner, string indexed assetName);
-    event AssetMinted(address indexed registryOwner, string indexed assetName, address indexed buyer);
+    // event RegistryRegistered(address indexed owner, address indexed registryAddress);
 
+    event RegistryCreated(address indexed owner, address indexed registryAddress, string authorName);
+
+    // /**
+    //  * @notice Get all assets created by an address
+    //  */
+    // function getAssetsByCreator(address creator) external view returns (string[] memory) {
+    //     return UserRegistry(_getRegistry(creator)).getAllAssetNames();
+    // }
+
+    // function getAllRegistries() public {
+
+
+    // }
+
+    function getUserRegistry(address creator) external view returns(address) {
+        return _getRegistry(creator);
+    }
+
+    function _getRegistry(address user) private view returns (address) {
+        address registryAddress = globalRegistry[user];
+        require(registryAddress != address(0), "No registry");
+        return registryAddress;
+    }
+
+    // function _verifyRegistry(address creator, address registryAddress) private view {
+    //     require(creator == UserRegistry(registryAddress).owner(), "Not the owner.");
+    // }
+
+    event AssetRegistered(address indexed registryOwner, string indexed assetName);
+    // event AssetMinted(address indexed registryOwner, string indexed assetName, address indexed buyer);
+    /**
+     * @notice Register a new asset (delegates to UserRegistry)
+     */
     function registerNewAsset(
-        string memory assetName, 
-        string memory cid,
+        string calldata assetName, 
+        string calldata cid,
         uint256 price,
         uint96 royaltyAmount,
         uint256 maxSupply
     )
     external payable {
-        address registryOwner = msg.sender;
-        address registryAddress = globalRegistry[registryOwner];
-        require(registryAddress != address(0), "This wallet address has not created a user registry.");
+        _validateAssetParams(assetName, cid);
+        address registryAddress = _getRegistry(msg.sender);
         UserRegistry userRegistry = UserRegistry(registryAddress);
-        require(bytes(assetName).length > 0, "AssettName must be non-empty");
-        require(bytes(cid).length > 0, "cid must be non-empty");
         userRegistry.registerNewAsset(maxSupply, assetName, price, royaltyAmount);
         emit AssetRegistered(msg.sender, assetName);
     }
 
-    function mintNewAsset(address registryOwner, string memory assetName) public payable {
-        address buyer = msg.sender;
-        address registryAddress = globalRegistry[registryOwner];
-        require(registryAddress != address(0), "Unable to find user's registry.");
-        UserRegistry userRegistry = UserRegistry(registryAddress);
-        userRegistry.mintNewToken{value: msg.value}(assetName, buyer);
-        emit AssetMinted(registryOwner, assetName, msg.sender);
-    }
+    // function mintNewAsset(address registryOwner, string memory assetName) public payable {
+    //     address registryAddress = _getRegistry(registryOwner);
+    //     UserRegistry userRegistry = UserRegistry(registryAddress);
+    //     userRegistry.mintNewToken{value: msg.value}(assetName, msg.sender);
+    //     emit AssetMinted(registryOwner, assetName, msg.sender);
+    // }
 
-    // create new registry
+    /**
+     * @notice Create a new user registry
+     * @param authorName_ Name of the author
+     */
     function createNewRegistry(string memory authorName_) external payable {
-        address registryOwner = msg.sender;
-        require(globalRegistry[registryOwner] == address(0), "The calling address already owns a registry.");
-        if (bytes(authorName_).length == 0) {
-            authorName_ = Strings.toHexString(msg.sender);
-        }
-        UserRegistry userRegistry = new UserRegistry(msg.sender, authorName_, address(this));
-        address userRegistryAddress = address(userRegistry);
-        globalRegistry[registryOwner] = userRegistryAddress;
-        emit RegistryCreated(msg.sender, userRegistryAddress, authorName_);
+        require(globalRegistry[msg.sender] == address(0), "Registry already exists.");
+        globalRegistry[msg.sender] = address(new UserRegistry(msg.sender, authorName_, address(this)));
+        emit RegistryCreated(msg.sender, globalRegistry[msg.sender], authorName_);
     }
 
-    function getAssetsByCreator(address creator) external view returns(string[] memory) {
-        address registryAddress = globalRegistry[creator];
-        require( registryAddress != address(0), "This wallet address has not created a user registry.");
-        UserRegistry userRegistry = UserRegistry(registryAddress);
-        return userRegistry.getAllAssetNames();
-    }
-
+    /**
+     * @notice Expose function to check that a user owns a token
+     */
     function hasAccess(string memory assetName, address creatorAddress) external view returns(bool) {
-        address tokenHolder = msg.sender;
-        address registryAddress = globalRegistry[creatorAddress];
-        require(registryAddress != address(0), "This wallet address has not created a user registry.");
+        address registryAddress = _getRegistry(creatorAddress);        
         UserRegistry userRegistry = UserRegistry(registryAddress);
-        return userRegistry.hasAccess(tokenHolder, assetName);
+        return userRegistry.hasAccess(msg.sender, assetName);
+    }
+
+    function _validateAssetParams(string calldata assetName, string calldata cid) 
+        private 
+        pure 
+    {
+        require(bytes(assetName).length > 0, "Empty name");
+        require(bytes(cid).length > 0, "Empty CID");
     }
 
     // a function to update the cost of setting up the registry
     // right now registry creation is free (minus gas fees)
-    function updateGlobalRegistryPrice() public onlyOwner {}
+    // function updateGlobalRegistryPrice() public onlyOwner {}
 }

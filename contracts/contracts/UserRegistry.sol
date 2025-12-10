@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./ThresholdEncryptedAsset.sol";
+import {LimitedThresholdEncryptedAsset, UnlimitedThresholdEncryptedAsset} from "./ThresholdEncryptedAsset.sol";
 contract UserRegistry is Ownable{
 
     string _authorName;
@@ -52,17 +52,12 @@ contract UserRegistry is Ownable{
         require (assetRegistry[assetName_].assetAddress == address(0), "Asset name aready exists");
         address newAssetAddress;
         AssetType assetType;
-        bool isUnlimitedSupply = maxSupply_ == 0; 
 
-        if (isUnlimitedSupply) {
-            UnlimitedThresholdEncryptedAsset newAsset = 
-                new UnlimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, owner(), address(this));
-            newAssetAddress = address(newAsset);
+        if (maxSupply_ == 0) {
+            newAssetAddress = address(new UnlimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, owner(), address(this)));
             assetType = AssetType.Unlimited;
         } else {
-            LimitedThresholdEncryptedAsset newAsset = 
-                new LimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, maxSupply_, owner(), address(this));
-            newAssetAddress = address(newAsset);
+            newAssetAddress = address(new LimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, maxSupply_, owner(), address(this)));
             assetType = AssetType.Limited;
         }
         
@@ -77,8 +72,8 @@ contract UserRegistry is Ownable{
         emit AssetRegistered(assetName_, newAssetAddress, assetType);
     }
 
-    function getAsset(string memory assetName_) 
-        public 
+    function _getAsset(string memory assetName_) 
+        private 
         view 
         returns (address, AssetType) 
     {
@@ -88,7 +83,7 @@ contract UserRegistry is Ownable{
     }
 
     function mintNewToken(string memory assetName, address buyer) public payable onlyOwnerOrDelegator {
-        (address assetAddr, AssetType assetType) = this.getAsset(assetName);
+        (address assetAddr, AssetType assetType) = _getAsset(assetName);
         if (assetType == AssetType.Unlimited) {
             UnlimitedThresholdEncryptedAsset unlimitedAsset =  UnlimitedThresholdEncryptedAsset(assetAddr);
             unlimitedAsset.tryPurchaseToken{value: msg.value}(buyer);
@@ -104,8 +99,7 @@ contract UserRegistry is Ownable{
 
     function hasAccess(address tokenHolder, string memory assetName) public view returns(bool) {
 
-        (address assetAddr, AssetType assetType) = this.getAsset(assetName);
-        require (assetAddr != address(0), "This asset does not exist.");
+        (address assetAddr, AssetType assetType) = _getAsset(assetName);
         bool hasToken;
 
         if (assetType == AssetType.Unlimited) {
@@ -117,6 +111,5 @@ contract UserRegistry is Ownable{
         }
 
         return hasToken;
-
     }
 }
