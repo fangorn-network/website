@@ -92,4 +92,22 @@ contract UserRegistry is Ownable{
     function getAllAssetNames() public view returns(string[] memory) {
         return assetNames;
     }
+
+    function hasAccess(address tokenHolder, string memory assetName) public view returns(bool) {
+
+        (address assetAddr, AssetType assetType) = this.getAsset(assetName);
+        require (assetAddr != address(0), "This asset does not exist.");
+        bool hasToken;
+
+        if (assetType == AssetType.Unlimited) {
+            UnlimitedThresholdEncryptedAsset unlimitedAsset =  UnlimitedThresholdEncryptedAsset(assetAddr);
+            hasToken = unlimitedAsset.hasAccess(tokenHolder);
+        } else {
+            LimitedThresholdEncryptedAsset limitedAsset =  LimitedThresholdEncryptedAsset(assetAddr);
+            hasToken = limitedAsset.hasAccess(tokenHolder);
+        }
+
+        return hasToken;
+
+    }
 }

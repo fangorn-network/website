@@ -113,6 +113,10 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         require(success, "Withdrawal failed");
     }
 
+    function hasAccess(address tokenHolder) public view returns (bool) {
+        return balanceOf(tokenHolder) > 0;
+    }
+
     /**
      * @dev See {IERC165-supportsInterface}
     */

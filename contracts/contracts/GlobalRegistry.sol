@@ -64,5 +64,15 @@ contract GlobalRegistry is Ownable{
         return userRegistry.getAllAssetNames();
     }
 
+    function hasAccess(string memory assetName, address creatorAddress) external view returns(bool) {
+        address tokenHolder = msg.sender;
+        address registryAddress = globalRegistry[creatorAddress];
+        require(registryAddress != address(0), "This wallet address has not created a user registry.");
+        UserRegistry userRegistry = UserRegistry(registryAddress);
+        return userRegistry.hasAccess(tokenHolder, assetName);
+    }
+
+    // a function to update the cost of setting up the registry
+    // right now registry creation is free (minus gas fees)
     function updateGlobalRegistryPrice() public onlyOwner {}
 }
