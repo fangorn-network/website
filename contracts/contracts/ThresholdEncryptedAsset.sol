@@ -33,7 +33,7 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
 
     modifier onlyOwnerOrDelegator() {
         require(
-            msg.sender == owner() || msg.sender == _delegatorAddress,
+            (msg.sender == owner() || msg.sender == _delegatorAddress) && (msg.sender != address(0)),
             "Only owner or designated delegator can call"
         );
         _;
