@@ -1,98 +1,273 @@
-import { 
-  Contract, 
-  Signer, 
-  providers,
-  utils,
-  BigNumber,
-  ContractTransaction,
-  ContractReceipt,
-} from 'ethers';
-
+// viem-registry.ts
 import {
-  AssetData, 
-  CreateAssetParams, 
-  AssetQuery, 
+  createPublicClient,
+  createWalletClient,
+  http,
+  PublicClient,
+  WalletClient,
+  Address,
+  Hash,
+  decodeEventLog,
+  parseEventLogs,
+  Log,
+} from 'viem';
+import type { Chain } from 'viem/chains';
+import {
+  AssetData,
+  CreateAssetParams,
+  AssetQuery,
   TxResult,
-  ParsedEvent 
+  ParsedEvent,
 } from '../common/types';
 import { IAssetRegistry } from './IAssetRegistry';
 
 const REGISTRY_ABI = [
-  "event AssetCreated(string indexed cid, address indexed creator, address tokenContract, uint256 price)",
-  "event AssetPurchased(string indexed cid, address indexed buyer, uint256 quantity, uint256 totalPaid)",
-  "event AssetUpdated(string indexed cid, string title, string description)",
-  
-  "function getAsset(string cid) view returns (tuple(string cid, string title, string description, string contentType, string fileSize, address tokenContract, uint256 createdAt, uint256 price, uint256 minted, uint256 maxSupply, uint256 royaltyBps, address creator, bool exists))",
-  "function getAssets(uint256 limit, uint256 offset) view returns (tuple(string cid, string title, string description, string contentType, string fileSize, address tokenContract, uint256 createdAt, uint256 price, uint256 minted, uint256 maxSupply, uint256 royaltyBps, address creator, bool exists)[])",
-  "function getAssetsByCreator(address creator) view returns (tuple(string cid, string title, string description, string contentType, string fileSize, address tokenContract, uint256 createdAt, uint256 price, uint256 minted, uint256 maxSupply, uint256 royaltyBps, address creator, bool exists)[])",
-  "function getAssetCount() view returns (uint256)",
-  "function hasAccess(string cid, address account) view returns (bool)",
-  "function getAccessTokenBalance(string cid, address account) view returns (uint256)",
-  
-  "function createAsset(string cid, string title, string description, string contentType, string fileSize, uint256 price, uint256 maxSupply, uint256 royaltyBps) payable returns (address tokenContract)",
-  "function purchase(string cid, uint256 quantity) payable",
-  "function updateMetadata(string cid, string title, string description)",
-];
+  {
+    type: 'event',
+    name: 'AssetCreated',
+    inputs: [
+      { name: 'cid', type: 'string', indexed: true },
+      { name: 'creator', type: 'address', indexed: true },
+      { name: 'tokenContract', type: 'address', indexed: false },
+      { name: 'price', type: 'uint256', indexed: false },
+    ],
+  },
+  {
+    type: 'event',
+    name: 'AssetPurchased',
+    inputs: [
+      { name: 'cid', type: 'string', indexed: true },
+      { name: 'buyer', type: 'address', indexed: true },
+      { name: 'quantity', type: 'uint256', indexed: false },
+      { name: 'totalPaid', type: 'uint256', indexed: false },
+    ],
+  },
+  {
+    type: 'event',
+    name: 'AssetUpdated',
+    inputs: [
+      { name: 'cid', type: 'string', indexed: true },
+      { name: 'title', type: 'string', indexed: false },
+      { name: 'description', type: 'string', indexed: false },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'getAsset',
+    stateMutability: 'view',
+    inputs: [{ name: 'cid', type: 'string' }],
+    outputs: [
+      {
+        type: 'tuple',
+        components: [
+          { name: 'cid', type: 'string' },
+          { name: 'title', type: 'string' },
+          { name: 'description', type: 'string' },
+          { name: 'contentType', type: 'string' },
+          { name: 'fileSize', type: 'string' },
+          { name: 'tokenContract', type: 'address' },
+          { name: 'createdAt', type: 'uint256' },
+          { name: 'price', type: 'uint256' },
+          { name: 'minted', type: 'uint256' },
+          { name: 'maxSupply', type: 'uint256' },
+          { name: 'royaltyBps', type: 'uint256' },
+          { name: 'creator', type: 'address' },
+          { name: 'exists', type: 'bool' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'getAssets',
+    stateMutability: 'view',
+    inputs: [
+      { name: 'limit', type: 'uint256' },
+      { name: 'offset', type: 'uint256' },
+    ],
+    outputs: [
+      {
+        type: 'tuple[]',
+        components: [
+          { name: 'cid', type: 'string' },
+          { name: 'title', type: 'string' },
+          { name: 'description', type: 'string' },
+          { name: 'contentType', type: 'string' },
+          { name: 'fileSize', type: 'string' },
+          { name: 'tokenContract', type: 'address' },
+          { name: 'createdAt', type: 'uint256' },
+          { name: 'price', type: 'uint256' },
+          { name: 'minted', type: 'uint256' },
+          { name: 'maxSupply', type: 'uint256' },
+          { name: 'royaltyBps', type: 'uint256' },
+          { name: 'creator', type: 'address' },
+          { name: 'exists', type: 'bool' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'getAssetsByCreator',
+    stateMutability: 'view',
+    inputs: [{ name: 'creator', type: 'address' }],
+    outputs: [
+      {
+        type: 'tuple[]',
+        components: [
+          { name: 'cid', type: 'string' },
+          { name: 'title', type: 'string' },
+          { name: 'description', type: 'string' },
+          { name: 'contentType', type: 'string' },
+          { name: 'fileSize', type: 'string' },
+          { name: 'tokenContract', type: 'address' },
+          { name: 'createdAt', type: 'uint256' },
+          { name: 'price', type: 'uint256' },
+          { name: 'minted', type: 'uint256' },
+          { name: 'maxSupply', type: 'uint256' },
+          { name: 'royaltyBps', type: 'uint256' },
+          { name: 'creator', type: 'address' },
+          { name: 'exists', type: 'bool' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'getAssetCount',
+    stateMutability: 'view',
+    inputs: [],
+    outputs: [{ type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'hasAccess',
+    stateMutability: 'view',
+    inputs: [
+      { name: 'cid', type: 'string' },
+      { name: 'account', type: 'address' },
+    ],
+    outputs: [{ type: 'bool' }],
+  },
+  {
+    type: 'function',
+    name: 'getAccessTokenBalance',
+    stateMutability: 'view',
+    inputs: [
+      { name: 'cid', type: 'string' },
+      { name: 'account', type: 'address' },
+    ],
+    outputs: [{ type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'createAsset',
+    stateMutability: 'payable',
+    inputs: [
+      { name: 'cid', type: 'string' },
+      { name: 'title', type: 'string' },
+      { name: 'description', type: 'string' },
+      { name: 'contentType', type: 'string' },
+      { name: 'fileSize', type: 'string' },
+      { name: 'price', type: 'uint256' },
+      { name: 'maxSupply', type: 'uint256' },
+      { name: 'royaltyBps', type: 'uint256' },
+    ],
+    outputs: [{ type: 'address' }],
+  },
+  {
+    type: 'function',
+    name: 'purchase',
+    stateMutability: 'payable',
+    inputs: [
+      { name: 'cid', type: 'string' },
+      { name: 'quantity', type: 'uint256' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'updateMetadata',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'cid', type: 'string' },
+      { name: 'title', type: 'string' },
+      { name: 'description', type: 'string' },
+    ],
+    outputs: [],
+  },
+] as const;
 
-export interface EvmRegistryConfig {
-  rpcUrl: string;
-  registryAddress: string;
-  abi?: string[];
+type RawAsset = {
+  cid: string;
+  title: string;
+  description: string;
+  contentType: string;
+  fileSize: string;
+  tokenContract: Address;
+  createdAt: bigint;
+  price: bigint;
+  minted: bigint;
+  maxSupply: bigint;
+  royaltyBps: bigint;
+  creator: Address;
+  exists: boolean;
+};
+
+export interface ViemRegistryConfig {
+  chain: Chain;
+  registryAddress: Address;
+  rpcUrl?: string;
 }
 
-export class EvmAssetRegistry implements IAssetRegistry {
-  private provider: providers.JsonRpcProvider;
-  private contract: Contract | null = null;
-  private signer: Signer | null = null;
-  private chainId: number = 0;
-  private readonly config: EvmRegistryConfig;
-  private readonly abi: string[];
-  private readonly iface: utils.Interface;
+export class ViemAssetRegistry implements IAssetRegistry {
+  private publicClient: PublicClient;
+  private walletClient: WalletClient | null = null;
+  private readonly config: ViemRegistryConfig;
+  private readonly address: Address;
 
-  constructor(config: EvmRegistryConfig) {
+  constructor(config: ViemRegistryConfig) {
     this.config = config;
-    this.abi = config.abi ?? REGISTRY_ABI;
-    this.iface = new utils.Interface(this.abi);
-    this.provider = new providers.JsonRpcProvider(config.rpcUrl);
+    this.address = config.registryAddress;
+    this.publicClient = createPublicClient({
+      chain: config.chain,
+      transport: http(config.rpcUrl),
+    });
   }
 
-  async connect(signer: Signer): Promise<void> {
-    this.signer = signer;
-    this.contract = new Contract(
-      this.config.registryAddress,
-      this.abi,
-      signer
-    );
-    
-    const network = await this.provider.getNetwork();
-    this.chainId = network.chainId;
+  async connect(walletClient: WalletClient): Promise<void> {
+    this.walletClient = walletClient;
   }
 
   async disconnect(): Promise<void> {
-    this.signer = null;
-    this.contract = null;
+    this.walletClient = null;
   }
 
   isConnected(): boolean {
-    return this.signer !== null && this.contract !== null;
+    return this.walletClient !== null;
   }
 
   getChainId(): string {
-    // return this.chainId;
-    // TODO: add multichain support
-    return "ethereum"
+    return this.config.chain.id.toString();
   }
 
   async getSignerAddress(): Promise<string> {
     this.ensureConnected();
-    return this.signer!.getAddress();
+    const [address] = await this.walletClient!.getAddresses();
+    return address;
   }
 
+  // --- Queries ---
+
   async getAsset(cid: string): Promise<AssetData | null> {
-    this.ensureConnected();
-    
     try {
-      const raw = await this.contract!.getAsset(cid);
+      const raw = await this.publicClient.readContract({
+        address: this.address,
+        abi: REGISTRY_ABI,
+        functionName: 'getAsset',
+        args: [cid],
+      });
+
       if (!raw.exists) return null;
       return this.mapToAssetData(raw);
     } catch (err) {
@@ -102,75 +277,104 @@ export class EvmAssetRegistry implements IAssetRegistry {
   }
 
   async getAssets(query?: AssetQuery): Promise<AssetData[]> {
-    this.ensureConnected();
-    
-    const limit = query?.limit ?? 100;
-    const offset = query?.offset ?? 0;
-    
-    const rawAssets = await this.contract!.getAssets(limit, offset);
+    const limit = BigInt(query?.limit ?? 100);
+    const offset = BigInt(query?.offset ?? 0);
+
+    const rawAssets = await this.publicClient.readContract({
+      address: this.address,
+      abi: REGISTRY_ABI,
+      functionName: 'getAssets',
+      args: [limit, offset],
+    });
+
     let assets = rawAssets
-      .filter((r: any) => r.exists)
-      .map((r: any) => this.mapToAssetData(r));
-    
+      .filter((r) => r.exists)
+      .map((r) => this.mapToAssetData(r));
+
     if (query?.creator) {
       const creatorLower = query.creator.toLowerCase();
       assets = assets.filter(
-        (a: AssetData) => a.creator.address.toLowerCase() === creatorLower
+        (a) => a.creator.address.toLowerCase() === creatorLower
       );
     }
-    
+
     if (query?.contentType) {
-      assets = assets.filter((a: AssetData) => a.contentType === query.contentType);
+      assets = assets.filter((a) => a.contentType === query.contentType);
     }
-    
+
     return assets;
   }
 
   async getAssetsByCreator(creator: string): Promise<AssetData[]> {
-    this.ensureConnected();
-    
-    const rawAssets = await this.contract!.getAssetsByCreator(creator);
+    const rawAssets = await this.publicClient.readContract({
+      address: this.address,
+      abi: REGISTRY_ABI,
+      functionName: 'getAssetsByCreator',
+      args: [creator as Address],
+    });
+
     return rawAssets
-      .filter((r: any) => r.exists)
-      .map((r: any) => this.mapToAssetData(r));
+      .filter((r) => r.exists)
+      .map((r) => this.mapToAssetData(r));
   }
 
   async getAssetCount(): Promise<number> {
-    this.ensureConnected();
-    const count: BigNumber = await this.contract!.getAssetCount();
-    return count.toNumber();
+    const count = await this.publicClient.readContract({
+      address: this.address,
+      abi: REGISTRY_ABI,
+      functionName: 'getAssetCount',
+    });
+
+    return Number(count);
   }
 
   async hasAccess(cid: string, address: string): Promise<boolean> {
-    this.ensureConnected();
-    return this.contract!.hasAccess(cid, address);
+    return this.publicClient.readContract({
+      address: this.address,
+      abi: REGISTRY_ABI,
+      functionName: 'hasAccess',
+      args: [cid, address as Address],
+    });
   }
 
   async getAccessTokenBalance(cid: string, address: string): Promise<bigint> {
-    this.ensureConnected();
-    const balance: BigNumber = await this.contract!.getAccessTokenBalance(cid, address);
-    return balance.toBigInt();
+    return this.publicClient.readContract({
+      address: this.address,
+      abi: REGISTRY_ABI,
+      functionName: 'getAccessTokenBalance',
+      args: [cid, address as Address],
+    });
   }
+
+  // --- Mutations ---
 
   async createAsset(params: CreateAssetParams): Promise<TxResult> {
     this.ensureConnected();
-    
-    const royaltyBps = Math.floor(params.royalty * 10000);
-    const maxSupply = params.maxSupply ?? 0;
-    
+
+    const royaltyBps = BigInt(Math.floor(params.royalty * 10000));
+    const maxSupply = BigInt(params.maxSupply ?? 0);
+    const [account] = await this.walletClient!.getAddresses();
+
     try {
-      const tx: ContractTransaction = await this.contract!.createAsset(
-        params.cid,
-        params.title,
-        params.description,
-        params.contentType,
-        params.fileSize,
-        params.price,
-        maxSupply,
-        royaltyBps
-      );
-      
-      return this.waitForTransaction(tx);
+      const { request } = await this.publicClient.simulateContract({
+        address: this.address,
+        abi: REGISTRY_ABI,
+        functionName: 'createAsset',
+        args: [
+          params.cid,
+          params.title,
+          params.description,
+          params.contentType,
+          params.fileSize,
+          params.price,
+          maxSupply,
+          royaltyBps,
+        ],
+        account,
+      });
+
+      const hash = await this.walletClient!.writeContract(request);
+      return this.waitForTransaction(hash);
     } catch (err) {
       return this.handleTransactionError(err);
     }
@@ -178,41 +382,52 @@ export class EvmAssetRegistry implements IAssetRegistry {
 
   async purchaseAccess(cid: string, quantity: number = 1): Promise<TxResult> {
     this.ensureConnected();
-    
+
     const asset = await this.getAsset(cid);
     if (!asset) {
       return { hash: '', success: false, error: 'Asset not found' };
     }
-    
-    const totalPrice = BigNumber.from(asset.price).mul(quantity);
-    
+
+    const totalPrice = asset.price as bigint * BigInt(quantity);
+    const [account] = await this.walletClient!.getAddresses();
+
     try {
-      const tx: ContractTransaction = await this.contract!.purchase(
-        cid, 
-        quantity, 
-        { value: totalPrice }
-      );
-      
-      return this.waitForTransaction(tx);
+      const { request } = await this.publicClient.simulateContract({
+        address: this.address,
+        abi: REGISTRY_ABI,
+        functionName: 'purchase',
+        args: [cid, BigInt(quantity)],
+        value: totalPrice,
+        account,
+      });
+
+      const hash = await this.walletClient!.writeContract(request);
+      return this.waitForTransaction(hash);
     } catch (err) {
       return this.handleTransactionError(err);
     }
   }
 
   async updateAssetMetadata(
-    cid: string, 
-    title: string, 
+    cid: string,
+    title: string,
     description: string
   ): Promise<TxResult> {
     this.ensureConnected();
-    
+
+    const [account] = await this.walletClient!.getAddresses();
+
     try {
-      const tx: ContractTransaction = await this.contract!.updateMetadata(
-        cid, 
-        title, 
-        description
-      );
-      return this.waitForTransaction(tx);
+      const { request } = await this.publicClient.simulateContract({
+        address: this.address,
+        abi: REGISTRY_ABI,
+        functionName: 'updateMetadata',
+        args: [cid, title, description],
+        account,
+      });
+
+      const hash = await this.walletClient!.writeContract(request);
+      return this.waitForTransaction(hash);
     } catch (err) {
       return this.handleTransactionError(err);
     }
@@ -220,78 +435,87 @@ export class EvmAssetRegistry implements IAssetRegistry {
 
   async estimateGas(method: string, ...args: unknown[]): Promise<bigint> {
     this.ensureConnected();
-    
-    const estimate: BigNumber = await this.contract!.estimateGas[method](...args);
-    // Add 20% buffer
-    return estimate.mul(120).div(100).toBigInt();
+
+    const [account] = await this.walletClient!.getAddresses();
+
+    const estimate = await this.publicClient.estimateContractGas({
+      address: this.address,
+      abi: REGISTRY_ABI,
+      functionName: method as any,
+      args: args as any,
+      account,
+    });
+
+    // 20% buffer
+    return (estimate * BigInt(120)) / BigInt(100);
   }
 
+  // --- Private ---
+
   private ensureConnected(): void {
-    if (!this.contract || !this.signer) {
+    if (!this.walletClient) {
       throw new Error('Registry not connected. Call connect() first.');
     }
   }
 
-  private async waitForTransaction(tx: ContractTransaction): Promise<TxResult> {
-    const receipt: ContractReceipt = await tx.wait();
-    
+  private async waitForTransaction(hash: Hash): Promise<TxResult> {
+    const receipt = await this.publicClient.waitForTransactionReceipt({ hash });
+
     return {
       hash: receipt.transactionHash,
-      blockNumber: receipt.blockNumber,
-      success: receipt.status === 1,
-      events: this.parseEvents(receipt),
+      blockNumber: Number(receipt.blockNumber),
+      success: receipt.status === 'success',
+      events: this.parseEvents(receipt.logs),
     };
   }
 
-  private parseEvents(receipt: ContractReceipt): ParsedEvent[] {
+  private parseEvents(logs: Log[]): ParsedEvent[] {
     const events: ParsedEvent[] = [];
-    
-    for (const log of receipt.logs) {
+
+    for (const log of logs) {
       try {
-        const parsed = this.iface.parseLog(log);
-        
-        if (parsed) {
-          const args: Record<string, unknown> = {};
-          parsed.eventFragment.inputs.forEach((input, i) => {
-            args[input.name] = parsed.args[i];
-          });
-          events.push({ name: parsed.name, args });
+        const decoded = decodeEventLog({
+          abi: REGISTRY_ABI,
+          data: log.data,
+          topics: log.topics,
+        });
+
+        const args: Record<string, unknown> = {};
+        if (decoded.args && typeof decoded.args === 'object') {
+          for (const [key, value] of Object.entries(decoded.args)) {
+            args[key] = value;
+          }
         }
+
+        events.push({ name: decoded.eventName, args });
       } catch {
         // Not one of our events
       }
     }
-    
+
     return events;
   }
 
   private handleTransactionError(err: unknown): TxResult {
     const error = err as Record<string, any>;
-    
+
     let message = error.message ?? 'Unknown error';
-    
-    if (error.reason) {
-      message = error.reason;
-    } else if (error.data?.message) {
-      message = error.data.message;
-    } else if (error.error?.message) {
-      message = error.error.message;
+
+    // viem error structure
+    if (error.shortMessage) {
+      message = error.shortMessage;
     }
 
-    // Try to decode custom error
-    if (error.data && typeof error.data === 'string' && error.data !== '0x') {
-      try {
-        const decoded = this.iface.parseError(error.data);
-        if (decoded) {
-          message = `${decoded.name}(${decoded.args.join(', ')})`;
-        }
-      } catch {
-        // Couldn't decode
-      }
+    if (error.cause?.reason) {
+      message = error.cause.reason;
     }
-    
+
+    if (error.cause?.shortMessage) {
+      message = error.cause.shortMessage;
+    }
+
     return {
-      hash: error.transactionHash ?? '',
+      hash: '',
       success: false,
       error: message,
     };
@@ -300,13 +524,13 @@ export class EvmAssetRegistry implements IAssetRegistry {
   private isRevertError(err: unknown): boolean {
     const error = err as Record<string, any>;
     return (
-      error.code === 'CALL_EXCEPTION' ||
-      error.code === 'UNPREDICTABLE_GAS_LIMIT' ||
-      error.message?.includes('revert')
+      error.name === 'ContractFunctionExecutionError' ||
+      error.message?.includes('revert') ||
+      error.cause?.name === 'ContractFunctionRevertedError'
     );
   }
 
-  private mapToAssetData(raw: any): AssetData {
+  private mapToAssetData(raw: RawAsset): AssetData {
     return {
       cid: raw.cid,
       title: raw.title,
@@ -315,11 +539,11 @@ export class EvmAssetRegistry implements IAssetRegistry {
       fileSize: raw.fileSize,
       contractAddress: raw.tokenContract,
       contentType: raw.contentType,
-      createdAt: new Date(BigNumber.from(raw.createdAt).toNumber() * 1000).toISOString(),
-      price: BigNumber.from(raw.price).toBigInt(),
-      minted: BigNumber.from(raw.minted).toNumber(),
-      maxSupply: BigNumber.from(raw.maxSupply).isZero() ? null : BigNumber.from(raw.maxSupply).toNumber(),
-      royalty: BigNumber.from(raw.royaltyBps).toNumber() / 10000,
+      createdAt: new Date(Number(raw.createdAt) * 1000).toISOString(),
+      price: raw.price,
+      minted: Number(raw.minted),
+      maxSupply: raw.maxSupply === BigInt(0) ? null : Number(raw.maxSupply),
+      royalty: Number(raw.royaltyBps) / 10000,
       creator: {
         address: raw.creator,
       },
@@ -340,7 +564,7 @@ export class EvmAssetRegistry implements IAssetRegistry {
       'text/plain': 'TEXT',
       'text/markdown': 'TEXT',
     };
-    
+
     return mapping[contentType.toLowerCase()] ?? 'OTHER';
   }
 }

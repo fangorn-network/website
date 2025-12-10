@@ -42,6 +42,7 @@ export interface AssetData {
 
 // What we need to create a new asset (contract-level params)
 export interface CreateAssetParams {
+  spaceName: string; 
   cid: string;
   title: string;
   description: string;

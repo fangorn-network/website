@@ -11,6 +11,7 @@ import Lit from './lit';
 import { create } from '@storacha/client';
 import uploadToStoracha from './upload';
 import { useStoracha } from '../hooks/useStoracha';
+import { useRegistry } from '../hooks/useRegistry';
 
 // ============================================
 // TYPES
@@ -308,6 +309,8 @@ const LibraryView = () => (
 export default function Page() {
 
   const wallet = useWallet();
+  const registry = useRegistry();
+
   const { upload, uploading } = useStoracha();
 
   const [activeView, setActiveView] = useState<'dashboard' | 'library'>('dashboard');
@@ -360,6 +363,7 @@ export default function Page() {
         await new Promise(r => setTimeout(r, 2000));
         setDeployStatus('Registering asset...');
         await new Promise(r => setTimeout(r, 800));
+        await registry.
 
         const newAsset: Asset = {
           id: String(Date.now()),
