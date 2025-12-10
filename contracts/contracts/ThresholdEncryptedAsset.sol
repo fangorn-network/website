@@ -13,7 +13,7 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
     uint256 internal _overriddenPrice;
     bool internal _overrideRoyalties;
     uint96 internal _overriddenRoyalties;
-    address public immutable _delegatorAddress;
+    address public _delegatorAddress;
 
     event TokenMinted(
         uint256 indexed tokenId,
@@ -54,6 +54,15 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         _setDefaultRoyalty(owner(), royaltyAmount_);
         _defaultPrice = nftPrice_;
         _delegatorAddress = delegatorAddress_;
+    }
+
+    function removeDelegator() public onlyOwner {
+        _delegatorAddress = address(0);
+    }
+
+    // maybe this should be accessible by the delegator as well?
+    function updateDelegator(address newDelegator) public onlyOwner {
+        _delegatorAddress = newDelegator;
     }
 
     function overridePrice(uint256 newPrice_) public onlyOwnerOrDelegator {

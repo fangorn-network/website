@@ -6,7 +6,7 @@ import "./ThresholdEncryptedAsset.sol";
 contract UserRegistry is Ownable{
 
     string _authorName;
-    address public immutable _delegatorAddress;
+    address public _delegatorAddress;
     string[] public assetNames;
 
     mapping(string => AssetInfo) assetRegistry;
@@ -36,6 +36,15 @@ contract UserRegistry is Ownable{
     constructor(address registryCreator_, string memory authorName_, address delegatorAddress_) Ownable(registryCreator_) {
         _authorName = authorName_;
         _delegatorAddress = delegatorAddress_;
+    }
+
+    function removeDelegator() public onlyOwner {
+        _delegatorAddress = address(0);
+    }
+
+    // maybe this should be accessible by the delegator as well?
+    function updateDelegator(address newDelegator) public onlyOwner {
+        _delegatorAddress = newDelegator;
     }
 
     function registerNewAsset(uint256 maxSupply_, string memory assetName_, uint256 nftPrice_, uint96 royaltyAmount_) public onlyOwnerOrDelegator {
