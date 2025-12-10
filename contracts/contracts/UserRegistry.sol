@@ -6,6 +6,7 @@ import "./ThresholdEncryptedAsset.sol";
 contract UserRegistry is Ownable{
 
     string _authorName;
+    address public immutable _delegatorAddress;
     string[] public assetNames;
 
     mapping(string => AssetInfo) assetRegistry;
@@ -18,17 +19,26 @@ contract UserRegistry is Ownable{
         uint256 createdAt;
     }
 
+    modifier onlyOwnerOrDelegator() {
+        require(
+            msg.sender == owner() || msg.sender == _delegatorAddress,
+            "Only owner or designated delegator can call"
+        );
+        _;
+    }
+
     event AssetRegistered(
         string indexed assetName, 
         address indexed assetAddress, 
         AssetType assetType
     );
 
-    constructor(address registryCreator_, string memory authorName_) Ownable(registryCreator_) {
+    constructor(address registryCreator_, string memory authorName_, address delegatorAddress_) Ownable(registryCreator_) {
         _authorName = authorName_;
+        _delegatorAddress = delegatorAddress_;
     }
 
-    function registerNewAsset(uint256 maxSupply_, string memory assetName_, uint256 nftPrice_, uint96 royaltyAmount_) public {
+    function registerNewAsset(uint256 maxSupply_, string memory assetName_, uint256 nftPrice_, uint96 royaltyAmount_) public onlyOwnerOrDelegator {
 
         require (assetRegistry[assetName_].assetAddress == address(0), "Asset name aready exists");
         address newAssetAddress;
@@ -68,14 +78,14 @@ contract UserRegistry is Ownable{
         return (info.assetAddress, info.assetType);
     }
 
-    function mintNewToken(string memory assetName, address buyer) public payable {
+    function mintNewToken(string memory assetName, address buyer) public payable onlyOwnerOrDelegator {
         (address assetAddr, AssetType assetType) = this.getAsset(assetName);
         if (assetType == AssetType.Unlimited) {
             UnlimitedThresholdEncryptedAsset unlimitedAsset =  UnlimitedThresholdEncryptedAsset(assetAddr);
-            unlimitedAsset.tryPurchaseToken(buyer);
+            unlimitedAsset.tryPurchaseToken{value: msg.value}(buyer);
         } else {
             LimitedThresholdEncryptedAsset limitedAsset =  LimitedThresholdEncryptedAsset(assetAddr);
-            limitedAsset.tryPurchaseToken(buyer);
+            limitedAsset.tryPurchaseToken{value: msg.value}(buyer);
         }
     }
 
