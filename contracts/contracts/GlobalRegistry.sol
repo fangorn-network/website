@@ -7,7 +7,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./UserRegistry.sol";
 
-contract GlobalRegistry {
+contract GlobalRegistry is Ownable{
+
+    constructor() Ownable(msg.sender) {}
 
     mapping(address => address) public globalRegistry;
 
@@ -49,7 +51,12 @@ contract GlobalRegistry {
         globalRegistry[registryOwner] = address(userRegistry);
     }
 
-    function getAssetsByCreator(address creator) external view {
-
+    function getAssetsByCreator(address creator) external view returns(string[] memory) {
+        address registryAddress = globalRegistry[creator];
+        require( registryAddress != address(0), "This wallet address has not created a user registry.");
+        UserRegistry userRegistry = UserRegistry(registryAddress);
+        return userRegistry.getAllAssetNames();
     }
+
+    function updateGlobalRegistryPrice() public onlyOwner {}
 }
