@@ -13,6 +13,7 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
     uint256 internal _overriddenPrice;
     bool internal _overrideRoyalties;
     uint96 internal _overriddenRoyalties;
+    address immutable _delegatorAddress;
 
     event TokenMinted(
         uint256 indexed tokenId,
@@ -30,50 +31,61 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         uint96 newRoyalty
     );
 
+    modifier onlyOwnerOrDelegator() {
+        require(
+            msg.sender == owner() || msg.sender == _delegatorAddress,
+            "Only owner or designated delegator can call"
+        );
+        _;
+    }
+
     constructor(
         uint256 nftPrice_,
         uint96 royaltyAmount_,
-        bool isLimitedAmount_
+        bool isLimitedAmount_,
+        address owner_,
+        address delegatorAddress_
     ) ERC721(
         isLimitedAmount_ ? "LimitedThresholdEncryptedAsset" : "UnlimitedThresholdEncryptedAsset",
         isLimitedAmount_ ? "LTEA" : "UTEA"
       ) 
-      Ownable(msg.sender) {
+      Ownable(owner_) {
         require(royaltyAmount_ <= 10000, "Fee exceeds 100%");
         _setDefaultRoyalty(owner(), royaltyAmount_);
         _defaultPrice = nftPrice_;
+        _delegatorAddress = delegatorAddress_;
     }
 
-    function overridePrice(uint256 newPrice_) public onlyOwner {
+    function overridePrice(uint256 newPrice_) public onlyOwnerOrDelegator {
         _overridePrice = true;
         _overriddenPrice = newPrice_;
 
         emit PriceChange(_defaultPrice, newPrice_);
     }
 
-    function useDefaultPrice() public onlyOwner() {
+    function useDefaultPrice() public onlyOwnerOrDelegator() {
         _overridePrice = false;
         emit PriceChange(_defaultPrice, _overriddenPrice);
     }
 
-    function setNewDefaultPrice(uint256 defaultPrice_) public onlyOwner {
+    function setNewDefaultPrice(uint256 defaultPrice_) public onlyOwnerOrDelegator {
         emit PriceChange(_defaultPrice, defaultPrice_);
         _defaultPrice = defaultPrice_;
     }
 
-    function setNewDefaultRoyalty(uint96 newDefaultRoyalty_) public onlyOwner {
+    function setNewDefaultRoyalty(uint96 newDefaultRoyalty_) public onlyOwnerOrDelegator {
         require(newDefaultRoyalty_ <= 10000, "Fee exceeds 100%");
         // emit RoyaltyChange(, newRoyalty);
         _setDefaultRoyalty(owner(), newDefaultRoyalty_);
     }
 
-    function overrideRoyalties(uint96 overriddenRoyalty_) public onlyOwner {
+    function overrideRoyalties(uint96 overriddenRoyalty_) public onlyOwnerOrDelegator {
         require(overriddenRoyalty_ <= 10000, "Fee exceeds 100%");
         _overrideRoyalties = true;
         _overriddenRoyalties = overriddenRoyalty_;
     }
 
-    function useDefaultRoyalty() public onlyOwner {
+    function useDefaultRoyalty() public onlyOwnerOrDelegator {
         _overrideRoyalties = false;
     }
 
@@ -96,7 +108,7 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         return tokenId;
     }
 
-    function withdraw() external onlyOwner {
+    function withdraw() external onlyOwnerOrDelegator {
         (bool success, ) = payable(owner()).call{value: address(this).balance}("");
         require(success, "Withdrawal failed");
     }
@@ -133,8 +145,10 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
     constructor(
         uint256 nftPrice_,
         uint96 royaltyAmount_,
-        uint256 maxSupply_
-    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, true) {
+        uint256 maxSupply_,
+        address owner_,
+        address delegatorAddress_
+    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, true, owner_, delegatorAddress_) {
         require(maxSupply_ > 0, "Max supply must be greater than zero");
         _maxSupply = maxSupply_;
     }
@@ -182,8 +196,10 @@ contract UnlimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
 
     constructor(
         uint256 nftPrice_,
-        uint96 royaltyAmount_
-    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false) {}
+        uint96 royaltyAmount_,
+        address owner_,
+        address delegatorAddress_
+    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false, owner_, delegatorAddress_) {}
 
     function tryPurchaseToken(address buyer) external payable returns (uint256) {
         uint256 tokenId = mintToken(buyer);

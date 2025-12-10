@@ -29,8 +29,6 @@ contract GlobalRegistry is Ownable{
         address registryAddress = globalRegistry[registryOwner];
         require(registryAddress != address(0), "This wallet address has not created a user registry.");
         UserRegistry userRegistry = UserRegistry(registryAddress);
-        // Not sure if this is necessary since registryOwner is taken from msg.sender. It may be redundant
-        require(registryOwner == userRegistry.owner(), "You do not own this registry.");
         require(bytes(assetName).length > 0, "AssettName must be non-empty");
         require(bytes(cid).length > 0, "cid must be non-empty");
         userRegistry.registerNewAsset(maxSupply, assetName, price, royaltyAmount);

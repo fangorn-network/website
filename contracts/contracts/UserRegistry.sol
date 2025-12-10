@@ -47,12 +47,12 @@ contract UserRegistry is Ownable{
 
         if (isUnlimitedSupply) {
             UnlimitedThresholdEncryptedAsset newAsset = 
-                new UnlimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_);
+                new UnlimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, owner(), address(this));
             newAssetAddress = address(newAsset);
             assetType = AssetType.Unlimited;
         } else {
             LimitedThresholdEncryptedAsset newAsset = 
-                new LimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, maxSupply_);
+                new LimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, maxSupply_, owner(), address(this));
             newAssetAddress = address(newAsset);
             assetType = AssetType.Limited;
         }
