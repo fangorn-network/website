@@ -13,7 +13,7 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
     uint256 internal _overriddenPrice;
     bool internal _overrideRoyalties;
     uint96 internal _overriddenRoyalties;
-    address immutable _delegatorAddress;
+    address public immutable _delegatorAddress;
 
     event TokenMinted(
         uint256 indexed tokenId,
@@ -162,18 +162,18 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
         }
     }
 
-    function increaseMaxTokensByAmount(uint256 _amountToIncrease) public onlyOwner {
+    function increaseMaxTokensByAmount(uint256 _amountToIncrease) public onlyOwnerOrDelegator {
         _maxSupply += _amountToIncrease;
     }
 
-    function decreaseMaxTokensByAmount(uint256 _amountToDecrease) public onlyOwner {
+    function decreaseMaxTokensByAmount(uint256 _amountToDecrease) public onlyOwnerOrDelegator {
         uint256 newMaxTokens =_maxSupply - _amountToDecrease;
         require(newMaxTokens > 0, "You cannot have a <= max supply amount. Please ensure that the maximum supply - your decrement is >0.");
         require(newMaxTokens >= _tokenIdCounter, "You cannot have less supply than there are already existing NFTs");
         _maxSupply = newMaxTokens;
     }
 
-    function setNewMaxTokens(uint256 _newMaxTokens) public onlyOwner {
+    function setNewMaxTokens(uint256 _newMaxTokens) public onlyOwnerOrDelegator {
         require(_newMaxTokens > 0, "You cannot have a zero max supply amount");
         require(_newMaxTokens >= _tokenIdCounter, "You cannot have less supply than there are already existing NFTs");
         _maxSupply = _newMaxTokens;
