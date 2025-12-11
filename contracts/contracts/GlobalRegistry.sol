@@ -9,10 +9,14 @@ import "./UserRegistry.sol";
 
 contract GlobalRegistry is Ownable{
 
-    constructor() Ownable(msg.sender) {}
-
     mapping(address => address) public globalRegistry;
     address[] public registryAddresses;
+    address public userRegistryImpl;
+
+    constructor(address userRegistryImpl_) Ownable(msg.sender) {
+        userRegistryImpl = userRegistryImpl_;
+    }
+
 
     event RegistryCreated(address indexed owner, address indexed registryAddress, string authorName);
 
@@ -42,9 +46,9 @@ contract GlobalRegistry is Ownable{
      * @notice Create a new user registry
      * @param authorName_ Name of the author
      */
-    function createNewRegistry(string memory authorName_, address contractImplAddress) external payable {
+    function createNewRegistry(string memory authorName_) external payable {
         require(globalRegistry[msg.sender] == address(0), "Registry already exists.");
-        address newRegistryAddress = Clones.clone(contractImplAddress);
+        address newRegistryAddress = Clones.clone(userRegistryImpl);
         UserRegistry newRegistry = UserRegistry(newRegistryAddress);
         newRegistry.transferOwnership(msg.sender);
         globalRegistry[msg.sender] = newRegistryAddress;
