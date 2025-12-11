@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/proxy/Clones.sol";
 
 import "./UserRegistry.sol";
 
@@ -11,79 +12,51 @@ contract GlobalRegistry is Ownable{
     constructor() Ownable(msg.sender) {}
 
     mapping(address => address) public globalRegistry;
-
-    // event RegistryRegistered(address indexed owner, address indexed registryAddress);
+    address[] public registryAddresses;
 
     event RegistryCreated(address indexed owner, address indexed registryAddress, string authorName);
 
-    // /**
-    //  * @notice Get all assets created by an address
-    //  */
-    // function getAssetsByCreator(address creator) external view returns (string[] memory) {
-    //     return UserRegistry(_getRegistry(creator)).getAllAssetNames();
-    // }
-
-    // function getAllRegistries() public {
-
-
-    // }
-
-    function getUserRegistry(address creator) external view returns(address) {
-        return _getRegistry(creator);
+    /**
+     * @notice Get certain number of registries
+     */
+    function getUserRegistries(uint256 numberOfRegistries) public view returns(address[] memory) {
+        numberOfRegistries = numberOfRegistries > registryAddresses.length ? registryAddresses.length : numberOfRegistries;
+        address[] memory addresses = new address[](numberOfRegistries);
+        for (uint256 i = 0; i < numberOfRegistries; i++) {
+            addresses[i] = registryAddresses[i];
+        }
+        return addresses;
     }
 
-    function _getRegistry(address user) private view returns (address) {
+    function getUserRegistry(address creator) external view returns(address) {
+        return _getUserRegistry(creator);
+    }
+
+    function _getUserRegistry(address user) private view returns (address) {
         address registryAddress = globalRegistry[user];
         require(registryAddress != address(0), "No registry");
         return registryAddress;
     }
 
-    // function _verifyRegistry(address creator, address registryAddress) private view {
-    //     require(creator == UserRegistry(registryAddress).owner(), "Not the owner.");
-    // }
-
-    event AssetRegistered(address indexed registryOwner, string indexed assetName);
-    // event AssetMinted(address indexed registryOwner, string indexed assetName, address indexed buyer);
-    /**
-     * @notice Register a new asset (delegates to UserRegistry)
-     */
-    function registerNewAsset(
-        string calldata assetName, 
-        string calldata cid,
-        uint256 price,
-        uint96 royaltyAmount,
-        uint256 maxSupply
-    )
-    external payable {
-        _validateAssetParams(assetName, cid);
-        address registryAddress = _getRegistry(msg.sender);
-        UserRegistry userRegistry = UserRegistry(registryAddress);
-        userRegistry.registerNewAsset(maxSupply, assetName, price, royaltyAmount);
-        emit AssetRegistered(msg.sender, assetName);
-    }
-
-    // function mintNewAsset(address registryOwner, string memory assetName) public payable {
-    //     address registryAddress = _getRegistry(registryOwner);
-    //     UserRegistry userRegistry = UserRegistry(registryAddress);
-    //     userRegistry.mintNewToken{value: msg.value}(assetName, msg.sender);
-    //     emit AssetMinted(registryOwner, assetName, msg.sender);
-    // }
-
     /**
      * @notice Create a new user registry
      * @param authorName_ Name of the author
      */
-    function createNewRegistry(string memory authorName_) external payable {
+    function createNewRegistry(string memory authorName_, address contractImplAddress) external payable {
         require(globalRegistry[msg.sender] == address(0), "Registry already exists.");
-        globalRegistry[msg.sender] = address(new UserRegistry(msg.sender, authorName_, address(this)));
-        emit RegistryCreated(msg.sender, globalRegistry[msg.sender], authorName_);
+        address newRegistryAddress = Clones.clone(contractImplAddress);
+        UserRegistry newRegistry = UserRegistry(newRegistryAddress);
+        newRegistry.transferOwnership(msg.sender);
+        globalRegistry[msg.sender] = newRegistryAddress;
+        registryAddresses.push(newRegistryAddress);
+        emit RegistryCreated(msg.sender, newRegistryAddress, authorName_);
     }
 
     /**
      * @notice Expose function to check that a user owns a token
      */
     function hasAccess(string memory assetName, address creatorAddress) external view returns(bool) {
-        address registryAddress = _getRegistry(creatorAddress);        
+        address registryAddress = _getUserRegistry(creatorAddress);        
         UserRegistry userRegistry = UserRegistry(registryAddress);
         return userRegistry.hasAccess(msg.sender, assetName);
     }
@@ -95,8 +68,4 @@ contract GlobalRegistry is Ownable{
         require(bytes(assetName).length > 0, "Empty name");
         require(bytes(cid).length > 0, "Empty CID");
     }
-
-    // a function to update the cost of setting up the registry
-    // right now registry creation is free (minus gas fees)
-    // function updateGlobalRegistryPrice() public onlyOwner {}
 }

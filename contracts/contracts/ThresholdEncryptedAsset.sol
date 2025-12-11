@@ -40,10 +40,12 @@ abstract contract ThresholdEncryptedAsset is ERC721, ERC2981, Ownable {
         uint96 royaltyAmount_,
         bool isLimitedAmount_,
         address owner_,
-        address delegatorAddress_
+        address delegatorAddress_,
+        string memory tokenName,
+        string memory tokenSymbol
     ) ERC721(
-        isLimitedAmount_ ? "LimitedThresholdEncryptedAsset" : "UnlimitedThresholdEncryptedAsset",
-        isLimitedAmount_ ? "LTEA" : "UTEA"
+        isLimitedAmount_ ? string.concat("Limited", tokenName) : string.concat("Unlimited", tokenName),
+        isLimitedAmount_ ? string.concat("L", tokenSymbol) : string.concat("U", tokenSymbol)
       ) 
       Ownable(owner_) {
         _setDefaultRoyalty(owner(), royaltyAmount_);
@@ -130,8 +132,10 @@ contract LimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
         uint96 royaltyAmount_,
         uint256 maxSupply_,
         address owner_,
-        address delegatorAddress_
-    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, true, owner_, delegatorAddress_) {
+        address delegatorAddress_,
+        string memory tokenName_,
+        string memory tokenSymbol_
+    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, true, owner_, delegatorAddress_, tokenName_, tokenSymbol_) {
         require(maxSupply_ > 0, "Max supply must be greater than zero");
         _maxSupply = maxSupply_;
     }
@@ -184,8 +188,10 @@ contract UnlimitedThresholdEncryptedAsset is ThresholdEncryptedAsset {
         uint256 nftPrice_,
         uint96 royaltyAmount_,
         address owner_,
-        address delegatorAddress_
-    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false, owner_, delegatorAddress_) {}
+        address delegatorAddress_,
+        string memory tokenName_,
+        string memory tokenSymbol_
+    )  ThresholdEncryptedAsset(nftPrice_, royaltyAmount_, false, owner_, delegatorAddress_, tokenName_, tokenSymbol_) {}
 
     function tryPurchaseToken(address buyer) external payable returns (uint256) {
         uint256 tokenId = mintToken(buyer);

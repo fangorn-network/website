@@ -2,8 +2,10 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {LimitedThresholdEncryptedAsset, UnlimitedThresholdEncryptedAsset} from "./ThresholdEncryptedAsset.sol";
-contract UserRegistry is Ownable{
+
+contract UserRegistry is Ownable, ReentrancyGuard {
 
     string _authorName;
     address public _delegatorAddress;
@@ -19,45 +21,27 @@ contract UserRegistry is Ownable{
         uint256 createdAt;
     }
 
-    modifier onlyOwnerOrDelegator() {
-        require(
-            (msg.sender == owner() || msg.sender == _delegatorAddress) && (msg.sender != address(0)),
-            "Only owner or designated delegator can call"
-        );
-        _;
-    }
-
     event AssetRegistered(
         string indexed assetName, 
         address indexed assetAddress, 
         AssetType assetType
     );
 
-    constructor(address registryCreator_, string memory authorName_, address delegatorAddress_) Ownable(registryCreator_) {
+    constructor(address registryCreator_, string memory authorName_) Ownable(registryCreator_) {
         _authorName = authorName_;
-        _delegatorAddress = delegatorAddress_;
     }
 
-    function removeDelegator() public onlyOwner {
-        _delegatorAddress = address(0);
-    }
-
-    // maybe this should be accessible by the delegator as well?
-    function updateDelegator(address newDelegator) public onlyOwner {
-        _delegatorAddress = newDelegator;
-    }
-
-    function registerNewAsset(uint256 maxSupply_, string memory assetName_, uint256 nftPrice_, uint96 royaltyAmount_) public onlyOwnerOrDelegator {
+    function registerNewAsset(uint256 maxSupply_, string memory assetName_, uint256 nftPrice_, uint96 royaltyAmount_, string memory tokenName, string memory tokenSymbol) public onlyOwner {
 
         require (assetRegistry[assetName_].assetAddress == address(0), "Asset name aready exists");
         address newAssetAddress;
         AssetType assetType;
 
         if (maxSupply_ == 0) {
-            newAssetAddress = address(new UnlimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, owner(), address(this)));
+            newAssetAddress = address(new UnlimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, owner(), address(this), tokenName, tokenSymbol));
             assetType = AssetType.Unlimited;
         } else {
-            newAssetAddress = address(new LimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, maxSupply_, owner(), address(this)));
+            newAssetAddress = address(new LimitedThresholdEncryptedAsset(nftPrice_, royaltyAmount_, maxSupply_, owner(), address(this), tokenName, tokenSymbol));
             assetType = AssetType.Limited;
         }
         
@@ -82,7 +66,7 @@ contract UserRegistry is Ownable{
         return (info.assetAddress, info.assetType);
     }
 
-    function mintNewToken(string memory assetName, address buyer) public payable onlyOwnerOrDelegator {
+    function mintNewToken(string memory assetName, address buyer) public payable nonReentrant {
         (address assetAddr, AssetType assetType) = _getAsset(assetName);
         if (assetType == AssetType.Unlimited) {
             UnlimitedThresholdEncryptedAsset unlimitedAsset =  UnlimitedThresholdEncryptedAsset(assetAddr);
