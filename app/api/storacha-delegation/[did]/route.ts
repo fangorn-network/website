@@ -3,11 +3,11 @@ import { StoreMemory } from '@storacha/client/stores/memory'
 import * as Proof from '@storacha/client/proof'
 import { Signer } from '@storacha/client/principal/ed25519'
 import * as DID from '@ipld/dag-ucan/did'
-import type { ServiceAbility } from '@storacha/client'
+import { ServiceAbility } from '@storacha/client/types'
 
 export async function GET(
     request: Request,
-    { params }: { params: { did: string } }
+    { params }: { params: Promise<{ did: string }> }
 ) {
     const { did } = await params
 

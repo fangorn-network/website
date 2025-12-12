@@ -20,7 +20,7 @@ const MOCK_ASSET: AssetData = {
     // registryId: 'fangorn:asset:0x7a3d...0047',
     contentType: 'application/pdf',
     createdAt: 'Dec 1, 2024',
-    price: 0.05,
+    price: BigInt(0.05),
     priceUsd: 187.50,
     minted: 89,
     maxSupply: 500,
@@ -94,7 +94,7 @@ interface CreatorInfoProps {
 const CreatorInfo = ({ creator }: CreatorInfoProps) => (
     <div className="asset-creator">
         <div className="creator-avatar">
-            {creator.name.slice(0, 2).toUpperCase()}
+            {creator.name?.slice(0, 2).toUpperCase()}
         </div>
         <div className="creator-info">
             <div className="creator-label">Created by</div>
@@ -151,7 +151,7 @@ const PriceSection = ({ asset }: PriceSectionProps) => (
     <div className="price-section">
         <div className="price-label">Price</div>
         <div className="price-value">
-            {asset.price}
+            {Number(asset.price)}
             <span className="price-currency">ETH</span>
         </div>
         <div className="price-usd">≈ ${asset.priceUsd?.toFixed(2)} USD</div>

@@ -1,6 +1,0 @@
-{
-  "/api/storacha-delegation/[did]/route": "app/api/storacha-delegation/[did]/route.js",
-  "/asset/[id]/page": "app/asset/[id]/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/page": "app/page.js"
-}

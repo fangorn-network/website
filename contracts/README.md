@@ -1,5 +1,7 @@
 # Registries
 
+Note: The Global Registry contract follows the proxy pattern as defined in ERC-1167 ref of impl used: https://docs.openzeppelin.com/contracts/5.x/api/proxy#clones
+
 ```shell
 npx hardhat help
 npx hardhat test

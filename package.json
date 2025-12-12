@@ -24,7 +24,7 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "solc": "^0.8.31",
-    "viem": "^2.41.2",
+    "viem": "^2.38.0",
     "wagmi": "^3.1.0"
   },
   "devDependencies": {

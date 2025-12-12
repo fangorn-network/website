@@ -239,6 +239,10 @@ export class ViemAssetRegistry implements IAssetRegistry {
     this.walletClient = walletClient;
   }
 
+  async createSpace(address: string, name: string): Promise<null> {
+    return null;
+  }
+
   async disconnect(): Promise<void> {
     this.walletClient = null;
   }
