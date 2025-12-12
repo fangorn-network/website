@@ -363,7 +363,6 @@ export default function Page() {
         await new Promise(r => setTimeout(r, 2000));
         setDeployStatus('Registering asset...');
         await new Promise(r => setTimeout(r, 800));
-        await registry.
 
         const newAsset: Asset = {
           id: String(Date.now()),

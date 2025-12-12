@@ -22,7 +22,6 @@ w3 delegation create did:key:z6Mk... \
 --can 'upload/add' \
 --base64
 
-
 # allow all
 w3 delegation create did:key:z6Mkfagmeg7y6BpwmrrTiHtSdsfuAvi4dyvRxUB6nUk4EmBK \
   --can '*' \
