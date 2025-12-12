@@ -103,17 +103,18 @@ body {
 .hero {
   flex: 1;
   grid-template-columns: 1fr 280px;
+  align-items: start;
   gap: 60px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 60px 40px 80px;
   display: grid;
 }
 
 .hero-content {
   flex-direction: column;
-  justify-content: center;
+  padding-top: 40px;
   display: flex;
 }
 
@@ -283,9 +284,8 @@ body {
   border: 1px solid var(--border);
   border-radius: 6px;
   height: fit-content;
-  padding: 32px;
-  position: sticky;
-  top: 40px;
+  margin-top: 40px;
+  padding: 28px;
 }
 
 .aside-label {
