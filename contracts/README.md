@@ -27,12 +27,12 @@ npx hardhat console --network localhost
 
 Once in the console session, you can obtain a reference to the GlobalRegistry
 ```shell
-> const GlobalRegistry = await ethers.getContractAt('GlobalRegistry', '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512')
+const GlobalRegistry = await ethers.getContractAt('GlobalRegistry', '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512')
 ```
 
 To deploy your own UserRegistry you can then run
 ```shell
-> await GlobalRegistry.createNewRegistry('author_name')
+await GlobalRegistry.createNewRegistry('author_name')
 ```
 To get your UserRegistry's address (assuming there is only one) run
 ```shell
