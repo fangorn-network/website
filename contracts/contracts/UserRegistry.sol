@@ -27,6 +27,12 @@ contract UserRegistry is Ownable, ReentrancyGuard {
         AssetType assetType
     );
 
+    function initialize(address owner_, string memory authorName_) external {
+        require(owner() == address(0), "Already initialized");
+        _transferOwnership(owner_);
+        _authorName = authorName_;
+    }
+
     constructor(address registryCreator_, string memory authorName_) Ownable(registryCreator_) {
         _authorName = authorName_;
     }

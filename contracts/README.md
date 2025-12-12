@@ -23,5 +23,6 @@ npx hardhat run scripts/deployContracts.js --network localhost
 Example to make a UserContract after deployment
 ```shell
 npx hardhat console --network localhost
-> const GlobalRegistry = await ethers.getContractAt('GlobalRegistry', '0x...')
+> const GlobalRegistry = await ethers.getContractAt('GlobalRegistry', '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512')
+> await GlobalRegistry.createNewRegistry('author_name')
 ```

@@ -28,26 +28,13 @@ async function main() {
   const globalRegistryAddress = await globalRegistry.getAddress();
   console.log("GlobalRegistry deployed to:", globalRegistryAddress);
 
+  const startingRegistryOwner = await userRegistry.owner();
+  console.log("The initial UserRegistry owner is ", startingRegistryOwner);
   console.log("Transferring ownership of UserRegistry to GlobalRegistry contract");
-  userRegistry.transferOwnership(globalRegistryAddress);
-
-  // Wait for a few block confirmations
-  // console.log("Waiting for block confirmations...");
-  // await globalRegistry.deploymentTransaction().wait(6);
-
-  // Verify on Etherscan
-  // if (hre.network.name !== "hardhat" && hre.network.name !== "localhost") {
-  //   console.log("Verifying contract on Etherscan...");
-  //   try {
-  //     await hre.run("verify:verify", {
-  //       address: address,
-  //       constructorArguments: [],
-  //     });
-  //     console.log("Contract verified!");
-  //   } catch (error) {
-  //     console.log("Verification failed:", error.message);
-  //   }
-  // }
+  await userRegistry.transferOwnership(globalRegistryAddress);
+  console.log("Ownership transferred!");
+  const registryOwner = await userRegistry.owner();
+  console.log("The new UserRegistry owner is ", registryOwner)
 
   return globalRegistryAddress;
 }

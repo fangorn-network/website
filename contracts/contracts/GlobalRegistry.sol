@@ -50,7 +50,8 @@ contract GlobalRegistry is Ownable{
         require(globalRegistry[msg.sender] == address(0), "Registry already exists.");
         address newRegistryAddress = Clones.clone(userRegistryImpl);
         UserRegistry newRegistry = UserRegistry(newRegistryAddress);
-        newRegistry.transferOwnership(msg.sender);
+        newRegistry.initialize(msg.sender, authorName_);
+        // newRegistry.transferOwnership(msg.sender);
         globalRegistry[msg.sender] = newRegistryAddress;
         registryAddresses.push(newRegistryAddress);
         emit RegistryCreated(msg.sender, newRegistryAddress, authorName_);
