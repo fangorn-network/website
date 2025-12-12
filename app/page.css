@@ -255,6 +255,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: opacity 0.15s;
+  z-index: 1;
 }
 
 .signup-button:hover:not(:disabled) {
