@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import './page.css';
 
 export default function Page() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -22,14 +22,13 @@ export default function Page() {
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Required for Google Apps Script
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
       });
 
-      // With no-cors we can't read the response, but if it didn't throw, assume success
       setSubmitted(true);
     } catch (err) {
       console.error('Waitlist signup error:', err);
@@ -40,87 +39,152 @@ export default function Page() {
   };
 
   return (
-    <div className="coming-soon">
-      <div className="glow-top" />
-      <div className="glow-bottom" />
-
-      <nav className="cs-nav">
-        <div className="cs-logo">Fangorn</div>
-        <div className="cs-nav-links">
-          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">GitHub</a>
-          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer" className="cs-nav-link">X</a>
-          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer" className="cs-nav-link">Discord</a>
+    <div className="page">
+      <div className="grid-bg" />
+      
+      <nav className="nav">
+        <div className="nav-logo">
+          <span className="logo-mark">◌</span>
+          <span className="logo-text">Fangorn</span>
+        </div>
+        <div className="nav-links">
+          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer">
+            X
+          </a>
+          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">
+            Discord
+          </a>
+          <Link href="/dashboard" className="nav-cta">
+            Launch
+          </Link>
         </div>
       </nav>
 
-      <main className="cs-main">
-        <div className="cs-badge">Coming Soon</div>
-
-        <h1 className="cs-title">
-          Turn access into<br /><em>liquid assets</em>
-        </h1>
-
-        <p className="cs-subtitle">
-          Tokenize access to your content with perpetual royalties.
-          Threshold encryption meets tradeable access rights.
-        </p>
-
-        <div className="cs-features">
-          <div className="cs-feature">
-            {/* <span className="cs-feature-icon">🔐</span> */}
-            <span className="cs-feature-text">Threshold Encryption</span>
+      <main className="hero">
+        <div className="hero-content">
+          <div className="status">
+            <span className="status-dot" />
+            <span className="status-text">In development</span>
           </div>
-          <div className="cs-feature-divider" />
-          <div className="cs-feature">
-            {/* <span className="cs-feature-icon">🎫</span> */}
-            <span className="cs-feature-text">Tradeable Access</span>
+
+          <h1 className="headline">
+            Programmable
+            <br />
+            <span className="headline-accent">secrets</span>
+          </h1>
+
+          <p className="description">
+            Encrypt data with conditions attached. 
+            Decrypt only when the conditions are met without revealing anything.
+          </p>
+
+          <p className="subdescription">
+            A composable ZK-predicate layer for Lit Protocol.
+          </p>
+
+          <div className="flow">
+            <div className="flow-step">
+              <span className="flow-label">Set conditions</span>
+            </div>
+            <span className="flow-arrow">→</span>
+            <div className="flow-step">
+              <span className="flow-label">Encrypt</span>
+            </div>
+            <span className="flow-arrow">→</span>
+            <div className="flow-step">
+              <span className="flow-label">Prove</span>
+            </div>
+            <span className="flow-arrow">→</span>
+            <div className="flow-step">
+              <span className="flow-label">Unlock</span>
+            </div>
           </div>
-          <div className="cs-feature-divider" />
-          <div className="cs-feature">
-            {/* <span className="cs-feature-icon">♻️</span> */}
-            <span className="cs-feature-text">Perpetual Royalties</span>
-          </div>
+
+          {!submitted ? (
+            <form className="signup" onSubmit={handleSubmit}>
+              <input
+                type="email"
+                className="signup-input"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={loading}
+              />
+              <button type="submit" className="signup-button" disabled={loading}>
+                {loading ? '...' : 'Get updates'}
+              </button>
+            </form>
+          ) : (
+            <div className="success">
+              <span className="success-check">✓</span>
+              <span>Added.</span>
+            </div>
+          )}
+
+          {error && <p className="error">{error}</p>}
         </div>
 
-        {!submitted ? (
-          <form className="cs-form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              className="cs-input"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={loading}
-            />
-            <button type="submit" className="cs-button" disabled={loading}>
-              {loading ? 'Joining...' : 'Join Waitlist'}
-            </button>
-          </form>
-        ) : (
-          <div className="cs-success">
-            <span className="cs-success-icon">✓</span>
-            <span>You&apos;re on the list. We&apos;ll be in touch.</span>
-          </div>
-        )}
+        <aside className="aside">
+          <div className="aside-label">Use cases</div>
+          <ul className="aside-list">
+            <li>
+              <span className="aside-bullet">→</span>
+              Credential-gated content
+            </li>
+            <li>
+              <span className="aside-bullet">→</span>
+              Sealed-bid auctions
+            </li>
+            <li>
+              <span className="aside-bullet">→</span>
+              Front-running protection
+            </li>
+            <li>
+              <span className="aside-bullet">→</span>
+              Time-released data
+            </li>
+          </ul>
+          
+          <div className="aside-divider" />
 
-        <p className="cs-note">
-          Be the first to know when we launch.
-        </p>
-
-        {error && (
-          <p className="cs-error">{error}</p>
-        )}
+          {/* <div className="aside-label">Stack</div>
+          <ul className="aside-list">
+            <li>
+              <span className="aside-bullet">◈</span>
+              Lit Protocol
+            </li>
+            <li>
+              <span className="aside-bullet">◇</span>
+              PLONK / Noir
+            </li>
+            <li>
+              <span className="aside-bullet">◇</span>
+              On-chain verification
+            </li>
+          </ul> */}
+        </aside>
       </main>
 
-      <footer className="cs-footer">
-        <div className="cs-footer-brand">
-          <span className="cs-footer-logo">Fangorn</span>
+      <footer className="footer">
+        <div className="footer-left">
+          <span className="footer-logo">Fangorn</span>
+          <span className="footer-divider">/</span>
+          <span className="footer-tagline">Intent-bound encryption</span>
         </div>
-        <div className="cs-footer-links">
-          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer">X</a>
-          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">Discord</a>
+        <div className="footer-right">
+          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer">
+            X
+          </a>
+          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">
+            Discord
+          </a>
         </div>
       </footer>
     </div>

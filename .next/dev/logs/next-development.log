@@ -1,7 +1,11 @@
-[00:00:09.252] Server  LOG      ✓ Ready in 7.8s
-[00:00:14.858] Server  LOG      ○ Compiling / ...
-[00:00:20.694] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:20.801] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:02.483] Server  LOG      ✓ Ready in 2.1s
+[00:00:10.978] Server  LOG      ○ Compiling / ...
+[00:00:25.050] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:29.865] Server  LOG      ✓ Compiled in 48ms
+[00:11:42.886] Server  LOG      ✓ Compiled in 1572ms
+[00:11:48.226] Server  LOG      ✓ Compiled in 228ms
+[00:11:58.219] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:58.219] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -14,31 +18,30 @@ It can also happen if the client has a browser extension installed which messes 
 %s%s https://react.dev/link/hydration-mismatch 
 
   ...
-    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
-      <LoadingBoundary name="/" loading={null}>
-        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
-          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
-            <RedirectBoundary>
-              <RedirectErrorBoundary router={{...}}>
-                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
-                  <SegmentViewNode type="page" pagePath="page.tsx">
-                    <SegmentTrieNode>
-                    <ClientPageRoot Component={function Page} serverProvidedParams={{...}}>
-                      <Page params={Promise} searchParams={Promise}>
-                        <div className="coming-soon">
-                          <div>
-                          <div>
-                          <nav>
-                          <main className="cs-main">
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function Page} serverProvidedParams={{...}}>
+                    <Page params={Promise} searchParams={Promise}>
+                      <div className="page">
+                        <div>
+                        <nav>
+                        <main className="hero">
+                          <div className="hero-content">
                             <div>
                             <h1>
                             <p>
                             <div>
-                            <form className="cs-form" onSubmit={function handleSubmit}>
+                            <form className="signup" onSubmit={function handleSubmit}>
                               <input
                                 type="email"
-                                className="cs-input"
-                                placeholder="Enter your email"
+                                className="signup-input"
+                                placeholder="your@email.com"
                                 value=""
                                 onChange={function onChange}
                                 required={true}
@@ -46,24 +49,130 @@ It can also happen if the client has a browser extension installed which messes 
 -                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
                               >
                               ...
-                            ...
                           ...
-                  ...
+                        ...
                 ...
+              ...
 
-[00:00:49.040] Server  LOG      ✓ Compiled in 67ms
-[00:00:50.471] Server  LOG      ✓ Compiled in 122ms
-[00:00:50.578] Browser ERROR   ./app/page.tsx:75:56
+[00:16:39.493] Server  LOG      ✓ Compiled in 324ms
+[00:16:46.209] Server  LOG      ✓ Compiled in 77ms
+[00:16:51.741] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:51.741] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function Page} serverProvidedParams={{...}}>
+                    <Page params={Promise} searchParams={Promise}>
+                      <div className="page">
+                        <div>
+                        <nav>
+                        <main className="hero">
+                          <div className="hero-content">
+                            <div>
+                            <h1>
+                            <p>
+                            <div>
+                            <form className="signup" onSubmit={function handleSubmit}>
+                              <input
+                                type="email"
+                                className="signup-input"
+                                placeholder="your@email.com"
+                                value=""
+                                onChange={function onChange}
+                                required={true}
+                                disabled={false}
+-                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
+                              >
+                              ...
+                          ...
+                        ...
+                ...
+              ...
+
+[00:17:26.240] Server  LOG      ○ Compiling /_not-found/page ...
+[00:17:27.695] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:17:30.079] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:44.158] Server  LOG      ✓ Compiled in 1464ms
+[00:21:51.386] Server  LOG      ✓ Compiled in 2.8s
+[00:27:31.300] Server  LOG      ✓ Compiled in 4.2s
+[00:27:33.082] Server  LOG      ✓ Compiled in 5ms
+[00:37:53.857] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:54.577] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function Page} serverProvidedParams={{...}}>
+                    <Page params={Promise} searchParams={Promise}>
+                      <div className="page">
+                        <div>
+                        <nav>
+                        <main className="hero">
+                          <div className="hero-content">
+                            <div>
+                            <h1>
+                            <p>
+                            <div>
+                            <form className="signup" onSubmit={function handleSubmit}>
+                              <input
+                                type="email"
+                                className="signup-input"
+                                placeholder="your@email.com"
+                                value=""
+                                onChange={function onChange}
+                                required={true}
+                                disabled={false}
+-                               style={{background-size:"auto, 25px",background-image:"none, url(...",background-repeat:"repeat...", ...}}
+                              >
+                              ...
+                          ...
+                        ...
+                ...
+              ...
+
+[00:40:44.308] Server  LOG      ✓ Compiled in 538ms
+[00:40:44.622] Browser ERROR   ./app/page.tsx:1:5
 Parsing ecmascript source code failed
-  73 |           <div className="cs-feature-divider" />
-  74 |           <div className="cs-feature">
-> 75 |             <span className="cs-feature-icon">🎫/span>
-     |                                                        ^
-  76 |             <span className="cs-feature-text">Tradeable Access</span>
-  77 |           </div>
-  78 |           <div className="cs-feature-divider" />
+> 1 | You will act as both a strategic advisor and as an objective collaborator. Consider my idea (notes) below. I want to best understand how I can immediately begin using something like this to generate revenue. One option is to essentially recreate story protocol but in a zk way, but that doesn't feel quite right... 
+    |     ^^^^
+  2 |
+  3 | # Fangorn <> LIT Proposal/Plan
+  4 | ## Introduction
 
-Unexpected token. Did you mean `{'>'}` or `&gt;`?
+Expected ';', '}' or <eof>
 
 Import traces:
   Client Component Browser:
@@ -73,5 +182,138 @@ Import traces:
   Client Component SSR:
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
-[00:00:51.874] Server  LOG      ✓ Compiled in 8ms
-[00:00:54.265] Server  LOG      ✓ Compiled in 7ms
+[00:40:44.622] Browser ERROR   ./app/page.tsx:1:5
+Parsing ecmascript source code failed
+> 1 | You will act as both a strategic advisor and as an objective collaborator. Consider my idea (notes) below. I want to best understand how I can immediately begin using something like this to generate revenue. One option is to essentially recreate story protocol but in a zk way, but that doesn't feel quite right... 
+    |     ^^^^
+  2 |
+  3 | # Fangorn <> LIT Proposal/Plan
+  4 | ## Introduction
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:40:51.630] Server  LOG      ✓ Compiled in 138ms
+[00:40:52.522] Browser ERROR   ./app/page.tsx:1:5
+Parsing ecmascript source code failed
+> 1 | You will act as both a strategic advisor and as an objective collaborator. Consider my idea (notes) below. I want to best understand how I can immediately begin using something like this to generate revenue. One option is to essentially recreate story protocol but in a zk way, but that doesn't feel quite right... 
+    |     ^^^^
+  2 |
+  3 | # Fangorn <> LIT Proposal/Plan
+  4 | ## Introduction
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:40:52.526] Browser ERROR   ./app/page.tsx:1:5
+Parsing ecmascript source code failed
+> 1 | You will act as both a strategic advisor and as an objective collaborator. Consider my idea (notes) below. I want to best understand how I can immediately begin using something like this to generate revenue. One option is to essentially recreate story protocol but in a zk way, but that doesn't feel quite right... 
+    |     ^^^^
+  2 |
+  3 | # Fangorn <> LIT Proposal/Plan
+  4 | ## Introduction
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:41:09.821] Server  LOG      ✓ Compiled in 17ms
+[00:41:26.462] Server  LOG      ✓ Compiled in 13ms
+[00:41:41.022] Server  LOG      ✓ Compiled in 10ms
+[00:41:57.986] Server  LOG      ✓ Compiled in 50ms
+[00:41:58.098] Browser ERROR   ./app/page.tsx:155:13
+Parsing ecmascript source code failed
+  153 |           <div className="aside-divider" />
+  154 |
+> 155 |           */} {/* <div className="aside-label">Stack</div>
+      |             ^
+  156 |           <ul className="aside-list">
+  157 |             <li>
+  158 |               <span className="aside-bullet">◈</span>
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:41:58.098] Browser ERROR   ./app/page.tsx:193:2
+Parsing ecmascript source code failed
+  191 |     </div>
+  192 |   );
+> 193 | }
+      |  ^
+
+Unterminated block comment
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:41:58.900] Browser ERROR   ./app/page.tsx:155:13
+Parsing ecmascript source code failed
+  153 |           <div className="aside-divider" />
+  154 |
+> 155 |           */} {/* <div className="aside-label">Stack</div>
+      |             ^
+  156 |           <ul className="aside-list">
+  157 |             <li>
+  158 |               <span className="aside-bullet">◈</span>
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:41:58.900] Browser ERROR   ./app/page.tsx:193:2
+Parsing ecmascript source code failed
+  191 |     </div>
+  192 |   );
+> 193 | }
+      |  ^
+
+Unterminated block comment
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[00:42:02.611] Server  LOG      ✓ Compiled in 9ms
+[00:42:58.296] Server  LOG      ✓ Compiled in 13ms

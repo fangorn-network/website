@@ -1,0 +1,3 @@
+{
+  "/api/storacha-delegation/[did]/route": "app/api/storacha-delegation/[did]/route.js"
+}
