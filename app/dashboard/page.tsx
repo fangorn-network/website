@@ -3,6 +3,8 @@
 import React, { useState, useCallback, useRef } from 'react';
 import './page.css';
 import { useWallet } from '../hooks/useWallet';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import FangornConnectButton from "./components/FangornConnectButton";
 import { formatFileSize, shortenAddress, shortenCid } from './utils';
 import { Sidebar } from 'lucide-react';
 import { UploadConfig, UploadModal } from './uploadModal';
@@ -173,13 +175,14 @@ const ConnectPrompt = ({ wallet }: ConnectPromptProps) => (
     <div className="connect-icon">🔐</div>
     <h2>Connect Your Wallet</h2>
     <p>Connect your wallet to view your dashboard and start creating tokenized content.</p>
-    <button
+    {/* <button
       className="btn-primary btn-large"
       onClick={wallet.connect}
       disabled={wallet.connecting}
     >
       {wallet.connecting ? 'Connecting...' : 'Connect Wallet'}
-    </button>
+    </button> */}
+    <FangornConnectButton classNameOverride="btn-primary btn-large"/>
   </div>
 );
 

@@ -3,6 +3,7 @@
 // SIDEBAR
 
 import { useWallet } from "../hooks/useWallet";
+import FangornConnectButton from "./components/FangornConnectButton";
 import { shortenAddress } from "./utils";
 
 // ============================================
@@ -33,7 +34,7 @@ export const AppSidebar = ({ wallet, activeView, onViewChange }: SidebarProps) =
     </nav>
 
     <div className="sidebar-footer">
-      {wallet.address ? (
+      {/* {wallet.address ? (
         <>
           <div className="wallet-status">
             <span className="status-dot" />
@@ -52,7 +53,8 @@ export const AppSidebar = ({ wallet, activeView, onViewChange }: SidebarProps) =
         >
           {wallet.connecting ? 'Connecting...' : 'Connect Wallet'}
         </button>
-      )}
+      )} */}
+      <FangornConnectButton classNameOverride="btn-connect-sidebar"/>
     </div>
   </aside>
 );

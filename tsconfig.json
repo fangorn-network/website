@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/dashboard/lit.tsx"  ],
+, "app/dashboard/lit.tsx", "app/common/FangornConnectButton.jsx"  ],
   "exclude": ["node_modules"]
 }
