@@ -57,9 +57,6 @@ export default function Page() {
           <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">
             Discord
           </a>
-          <Link href="/dashboard" className="nav-cta">
-            Launch
-          </Link>
         </div>
       </nav>
 
@@ -71,23 +68,23 @@ export default function Page() {
           </div>
 
           <h1 className="headline">
-            Programmable
+            Privacy-preserving
             <br />
-            <span className="headline-accent">secrets</span>
+            <span className="headline-accent">access control</span>
           </h1>
 
           <p className="description">
-            Encrypt data with conditions attached. 
-            Decrypt only when the conditions are met without revealing anything.
+            Data as a programmable commons. Define access with composable ZK predicates. 
+            Verify without surveillance. No gatekeepers.
           </p>
 
           <p className="subdescription">
-            A composable ZK-predicate layer for Lit Protocol.
+            ZK middleware for Lit Protocol. Witness encryption without the complexity.
           </p>
 
           <div className="flow">
             <div className="flow-step">
-              <span className="flow-label">Set conditions</span>
+              <span className="flow-label">Define</span>
             </div>
             <span className="flow-arrow">→</span>
             <div className="flow-step">
@@ -129,43 +126,43 @@ export default function Page() {
         </div>
 
         <aside className="aside">
-          <div className="aside-label">Use cases</div>
+          <div className="aside-label">What this enables</div>
           <ul className="aside-list">
             <li>
               <span className="aside-bullet">→</span>
-              Credential-gated content
+              Access conditions that stay confidential
             </li>
             <li>
               <span className="aside-bullet">→</span>
-              Sealed-bid auctions
+              Verification without identity exposure
             </li>
             <li>
               <span className="aside-bullet">→</span>
-              Front-running protection
+              Composable predicates from simple gadgets
             </li>
             <li>
               <span className="aside-bullet">→</span>
-              Time-released data
+              No TEE dependency for security
             </li>
           </ul>
           
           <div className="aside-divider" />
 
-          {/* <div className="aside-label">Stack</div>
+          <div className="aside-label">For builders</div>
           <ul className="aside-list">
             <li>
-              <span className="aside-bullet">◈</span>
-              Lit Protocol
+              <span className="aside-bullet">+</span>
+              SDK for defining ZK access conditions
             </li>
             <li>
-              <span className="aside-bullet">◇</span>
-              PLONK / Noir
+              <span className="aside-bullet">+</span>
+              On-chain proof verification
             </li>
             <li>
-              <span className="aside-bullet">◇</span>
-              On-chain verification
+              <span className="aside-bullet">+</span>
+              Drop-in Lit Protocol integration
             </li>
-          </ul> */}
+          </ul>
         </aside>
       </main>
 
@@ -173,7 +170,7 @@ export default function Page() {
         <div className="footer-left">
           <span className="footer-logo">Fangorn</span>
           <span className="footer-divider">/</span>
-          <span className="footer-tagline">Intent-bound encryption</span>
+          <span className="footer-tagline">Intent-bound data infrastructure</span>
         </div>
         <div className="footer-right">
           <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">
