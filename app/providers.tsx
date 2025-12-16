@@ -6,11 +6,10 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 import {
   connectorsForWallets,
-  getDefaultConfig,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import {
-  injectedWallet,
+  injectedWallet
 } from '@rainbow-me/rainbowkit/wallets';
 import { createConfig, http, WagmiProvider } from 'wagmi';
 import {
@@ -21,34 +20,39 @@ import {
   base,
 } from 'wagmi/chains';
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  const connectors = connectorsForWallets(
-    [
-      {
-        groupName: 'Recommended',
-        wallets: [
-          injectedWallet,
-        ]
-      },
-    ],
+const connectors = connectorsForWallets(
+  [
     {
-      appName: 'Fangorn',
-      projectId: 'dummy-id',
-    }
-  );
-
-  const config = createConfig({
-    connectors,
-    chains: [mainnet],
-    transports: {
-      [mainnet.id]: http(),
+      groupName: 'Recommended',
+      wallets: [
+        injectedWallet,
+      ]
     },
-    ssr: true,
-  });
-  const queryClient = new QueryClient()
+  ],
+  {
+    appName: 'Fangorn',
+    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'dummy-id',
+  }
+);
 
+const config = createConfig({
+  connectors,
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+    [optimism.id]: http(),
+    [arbitrum.id]: http(),
+    [base.id]: http(),
+  },
+  ssr: true,
+});
+
+const queryClient = new QueryClient()
+
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
- <WagmiProvider config={config}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
           {children}

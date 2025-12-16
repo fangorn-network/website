@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState, useCallback, useRef } from 'react';
+import {useState} from 'react';
+import {useAccount} from 'wagmi';
 import './page.css';
-import { useWallet } from '../hooks/useWallet';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import FangornConnectButton from "./components/FangornConnectButton";
 import { formatFileSize, shortenAddress, shortenCid } from './utils';
 import { Sidebar } from 'lucide-react';
@@ -166,23 +165,13 @@ const AssetDetailModal = ({ asset, onClose }: AssetDetailModalProps) => {
 // ============================================
 // CONNECT PROMPT
 // ============================================
-interface ConnectPromptProps {
-  wallet: ReturnType<typeof useWallet>;
-}
 
-const ConnectPrompt = ({ wallet }: ConnectPromptProps) => (
+const ConnectPrompt = () => (
   <div className="connect-prompt">
     <div className="connect-icon">🔐</div>
     <h2>Connect Your Wallet</h2>
     <p>Connect your wallet to view your dashboard and start creating tokenized content.</p>
-    {/* <button
-      className="btn-primary btn-large"
-      onClick={wallet.connect}
-      disabled={wallet.connecting}
-    >
-      {wallet.connecting ? 'Connecting...' : 'Connect Wallet'}
-    </button> */}
-    <FangornConnectButton classNameOverride="btn-primary btn-large"/>
+    <FangornConnectButton className = "btn-primary btn-large"/>
   </div>
 );
 
@@ -311,7 +300,6 @@ const LibraryView = () => (
 // ============================================
 export default function Page() {
 
-  const wallet = useWallet();
   const registry = useRegistry();
 
   const { upload, uploading } = useStoracha();
@@ -322,6 +310,7 @@ export default function Page() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [isDeploying, setIsDeploying] = useState(false);
   const [deployStatus, setDeployStatus] = useState('');
+    const { address, isConnected } = useAccount();
 
   const handleUpload = async (file: File, config: UploadConfig) => {
     // TODO: encrypt the file for an erc-2981 token
@@ -422,14 +411,13 @@ export default function Page() {
   return (
     <div className="app">
       <AppSidebar
-        wallet={wallet}
         activeView={activeView}
         onViewChange={setActiveView}
       />
 
       <main className="main">
-        {!wallet.address ? (
-          <ConnectPrompt wallet={wallet} />
+        {!isConnected ? (
+          <ConnectPrompt />
         ) : activeView === 'dashboard' ? (
           <DashboardView
             assets={assets}

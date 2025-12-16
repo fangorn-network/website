@@ -1,8 +1,12 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useDisconnect } from 'wagmi';
+import { shortenAddress } from '../utils';
 
 export default function FangornConnectButton({
-        classNameOverride,
-      }) {
+  className
+}) {
+  const { disconnect } = useDisconnect();
+
   return (
     <ConnectButton.Custom>
       {({
@@ -20,27 +24,54 @@ export default function FangornConnectButton({
             {!connected ? (
               <button 
                 onClick={openConnectModal}
-                className= {classNameOverride}
+                className= {className}
               >
                 Connect Wallet
               </button>
-            ) : (
-              <div style={{ display: 'flex', gap: '12px' }}>
-                {chain.unsupported ? (
-                  <button onClick={openChainModal}>
-                    Wrong network
-                  </button>
-                ) : (
-                  <button onClick={openChainModal}>
-                    {chain.name}
-                  </button>
-                )}
-                <button onClick={openAccountModal}>
-                  {account.displayName}
-                  {account.displayBalance && ` (${account.displayBalance})`}
+            ) : 
+              <>
+                <div 
+                  className="wallet-status"
+                  onClick={openChainModal}
+                  style={{ 
+                    cursor: 'pointer',
+                    transition: 'opacity 0.2s ease, transform 0.1s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = '0.7';
+                    e.currentTarget.style.transform = 'translateX(2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
+                >
+                  <span className="status-dot" />
+                  Connected to {chain.name}
+                </div>
+                <div 
+                  className="wallet-address"
+                  onClick={openAccountModal}
+                  style={{ 
+                    cursor: 'pointer',
+                    transition: 'opacity 0.2s ease, transform 0.1s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = '0.7';
+                    e.currentTarget.style.transform = 'translateX(2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
+                >
+                  {shortenAddress(account.address)}
+                </div>
+                <button className="btn-disconnect" onClick={() => disconnect()}>
+                  Disconnect
                 </button>
-              </div>
-            )}
+              </>
+            }
           </div>
         );
       }}

@@ -1,7 +1,7 @@
 // hooks/useRegistry.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useMemo, useEffect } from 'react';
-import { useWallet } from './useWallet';
+import { useEffect } from 'react';
+import { useAccount } from 'wagmi';
 import { CreateAssetParams, AssetQuery } from '../common/types';
 import { MockAssetRegistry } from '../registry/MockAssetRegistry';
 
@@ -9,20 +9,20 @@ import { MockAssetRegistry } from '../registry/MockAssetRegistry';
 const registry = new MockAssetRegistry();
 
 export function useRegistry() {
-    const wallet = useWallet();
+    const { address, isConnected } = useAccount();
 
     useEffect(() => {
-        if (wallet.address) {
-            registry.connect({ getAddress: async () => wallet.address! });
+        if (address && isConnected) {
+            registry.connect({ getAddress: async () => address });
         } else {
             registry.disconnect();
         }
-    }, [wallet.address]);
+    }, [address, isConnected]);
 
     return {
         registry,
-        ...wallet,
-        isConnected: !!wallet.address,
+        address,
+        isConnected,
     };
 }
 
