@@ -40,14 +40,12 @@ export default function Page() {
 
   return (
     <div className="page">
-      <div className="grid-bg" />
-      
       <nav className="nav">
         <div className="nav-logo">
-          <span className="logo-mark">◌</span>
           <span className="logo-text">Fangorn</span>
         </div>
         <div className="nav-links">
+          <Link href="/about">About Us</Link>
           <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
@@ -60,128 +58,113 @@ export default function Page() {
         </div>
       </nav>
 
-      <main className="hero">
-        <div className="hero-content">
-          <div className="status">
-            <span className="status-dot" />
-            <span className="status-text">In development</span>
-          </div>
-
-          <h1 className="headline">
-            Privacy-preserving
-            <br />
-            <span className="headline-accent">access control</span>
+      <main className="main-content">
+        <section className="hero-section">
+          <div className="status-badge">In development</div>
+          
+          <h1 className="main-heading">
+            Privacy-preserving access control for the decentralized web
           </h1>
 
-          <p className="description">
-            Data as a programmable commons. Define access with composable ZK predicates. 
-            Verify without surveillance. No gatekeepers.
+          <p className="main-description">
+            Fangorn is building ZK middleware for Lit Protocol, enabling witness encryption 
+            without complexity. We're creating data infrastructure where access is programmable, 
+            verification happens without surveillance, and there are no gatekeepers.
           </p>
+        </section>
 
-          <p className="subdescription">
-            ZK middleware for Lit Protocol. Witness encryption without the complexity.
+        <section className="product-box">
+          <h2>Our Product</h2>
+          <p>
+            We provide composable ZK predicates that define access conditions while keeping 
+            them confidential. Verify credentials without exposing identity. Build sophisticated 
+            access controls from simple, reusable components.
           </p>
-
-          <div className="flow">
-            <div className="flow-step">
-              <span className="flow-label">Define</span>
+          
+          <div className="features-grid">
+            <div className="feature-item">
+              <h3>Define</h3>
+              <p>Create access conditions using composable ZK predicates</p>
             </div>
-            <span className="flow-arrow">→</span>
-            <div className="flow-step">
-              <span className="flow-label">Encrypt</span>
+            <div className="feature-item">
+              <h3>Encrypt</h3>
+              <p>Secure your data with privacy-preserving encryption</p>
             </div>
-            <span className="flow-arrow">→</span>
-            <div className="flow-step">
-              <span className="flow-label">Prove</span>
+            <div className="feature-item">
+              <h3>Prove</h3>
+              <p>Generate zero-knowledge proofs of access rights</p>
             </div>
-            <span className="flow-arrow">→</span>
-            <div className="flow-step">
-              <span className="flow-label">Unlock</span>
+            <div className="feature-item">
+              <h3>Unlock</h3>
+              <p>Access data without revealing sensitive information</p>
             </div>
           </div>
+        </section>
 
+        <section className="product-box">
+          <h2>What This Enables</h2>
+          <ul className="features-list">
+            <li>Access conditions that stay confidential</li>
+            <li>Verification without identity exposure</li>
+            <li>Composable predicates from simple gadgets</li>
+            <li>No TEE dependency for security</li>
+          </ul>
+        </section>
+
+        <section className="product-box">
+          <h2>For Builders</h2>
+          <ul className="features-list">
+            <li>SDK for defining ZK access conditions</li>
+            <li>On-chain proof verification</li>
+            <li>Drop-in Lit Protocol integration</li>
+          </ul>
+        </section>
+
+        <section className="signup-section">
+          <h2>Stay Updated</h2>
+          <p>Get notified when we launch</p>
+          
           {!submitted ? (
-            <form className="signup" onSubmit={handleSubmit}>
+            <form className="signup-form" onSubmit={handleSubmit}>
               <input
                 type="email"
-                className="signup-input"
+                className="email-input"
                 placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={loading}
               />
-              <button type="submit" className="signup-button" disabled={loading}>
-                {loading ? '...' : 'Get updates'}
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? 'Submitting...' : 'Get updates'}
               </button>
             </form>
           ) : (
-            <div className="success">
-              <span className="success-check">✓</span>
-              <span>Added.</span>
+            <div className="success-message">
+              ✓ Successfully added to waitlist
             </div>
           )}
 
-          {error && <p className="error">{error}</p>}
-        </div>
-
-        <aside className="aside">
-          <div className="aside-label">What this enables</div>
-          <ul className="aside-list">
-            <li>
-              <span className="aside-bullet">→</span>
-              Access conditions that stay confidential
-            </li>
-            <li>
-              <span className="aside-bullet">→</span>
-              Verification without identity exposure
-            </li>
-            <li>
-              <span className="aside-bullet">→</span>
-              Composable predicates from simple gadgets
-            </li>
-            <li>
-              <span className="aside-bullet">→</span>
-              No TEE dependency for security
-            </li>
-          </ul>
-          
-          <div className="aside-divider" />
-
-          <div className="aside-label">For builders</div>
-          <ul className="aside-list">
-            <li>
-              <span className="aside-bullet">+</span>
-              SDK for defining ZK access conditions
-            </li>
-            <li>
-              <span className="aside-bullet">+</span>
-              On-chain proof verification
-            </li>
-            <li>
-              <span className="aside-bullet">+</span>
-              Drop-in Lit Protocol integration
-            </li>
-          </ul>
-        </aside>
+          {error && <p className="error-message">{error}</p>}
+        </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-left">
-          <span className="footer-logo">Fangorn</span>
-          <span className="footer-divider">/</span>
-          <span className="footer-tagline">Intent-bound data infrastructure</span>
-        </div>
-        <div className="footer-right">
-          <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer">
-            X
-          </a>
-          <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">
-            Discord
-          </a>
+        <div className="footer-content">
+          <div className="footer-left">
+            <strong>Fangorn</strong> — Intent-bound data infrastructure
+          </div>
+          <div className="footer-right">
+            <a href="https://github.com/fangorn-network" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a href="https://x.com/Fangorn_network" target="_blank" rel="noopener noreferrer">
+              X
+            </a>
+            <a href="https://discord.gg/P8xtDRWZ" target="_blank" rel="noopener noreferrer">
+              Discord
+            </a>
+          </div>
         </div>
       </footer>
     </div>
