@@ -9,7 +9,7 @@ export default function ContactSection() {
     name: '',
     email: '',
     message: '',
-    type: 'general',
+    type: 'General',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -31,14 +31,30 @@ export default function ContactSection() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setIsSubmitting(true)
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formState),
+    })
+
+    if (response.ok) {
+      setSubmitted(true)
+    } else {
+      alert('Something went wrong. Please try again.')
+    }
+  } catch (error) {
+    alert('Something went wrong. Please try again.')
+  } finally {
     setIsSubmitting(false)
-    setSubmitted(true)
   }
+}
 
   return (
     <section
@@ -219,10 +235,10 @@ export default function ContactSection() {
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { value: 'general', label: 'General' },
-                      { value: 'partnership', label: 'Partnership' },
-                      { value: 'developer', label: 'Developer' },
-                      { value: 'press', label: 'Press' },
+                      { value: 'General', label: 'General' },
+                      { value: 'Partnership', label: 'Partnership' },
+                      { value: 'Developer', label: 'Developer' },
+                      { value: 'Press', label: 'Press' },
                     ].map((type) => (
                       <button
                         key={type.value}
