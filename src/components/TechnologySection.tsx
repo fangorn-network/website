@@ -125,9 +125,8 @@ export default function TechnologySection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            Like the ancient Ents of Fangorn Forest, our technology is patient, 
-            deliberate, and deeply rooted. Data remains protected in the roots of 
-            our network, emerging only when the right conditions bloom.
+            Secure your data by specifying your own conditions with no intermediary. Data remains protected, censorship resistant, and
+            only decrypts when the right conditions bloom.
           </p>
         </div>
 
