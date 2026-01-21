@@ -94,10 +94,10 @@ export default function ContactSection() {
                     Email
                   </h4>
                   <a
-                    href="mailto:hello@fangorn.xyz"
+                    href="mailto:fangorn@fangorn.network"
                     className="text-fangorn-ivory hover:text-white transition-colors link-underline"
                   >
-                    hello@fangorn.xyz
+                    fangorn@fangorn.network
                   </a>
                 </div>
               </div>
@@ -113,12 +113,12 @@ export default function ContactSection() {
                     Twitter / X
                   </h4>
                   <a
-                    href="https://twitter.com/fangorn_xyz"
+                    href="https://x.com/Fangorn_network"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-fangorn-ivory hover:text-white transition-colors link-underline"
                   >
-                    @fangorn_xyz
+                    @Fangorn_network
                   </a>
                 </div>
               </div>
@@ -134,12 +134,12 @@ export default function ContactSection() {
                     Discord
                   </h4>
                   <a
-                    href="https://discord.gg/fangorn"
+                    href="https://discord.gg/JDj8RdCVyU"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-fangorn-ivory hover:text-white transition-colors link-underline"
                   >
-                    discord.gg/fangorn
+                    discord.gg
                   </a>
                 </div>
               </div>
@@ -157,9 +157,9 @@ export default function ContactSection() {
               <div className="flex-1 h-px bg-fangorn-graphite" />
               <div className="flex items-center gap-3">
                 {[
-                  { icon: 'github', url: 'https://github.com/fangorn-xyz' },
-                  { icon: 'twitter', url: 'https://twitter.com/fangorn_xyz' },
-                  { icon: 'discord', url: 'https://discord.gg/fangorn' },
+                  { icon: 'github', url: 'https://github.com/fangorn-network' },
+                  { icon: 'twitter', url: 'https://x.com/Fangorn_network' },
+                  { icon: 'discord', url: 'https://discord.gg/JDj8RdCVyU' },
                 ].map((social) => (
                   <a
                     key={social.icon}

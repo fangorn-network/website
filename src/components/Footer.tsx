@@ -18,8 +18,8 @@ export default function Footer() {
     ],
     resources: [
       { label: 'Whitepaper', href: '#' },
-      { label: 'GitHub', href: 'https://github.com/fangorn-xyz' },
-      { label: 'Discord', href: 'https://discord.gg/fangorn' },
+      { label: 'GitHub', href: 'https://github.com/fangorn-network' },
+      { label: 'Discord', href: 'https://discord.gg/JDj8RdCVyU' },
       { label: 'Brand Kit', href: '#' },
     ],
     legal: [
@@ -70,9 +70,9 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               {[
-                { icon: 'github', url: 'https://github.com/fangorn-xyz' },
-                { icon: 'twitter', url: 'https://twitter.com/fangorn_xyz' },
-                { icon: 'discord', url: 'https://discord.gg/fangorn' },
+                { icon: 'github', url: 'https://github.com/fangorn-network' },
+                { icon: 'twitter', url: 'https://twitter.com/Fangorn_network' },
+                { icon: 'discord', url: 'https://discord.gg/JDj8RdCVyU' },
               ].map((social) => (
                 <a
                   key={social.icon}

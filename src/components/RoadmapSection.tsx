@@ -37,6 +37,7 @@ const roadmapItems = [
       'Multi-chain support',
       'Oracle network integration',
       'Community governance proposal',
+      'Test extra item'
     ],
   },
   {
