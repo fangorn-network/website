@@ -4,35 +4,27 @@ import { useEffect, useRef, useState } from 'react'
 
 const team = [
   {
-    name: 'Co-Founder Name',
-    role: 'CEO & Co-Founder',
+    name: 'Tony Riemer',
+    role: 'Co-Founder',
     bio: 'Visionary leader with deep expertise in cryptography and distributed systems. Previously led blockchain research at a Fortune 500 tech company.',
+    image: 'team/tony.jpg',
     links: {
       twitter: '#',
-      linkedin: '#',
-      github: '#',
+      linkedin: 'https://www.linkedin.com/in/tony-riemer/',
+      github: 'https://github.com/driemworks',
     },
   },
   {
-    name: 'Co-Founder Name',
-    role: 'CTO & Co-Founder',
-    bio: 'Zero-knowledge proof specialist with a PhD in Applied Cryptography. Core contributor to multiple open-source ZK libraries.',
+    name: 'Coleman Irby',
+    role: 'Co-Founder',
+    bio: 'Full stack engineer with a Masters degree in Physics. Building the future of the internet one block at a time.',
+    image: 'team/coleman.jpg',
     links: {
-      twitter: '#',
-      linkedin: '#',
-      github: '#',
+      // twitter: '#',
+      linkedin: 'https://www.linkedin.com/in/coleman-irby',
+      github: 'https://github.com/colemanirby',
     },
-  },
-  {
-    name: 'Co-Founder Name',
-    role: 'COO & Co-Founder',
-    bio: 'Operations expert with a track record of scaling Web3 startups. Focused on building sustainable, mission-driven organizations.',
-    links: {
-      twitter: '#',
-      linkedin: '#',
-      github: '#',
-    },
-  },
+  }
 ]
 
 const values = [
@@ -46,7 +38,7 @@ const values = [
   },
   {
     title: 'Patient Progress',
-    description: 'Like the Ents we\'re named after, we take the long view. Quality and security over speed.',
+    description: 'We take the long view. Quality and security over speed.',
   },
 ]
 
@@ -102,8 +94,8 @@ export default function TeamSection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            We are a team of cryptographers, engineers, and builders united by 
-            a shared vision: a world where individuals have true control over 
+            We are a team of cryptography and mathematics enthusiasts united by 
+            shared interests and a shared vision: a world where individuals have true control over 
             their data.
           </p>
         </div>
@@ -122,20 +114,11 @@ export default function TeamSection() {
             >
               {/* Avatar placeholder */}
               <div className="relative aspect-[4/5] mb-6 overflow-hidden bg-fangorn-charcoal">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="w-24 h-24 text-fangorn-graphite"
-                  >
-                    {/* Tree silhouette as avatar placeholder */}
-                    <path
-                      d="M50 90V50M50 50L30 70M50 50L70 70M50 50V30M50 30L35 45M50 30L65 45M50 30V15M50 15L40 25M50 15L60 25"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                </div>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:grayscale"
+                  />
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-fangorn-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                   {Object.entries(member.links).map(([platform, url]) => (
