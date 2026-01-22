@@ -6,7 +6,11 @@ const team = [
   {
     name: 'Tony Riemer',
     role: 'Co-Founder',
-    bio: 'Visionary leader with deep expertise in cryptography and distributed systems. Previously led blockchain research at a Fortune 500 tech company.',
+    bio: `
+      Tony is an architect of secure systems with a career spanning enterprise fintech at Capital One and deep blockchain infrastructure at Ideal Labs. 
+      Through multiple Web3 Foundation grants, he has demonstrated a mastery of advanced cryptography, ensuring Fangorn’s foundations are technically uncompromising. 
+      He specializes in translating complex cryptographic theory into the production-ready code required to solve real-world architectural challenges.
+      `,
     image: 'team/tony.jpg',
     links: {
       twitter: '#',
