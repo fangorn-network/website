@@ -14,9 +14,9 @@ const technologies = [
         <path d="M4 14l20 10 20-10M24 44V24" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
-    title: 'Conditional Encryption',
+    title: 'Intent-Bound Data',
     description:
-      'Encrypt data with programmable unlock conditions. Whether it\'s a specific block height, oracle data, or multi-party consensus—your data stays sealed until the moment is right.',
+      'Encrypt for a provable condition, not a secret key. With programmable unlock conditions, whether it\'s a specific block height, oracle data, or multi-party consensus, your data stays sealed until conditions are met',
   },
   {
     icon: (
@@ -33,7 +33,7 @@ const technologies = [
     ),
     title: 'Zero-Knowledge Proofs',
     description:
-      'Prove that conditions are met without revealing sensitive data. Our ZK infrastructure enables trustless verification while maintaining complete privacy.',
+      'Extensible, TEE-free verification. Use our composable zk-gadget framework to set arbitrary conditions, proving the "if" without revealing the "what"',
   },
   {
     icon: (
@@ -48,9 +48,9 @@ const technologies = [
         <path d="M16 16l8 8-8 8" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
-    title: 'On-Chain Integration',
+    title: 'Multi-Chain Support',
     description:
-      'Native support for Ethereum, Solana, and other major chains. Smart contract conditions seamlessly integrate with our encryption layer.',
+      'Fangorn can be integrated into any EVM L2 that supports efficient proof verification.',
   },
   {
     icon: (
@@ -66,9 +66,9 @@ const technologies = [
         <circle cx="24" cy="44" r="2" fill="currentColor" />
       </svg>
     ),
-    title: 'Off-Chain Oracles',
+    title: 'Trustless Threshold Encryption',
     description:
-      'Connect real-world data to your encryption conditions. Time-based releases, external API triggers, and custom oracle networks supported.',
+      `Powered by Lit Protocol\'s threshold encryption network, Fangorn ensures that your "if-then" logic is enforced by a distributed set of nodes. No server ever holds a key to your data.`,
   },
 ]
 
@@ -126,7 +126,7 @@ export default function TechnologySection() {
             }`}
           >
             Secure your data by specifying your own conditions with no intermediary. Data remains protected, censorship resistant, and
-            only decrypts when the right conditions bloom.
+            only decrypts when the right conditions are met.
           </p>
         </div>
 
@@ -166,7 +166,7 @@ export default function TechnologySection() {
             {[
               { step: '01', label: 'Define Conditions', desc: 'Set unlock parameters' },
               { step: '→', label: '', desc: '' },
-              { step: '02', label: 'Encrypt Data', desc: 'Seal with intent-bound key' },
+              { step: '02', label: 'Encrypt Data', desc: 'Encrypt and register data' },
               { step: '→', label: '', desc: '' },
               { step: '03', label: 'Verify & Unlock', desc: 'ZK proof triggers release' },
             ].map((item, index) =>

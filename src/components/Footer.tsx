@@ -13,18 +13,12 @@ export default function Footer() {
     company: [
       { label: 'Team', href: '#team' },
       { label: 'Roadmap', href: '#roadmap' },
-      { label: 'Blog', href: '#' },
-      { label: 'Careers', href: '#' },
+      { label: 'Blog', href: 'https://paragraph.com/0x9069d1daaae05d9d70bb1f782f01786397326801' },
     ],
     resources: [
-      { label: 'Whitepaper', href: '#' },
+      { label: 'Whitepaper (coming soon)', href: '#' },
       { label: 'GitHub', href: 'https://github.com/fangorn-network' },
       { label: 'Discord', href: 'https://discord.gg/JDj8RdCVyU' },
-      { label: 'Brand Kit', href: '#' },
-    ],
-    legal: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
     ],
   }
 
@@ -131,6 +125,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    target='#'
                     className="text-fangorn-ash text-sm hover:text-white transition-colors duration-300"
                   >
                     {link.label}
@@ -150,27 +145,8 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target={link.href.startsWith('http') ? '_blank' : undefined}
+                    target='_blank'
                     rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="text-fangorn-ash text-sm hover:text-white transition-colors duration-300"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h4 className="font-mono text-xs tracking-widest text-fangorn-mist mb-4 uppercase">
-              Legal
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
                     className="text-fangorn-ash text-sm hover:text-white transition-colors duration-300"
                   >
                     {link.label}

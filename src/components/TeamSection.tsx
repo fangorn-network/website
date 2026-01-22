@@ -87,7 +87,7 @@ export default function TeamSection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            Rooted in <span className="italic text-fangorn-silver">purpose</span>
+            Meet the <span className="italic text-fangorn-silver">team</span>
           </h2>
           <p
             className={`text-fangorn-silver leading-relaxed transition-all duration-700 delay-200 ${

@@ -3,11 +3,7 @@
 import { useEffect, useState } from 'react'
 
 export default function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const [isVisible, setIsVisible] = useState(true)
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -35,10 +31,6 @@ export default function HeroSection() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-flex items-center gap-3 px-4 py-2 border border-fangorn-graphite text-fangorn-silver text-sm font-mono tracking-wider">
-            <span className="w-2 h-2 bg-fangorn-mist rounded-full animate-pulse" />
-            WEB3 INFRASTRUCTURE
-          </span>
         </div>
 
         {/* Main Headline */}
@@ -47,8 +39,7 @@ export default function HeroSection() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="block text-fangorn-ivory">Data that speaks</span>
-          <span className="block gradient-text italic">only when ready</span>
+          <span className="block text-fangorn-ivory">{'{ proof > permission }'}</span>
         </h1>
 
         {/* Subheadline */}
@@ -57,9 +48,8 @@ export default function HeroSection() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          Fangorn enables intent-bound encryption—your data remains sealed until 
-          on-chain or off-chain conditions are met. Privacy-preserving. Trustless. 
-          Powered by zero-knowledge proofs.
+          Fangorn is the if-statement for Web3; a programmable logic layer for encrypted data. 
+          No middleman imposing policies, no server storing a password, and nobody who can usurp your own agency.
         </p>
 
         {/* CTA Buttons */}
@@ -90,8 +80,8 @@ export default function HeroSection() {
         >
           {[
             {
-              title: 'Intent-Bound',
-              description: 'Data unlocks only when your specified conditions are met',
+              title: 'Programmable Secrets',
+              description: 'Encrypt data using logical conditions, not secret keys.',
             },
             {
               title: 'Zero-Knowledge',
