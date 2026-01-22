@@ -13,7 +13,7 @@ const team = [
       `,
     image: 'team/tony.jpg',
     links: {
-      twitter: '#',
+      // twitter: '#',
       linkedin: 'https://www.linkedin.com/in/tony-riemer/',
       github: 'https://github.com/driemworks',
     },
@@ -21,7 +21,9 @@ const team = [
   {
     name: 'Coleman Irby',
     role: 'Co-Founder',
-    bio: 'Full stack engineer with a Masters degree in Physics. Building the future of the internet one block at a time.',
+    bio: `Coleman is a self-driven technologist with a BS in Electrical Engineering and an MS in Physics. His career began in software engineering, spending six years in enterprise fintech at Fannie Mae 
+    before returning to school to study advanced Physics. He specializes in rapidly mastering complex domains and bringing rigorous analytical thinking to new challenges, 
+    now channeling that ability into building out the shared vision for Fangorn.`,
     image: 'team/coleman.jpg',
     links: {
       // twitter: '#',

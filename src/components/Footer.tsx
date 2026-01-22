@@ -6,9 +6,9 @@ export default function Footer() {
   const footerLinks = {
     product: [
       { label: 'Technology', href: '#technology' },
-      { label: 'Documentation', href: '#' },
-      { label: 'SDK', href: '#' },
-      { label: 'API Reference', href: '#' },
+      // { label: 'Documentation (Coming Soon)', href: '#' },
+      // { label: 'SDK (Coming Soon)', href: '#' },
+      // { label: 'API Reference', href: '#' },
     ],
     company: [
       { label: 'Team', href: '#team' },
@@ -16,7 +16,7 @@ export default function Footer() {
       { label: 'Blog', href: 'https://paragraph.com/0x9069d1daaae05d9d70bb1f782f01786397326801' },
     ],
     resources: [
-      { label: 'Whitepaper (coming soon)', href: '#' },
+      // { label: 'Whitepaper (coming soon)', href: '#' },
       { label: 'GitHub', href: 'https://github.com/fangorn-network' },
       { label: 'Discord', href: 'https://discord.gg/JDj8RdCVyU' },
     ],

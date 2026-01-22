@@ -11,6 +11,9 @@ export default function ContactSection() {
     message: '',
     type: 'General',
   })
+  const [errors, setErrors] = useState({
+    email: '',
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
@@ -31,30 +34,68 @@ export default function ContactSection() {
     return () => observer.disconnect()
   }, [])
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setIsSubmitting(true)
-
-  try {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formState),
-    })
-
-    if (response.ok) {
-      setSubmitted(true)
-    } else {
-      alert('Something went wrong. Please try again.')
-    }
-  } catch (error) {
-    alert('Something went wrong. Please try again.')
-  } finally {
-    setIsSubmitting(false)
+  const validateEmail = (email: string): boolean => {
+    // Regex pattern for: something@domain.wherever
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
   }
-}
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value
+    setFormState({ ...formState, email })
+    
+    // Clear error when user starts typing
+    if (errors.email) {
+      setErrors({ ...errors, email: '' })
+    }
+  }
+
+  const handleEmailBlur = () => {
+    if (formState.email && !validateEmail(formState.email)) {
+      setErrors({ ...errors, email: 'Please enter a valid email address' })
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    // Validate email before submission
+    if (!validateEmail(formState.email)) {
+      setErrors({ ...errors, email: 'Please enter a valid email address' })
+      return
+    }
+    
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      })
+
+      const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_WAITLIST_URL || 'https://script.google.com/macros/s/AKfycbyk7RMReJQPxdWGQ8JqVi-ECQguE4teqxP7Wq2NUGp97Dd51SiRCMC1t-440DMQXbMC/exec';
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: formState.email }),
+      });
+      if (response.ok) {
+        setSubmitted(true)
+      } else {
+        alert('Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section
@@ -292,12 +333,18 @@ const handleSubmit = async (e: React.FormEvent) => {
                     id="email"
                     required
                     value={formState.email}
-                    onChange={(e) =>
-                      setFormState({ ...formState, email: e.target.value })
-                    }
-                    className="w-full px-4 py-3 bg-transparent border border-fangorn-graphite text-fangorn-ivory placeholder-fangorn-slate focus:border-fangorn-mist focus:outline-none transition-colors"
+                    onChange={handleEmailChange}
+                    onBlur={handleEmailBlur}
+                    className={`w-full px-4 py-3 bg-transparent border text-fangorn-ivory placeholder-fangorn-slate focus:outline-none transition-colors ${
+                      errors.email 
+                        ? 'border-red-500 focus:border-red-400' 
+                        : 'border-fangorn-graphite focus:border-fangorn-mist'
+                    }`}
                     placeholder="your@email.com"
                   />
+                  {errors.email && (
+                    <p className="mt-2 text-sm text-red-400">{errors.email}</p>
+                  )}
                 </div>
 
                 {/* Message */}

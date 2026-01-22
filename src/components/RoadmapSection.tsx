@@ -54,7 +54,11 @@ const roadmapItems = [
   },
 ]
 
-export default function RoadmapSection() {
+interface RoadmapSectionProps {
+  showRoadmap?: boolean
+}
+
+export default function RoadmapSection({ showRoadmap = false }: RoadmapSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -122,177 +126,217 @@ export default function RoadmapSection() {
           </p>
         </div>
 
-        {/* Roadmap Timeline - Desktop */}
-        <div className="hidden lg:block relative">
-          {/* Timeline line */}
-          <div className="absolute left-0 right-0 top-12 h-px bg-fangorn-graphite" />
-          
-          {/* Branch connection lines */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="branchLine" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#3a3a3a" />
-                <stop offset="100%" stopColor="#1a1a1a" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-          <div className="grid grid-cols-4 gap-8">
-            {roadmapItems.map((item, index) => (
-              <div
-                key={index}
-                className={`relative transition-all duration-700 ${
-                  isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${300 + index * 150}ms` }}
+        {showRoadmap ? (
+          <>
+            {/* Roadmap Timeline - Desktop */}
+            <div className="hidden lg:block relative">
+              {/* Timeline line */}
+              <div className="absolute left-0 right-0 top-12 h-px bg-fangorn-graphite" />
+              
+              {/* Branch connection lines */}
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                preserveAspectRatio="none"
               >
-                {/* Timeline node */}
-                <div className="relative mb-8">
+                <defs>
+                  <linearGradient id="branchLine" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#3a3a3a" />
+                    <stop offset="100%" stopColor="#1a1a1a" />
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              <div className="grid grid-cols-4 gap-8">
+                {roadmapItems.map((item, index) => (
                   <div
-                    className={`w-6 h-6 rounded-full ${getStatusStyles(item.status)} flex items-center justify-center`}
+                    key={index}
+                    className={`relative transition-all duration-700 ${
+                      isVisible
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-8'
+                    }`}
+                    style={{ transitionDelay: `${300 + index * 150}ms` }}
                   >
-                    {item.status === 'completed' && (
-                      <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-                      </svg>
-                    )}
-                    {item.status === 'in-progress' && (
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                    )}
-                  </div>
-                  <div className="absolute top-8 left-3 w-px h-8 bg-gradient-to-b from-fangorn-graphite to-transparent" />
-                </div>
-
-                {/* Content */}
-                <div className="pt-4">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="font-mono text-[10px] tracking-widest text-fangorn-ash uppercase">
-                      {item.phase}
-                    </span>
-                    <span
-                      className={`px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase ${
-                        item.status === 'completed'
-                          ? 'bg-white/10 text-white'
-                          : item.status === 'in-progress'
-                          ? 'bg-fangorn-charcoal text-fangorn-mist border border-fangorn-slate'
-                          : 'text-fangorn-ash'
-                      }`}
-                    >
-                      {item.timeline}
-                    </span>
-                  </div>
-                  <h3 className="font-display text-xl text-fangorn-ivory mb-4">
-                    {item.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {item.items.map((listItem, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="flex items-start gap-2 text-sm text-fangorn-ash"
+                    {/* Timeline node */}
+                    <div className="relative mb-8">
+                      <div
+                        className={`w-6 h-6 rounded-full ${getStatusStyles(item.status)} flex items-center justify-center`}
                       >
-                        <span className="mt-1.5 w-1 h-1 bg-fangorn-slate rounded-full flex-shrink-0" />
-                        {listItem}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+                        {item.status === 'completed' && (
+                          <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                          </svg>
+                        )}
+                        {item.status === 'in-progress' && (
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                        )}
+                      </div>
+                      <div className="absolute top-8 left-3 w-px h-8 bg-gradient-to-b from-fangorn-graphite to-transparent" />
+                    </div>
 
-        {/* Roadmap Timeline - Mobile */}
-        <div className="lg:hidden">
-          <div className="relative pl-8 border-l border-fangorn-graphite">
-            {roadmapItems.map((item, index) => (
-              <div
-                key={index}
-                className={`relative pb-12 last:pb-0 transition-all duration-700 ${
-                  isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${300 + index * 150}ms` }}
-              >
-                {/* Timeline node */}
-                <div
-                  className={`absolute -left-[17px] w-6 h-6 rounded-full ${getStatusStyles(
-                    item.status
-                  )} flex items-center justify-center`}
-                >
-                  {item.status === 'completed' && (
-                    <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-                    </svg>
-                  )}
-                  {item.status === 'in-progress' && (
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="pl-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="font-mono text-[10px] tracking-widest text-fangorn-ash uppercase">
-                      {item.phase}
-                    </span>
-                    <span
-                      className={`px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase ${
-                        item.status === 'completed'
-                          ? 'bg-white/10 text-white'
-                          : item.status === 'in-progress'
-                          ? 'bg-fangorn-charcoal text-fangorn-mist border border-fangorn-slate'
-                          : 'text-fangorn-ash'
-                      }`}
-                    >
-                      {item.timeline}
-                    </span>
+                    {/* Content */}
+                    <div className="pt-4">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="font-mono text-[10px] tracking-widest text-fangorn-ash uppercase">
+                          {item.phase}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase ${
+                            item.status === 'completed'
+                              ? 'bg-white/10 text-white'
+                              : item.status === 'in-progress'
+                              ? 'bg-fangorn-charcoal text-fangorn-mist border border-fangorn-slate'
+                              : 'text-fangorn-ash'
+                          }`}
+                        >
+                          {item.timeline}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-xl text-fangorn-ivory mb-4">
+                        {item.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {item.items.map((listItem, itemIndex) => (
+                          <li
+                            key={itemIndex}
+                            className="flex items-start gap-2 text-sm text-fangorn-ash"
+                          >
+                            <span className="mt-1.5 w-1 h-1 bg-fangorn-slate rounded-full flex-shrink-0" />
+                            {listItem}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <h3 className="font-display text-xl text-fangorn-ivory mb-3">
-                    {item.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {item.items.map((listItem, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="flex items-start gap-2 text-sm text-fangorn-ash"
-                      >
-                        <span className="mt-1.5 w-1 h-1 bg-fangorn-slate rounded-full flex-shrink-0" />
-                        {listItem}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* CTA */}
-        <div
-          className={`mt-20 p-8 lg:p-12 border border-fangorn-graphite text-center transition-all duration-700 delay-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h3 className="font-display text-2xl text-fangorn-ivory mb-4">
-            Want to build with us?
-          </h3>
-          <p className="text-fangorn-silver mb-8 max-w-xl mx-auto">
-            We're looking for partners, developers, and early adopters who share 
-            our vision for a more private and intentional future.
-          </p>
-          <a
-            href="#contact"
-            className="inline-block px-8 py-4 bg-white text-fangorn-black font-body text-sm tracking-wide hover:bg-fangorn-ivory transition-all duration-300"
+            {/* Roadmap Timeline - Mobile */}
+            <div className="lg:hidden">
+              <div className="relative pl-8 border-l border-fangorn-graphite">
+                {roadmapItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`relative pb-12 last:pb-0 transition-all duration-700 ${
+                      isVisible
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-8'
+                    }`}
+                    style={{ transitionDelay: `${300 + index * 150}ms` }}
+                  >
+                    {/* Timeline node */}
+                    <div
+                      className={`absolute -left-[17px] w-6 h-6 rounded-full ${getStatusStyles(
+                        item.status
+                      )} flex items-center justify-center`}
+                    >
+                      {item.status === 'completed' && (
+                        <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor">
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                        </svg>
+                      )}
+                      {item.status === 'in-progress' && (
+                        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="pl-6">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="font-mono text-[10px] tracking-widest text-fangorn-ash uppercase">
+                          {item.phase}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase ${
+                            item.status === 'completed'
+                              ? 'bg-white/10 text-white'
+                              : item.status === 'in-progress'
+                              ? 'bg-fangorn-charcoal text-fangorn-mist border border-fangorn-slate'
+                              : 'text-fangorn-ash'
+                          }`}
+                        >
+                          {item.timeline}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-xl text-fangorn-ivory mb-3">
+                        {item.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {item.items.map((listItem, itemIndex) => (
+                          <li
+                            key={itemIndex}
+                            className="flex items-start gap-2 text-sm text-fangorn-ash"
+                          >
+                            <span className="mt-1.5 w-1 h-1 bg-fangorn-slate rounded-full flex-shrink-0" />
+                            {listItem}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Coming Soon Placeholder */
+          <div
+            className={`relative border border-fangorn-graphite p-12 lg:p-20 transition-all duration-700 delay-300 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           >
-            Join Early Access
-          </a>
-        </div>
+            {/* Decorative timeline preview */}
+            <div className="absolute top-8 left-8 right-8 h-px bg-fangorn-graphite opacity-50" />
+            <div className="absolute top-6 left-8 w-4 h-4 rounded-full border border-fangorn-graphite" />
+            <div className="absolute top-6 left-1/4 w-4 h-4 rounded-full border border-fangorn-graphite" />
+            <div className="absolute top-6 left-1/2 w-4 h-4 rounded-full border border-fangorn-graphite" />
+            <div className="absolute top-6 left-3/4 w-4 h-4 rounded-full border border-fangorn-graphite" />
+
+            <div className="flex flex-col items-center justify-center text-center pt-8">
+              <div
+                className={`w-16 h-16 border border-fangorn-slate rounded-full flex items-center justify-center mb-8 transition-all duration-700 delay-400 ${
+                  isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+                }`}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-7 h-7 text-fangorn-mist"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <h3
+                className={`font-display text-3xl lg:text-4xl text-fangorn-ivory mb-4 transition-all duration-700 delay-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                Coming Soon
+              </h3>
+              <p
+                className={`text-fangorn-silver max-w-md mb-8 transition-all duration-700 delay-600 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                We're mapping out our path forward. Check back soon for our detailed 
+                roadmap and milestones.
+              </p>
+              <div
+                className={`flex items-center gap-3 transition-all duration-700 delay-700 ${
+                  isVisible ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
