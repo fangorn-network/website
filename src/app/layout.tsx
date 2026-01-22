@@ -20,6 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <body className="antialiased">
         <div className="noise-overlay" aria-hidden="true" />
         {children}

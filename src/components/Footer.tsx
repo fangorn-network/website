@@ -1,5 +1,7 @@
 'use client'
 
+import { FangornLogo } from "../../public/svg/fangorn-logo"
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -33,26 +35,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <a href="/" className="flex items-center gap-3 group mb-6">
               <div className="relative w-8 h-8">
-                <svg
-                  viewBox="0 0 40 40"
-                  className="w-full h-full"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M20 38V20M20 20L8 28M20 20L32 28M20 20V8M20 8L12 14M20 8L28 14M20 8V2"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    className="text-fangorn-mist group-hover:text-white transition-colors duration-300"
-                  />
-                  <circle
-                    cx="20"
-                    cy="2"
-                    r="2"
-                    className="fill-fangorn-mist group-hover:fill-white transition-colors duration-300"
-                  />
-                </svg>
+              <FangornLogo/>
               </div>
               <span className="font-display text-xl tracking-wide text-fangorn-ivory group-hover:text-white transition-colors duration-300">
                 Fangorn
