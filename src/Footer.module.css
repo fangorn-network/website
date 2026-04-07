@@ -1,0 +1,106 @@
+.cta {
+  padding: 72px 48px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.ctaH2 {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.ctaP {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--sub);
+  font-weight: 300;
+  max-width: 360px;
+  margin: 0 auto 32px;
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.btnA {
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--hi);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.btnA:hover { background: var(--hi2); }
+
+.btnB {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--sub);
+  border: 1px solid var(--line2);
+  padding: 10px 22px;
+  border-radius: 6px;
+  background: var(--s2);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnB:hover { border-color: var(--dim); color: var(--text); }
+
+.ctaLinks {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaLink {
+  font-size: 13px;
+  color: var(--sub);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s;
+}
+
+.ctaLink::after { content: '↗'; font-size: 11px; }
+.ctaLink:hover { color: var(--text); }
+
+.footer {
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+}
+
+.fl { font-size: 13px; font-weight: 500; color: var(--sub); }
+.fc { font-size: 12px; color: var(--dim); }
+
+.flinks { display: flex; gap: 20px; }
+
+.flink {
+  font-size: 12px;
+  color: var(--dim);
+  transition: color 0.15s;
+}
+
+.flink:hover { color: var(--sub); }
+
+@media (max-width: 860px) {
+  .cta { padding: 48px 20px; }
+  .footer { flex-direction: column; gap: 10px; text-align: center; padding: 20px; }
+}
