@@ -1,4 +1,7 @@
-.section { border-bottom: 1px solid var(--line); }
+.section {
+  border-bottom: 1px solid var(--line);
+  margin: 5%;
+}
 
 .header {
   padding: 56px 48px 40px;
@@ -45,14 +48,18 @@
   transition: color 0.15s, border-color 0.15s;
 }
 
-.tab:hover { color: var(--text); }
+.tab:hover {
+  color: var(--text);
+}
 
 .tabActive {
   color: var(--text);
   border-bottom-color: var(--hi);
 }
 
-.pane { min-height: 400px; }
+.pane {
+  min-height: 400px;
+}
 
 /* Shared layout */
 .twoCol {
@@ -127,8 +134,14 @@
   transition: color 0.15s;
 }
 
-.ppLink::after { content: '↗'; font-size: 11px; }
-.ppLink:hover { color: var(--hi2); }
+.ppLink::after {
+  content: '↗';
+  font-size: 11px;
+}
+
+.ppLink:hover {
+  color: var(--hi2);
+}
 
 .ic {
   font-family: var(--mono);
@@ -137,7 +150,10 @@
 }
 
 /* SDK features */
-.featList { display: flex; flex-direction: column; }
+.featList {
+  display: flex;
+  flex-direction: column;
+}
 
 .feat {
   padding: 20px 0;
@@ -148,7 +164,9 @@
   align-items: start;
 }
 
-.feat:first-child { border-top: 1px solid var(--line); }
+.feat:first-child {
+  border-top: 1px solid var(--line);
+}
 
 .featBullet {
   width: 5px;
@@ -185,7 +203,9 @@
   border-right: 1px solid var(--line);
 }
 
-.phase:last-child { border-right: none; }
+.phase:last-child {
+  border-right: none;
+}
 
 .phStep {
   font-family: var(--mono);
@@ -313,12 +333,29 @@
   line-height: 1.9;
 }
 
-.tU { color: var(--sub); }
-.tC { color: var(--text); }
-.tOk { color: var(--g1); }
-.tD { color: var(--dim); }
-.tA { color: var(--hi); }
-.tBl { color: var(--blue); }
+.tU {
+  color: var(--sub);
+}
+
+.tC {
+  color: var(--text);
+}
+
+.tOk {
+  color: var(--g1);
+}
+
+.tD {
+  color: var(--dim);
+}
+
+.tA {
+  color: var(--hi);
+}
+
+.tBl {
+  color: var(--blue);
+}
 
 .cursor {
   display: inline-block;
@@ -331,8 +368,15 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .agentFeats {
@@ -347,7 +391,9 @@
   border-bottom: 1px solid var(--line);
 }
 
-.af:nth-child(2n) { border-right: none; }
+.af:nth-child(2n) {
+  border-right: none;
+}
 
 .afN {
   font-family: var(--mono);
@@ -407,7 +453,9 @@
   justify-content: space-between;
 }
 
-.musicStat:first-of-type { border-top: 1px solid var(--line); }
+.musicStat:first-of-type {
+  border-top: 1px solid var(--line);
+}
 
 .msLabel {
   font-size: 13px;
@@ -422,21 +470,77 @@
 }
 
 @media (max-width: 860px) {
-  .header { grid-template-columns: 1fr; gap: 12px; padding: 40px 20px 28px; }
-  .twoCol { grid-template-columns: 1fr; }
-  .ppL { border-right: none; padding: 28px 20px; }
-  .ppR { padding: 28px 20px; }
-  .phases { grid-template-columns: 1fr; }
-  .phase { border-right: none; }
-  .x402Bottom { grid-template-columns: 1fr; }
-  .x402Prose { border-right: none; padding: 28px 20px; }
-  .x402Code { padding: 28px 20px; }
-  .agentTop { grid-template-columns: 1fr; }
-  .agentIntro { border-right: none; padding: 28px 20px; }
-  .agentTerm { padding: 0 20px 28px; }
-  .agentFeats { grid-template-columns: 1fr; }
-  .af { border-right: none; }
-  .musicInner { grid-template-columns: 1fr; }
-  .musicL { border-right: none; padding: 28px 20px; }
-  .musicR { padding: 28px 20px; }
+  .header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 40px 20px 28px;
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+
+  .ppL {
+    border-right: none;
+    padding: 28px 20px;
+  }
+
+  .ppR {
+    padding: 28px 20px;
+  }
+
+  .phases {
+    grid-template-columns: 1fr;
+  }
+
+  .phase {
+    border-right: none;
+  }
+
+  .x402Bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .x402Prose {
+    border-right: none;
+    padding: 28px 20px;
+  }
+
+  .x402Code {
+    padding: 28px 20px;
+  }
+
+  .agentTop {
+    grid-template-columns: 1fr;
+  }
+
+  .agentIntro {
+    border-right: none;
+    padding: 28px 20px;
+  }
+
+  .agentTerm {
+    padding: 0 20px 28px;
+  }
+
+  .agentFeats {
+    grid-template-columns: 1fr;
+  }
+
+  .af {
+    border-right: none;
+  }
+
+  .musicInner {
+    grid-template-columns: 1fr;
+  }
+
+  .musicL {
+    border-right: none;
+    padding: 28px 20px;
+  }
+
+  .musicR {
+    padding: 28px 20px;
+  }
 }

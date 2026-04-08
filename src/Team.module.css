@@ -1,5 +1,6 @@
 .section {
   border-bottom: 1px solid var(--line);
+  margin: 5%;
 }
 
 .header {
