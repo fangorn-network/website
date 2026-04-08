@@ -7,7 +7,7 @@ export default function Nav() {
       <div className={styles.right}>
         <a href="#products" className={styles.link}>Products</a>
         <a href="#contact" className={styles.link}>Contact</a>
-        <a href="https://docs.fangorn.network" className={styles.btn}>Documentation</a>
+        <a href="https://docs.fangorn.network" className={styles.btn}>Documentation [Coming Soon]</a>
       </div>
     </nav>
   );

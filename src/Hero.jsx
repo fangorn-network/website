@@ -29,7 +29,7 @@ export default function Hero() {
       </div>
 
       <div className={styles.btns}>
-        <a href="https://docs.fangorn.network" className={styles.btnA}>Read the docs</a>
+        <a href="https://docs.fangorn.network" className={styles.btnA}>Read the Docs [Coming Soon]</a>
         <a href="https://github.com/fangorn-network/fangorn" className={styles.btnB}>View on GitHub</a>
       </div>
 
