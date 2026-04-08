@@ -9,25 +9,25 @@ const PANES = {
   sdk: {
     tag: 'Core library',
     name: <><code>@fangorn-network/sdk</code></>,
-    desc: 'Define schemas with field-level encryption, publish records to IPFS-backed storage, and register them on-chain. The access condition is baked into the encrypted field itself via gadgets.',
+    desc: 'Publish data encrypted under programmable access conditions. Fields marked encrypted in your schema are gated by gadgets; the access condition is baked into the ciphertext itself. Everything else stays plaintext and queryable via The Graph.',
     pills: ['TypeScript', 'Pinata', 'Storacha', 'Arbitrum Sepolia', 'The Graph'],
     link: { href: 'https://github.com/fangorn-network/fangorn', label: 'GitHub' },
     features: [
       {
         title: 'Field-level encryption',
-        desc: <span>Mark individual fields <Ic>@type: "encrypted"</Ic> in your schema. Everything else stays plaintext and queryable via The Graph. The gadget hint on each field defines its access condition.</span>,
+        desc: <span>Mark a field <Ic>@type: "encrypted"</Ic> and it gets encrypted at publish time. Plaintext fields stay readable in the manifest with no purchase flow.</span>,
       },
       {
-        title: 'On-chain schema and agent registry',
-        desc: 'Schemas are registered on-chain alongside ERC-8004 agent identities. Any agent can discover your data source by reading the registry, with no additional configuration.',
+        title: 'Schema and agent registry',
+        desc: 'Schemas are registered on-chain alongside ERC-8004 agent identities. Any agent can discover your data source by reading the registry, no extra config required.',
       },
       {
-        title: 'Multi-provider storage',
-        desc: <span>Ciphertexts go to Pinata or Storacha. Manifest CIDs committed on-chain. Subsequent uploads merge with the existing manifest unless you set <Ic>overwrite</Ic>.</span>,
+        title: 'Pinata and Storacha',
+        desc: <span>Ciphertexts pin to Pinata or Storacha. Manifest CIDs commit on-chain. Subsequent uploads merge with the existing manifest unless you set <Ic>overwrite</Ic>.</span>,
       },
       {
-        title: 'Live subgraph on The Graph',
-        desc: 'All registry events indexed in real-time. Plaintext envelope data queryable via GraphQL. Encrypted fields never leave storage without a valid claim.',
+        title: 'Live subgraph',
+        desc: 'All registry events indexed in real-time. Plaintext envelope fields are queryable via GraphQL. Encrypted fields never leave storage without a valid claim.',
       },
     ],
   },
@@ -181,7 +181,7 @@ function MusicPane() {
   const stats = [
     ['Schema registration', 'music.track.v1'],
     ['Encrypted fields', 'audio, lyrics'],
-    ['Storage', 'Pinata + Storacha'],
+    ['Storage', 'Pinata'],
     ['Payment', 'x402f / USDC'],
     ['Discovery', 'Fangorn Agent + The Graph'],
     ['Network', 'Arbitrum Sepolia'],

@@ -45,7 +45,7 @@ export default function Team() {
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div className={styles.tag}>Team</div>
-          <h2 className={styles.h2}>Built by two people who care about the problem.</h2>
+          {/* <h2 className={styles.h2}>Built by two people who care about the problem.</h2> */}
         </div>
         <p className={styles.headerRight}>
           We're cryptography and systems engineers who got tired of watching platforms extract value from data they don't own. Fangorn is what we wanted to exist.
@@ -56,36 +56,32 @@ export default function Team() {
         {team.map((member) => (
           <div key={member.name} className={styles.card}>
             <div className={styles.imgWrap}>
+              <div className={styles.imgFallback}>
+                {member.name.split(' ').map(n => n[0]).join('')}
+              </div>
               <img
                 src={member.image}
                 alt={member.name}
                 className={styles.img}
+                onLoad={(e) => { e.target.previousSibling.style.display = 'none'; }}
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
-              <div className={styles.imgFallback}>
-                {member.name.split(' ').map(n => n[0]).join('')}
-              </div>
             </div>
-            <div className={styles.cardBody}>
-              <div className={styles.cardTop}>
-                <div>
-                  <div className={styles.name}>{member.name}</div>
-                  <div className={styles.role}>{member.role}</div>
-                </div>
-                <div className={styles.links}>
-                  {member.links.github && (
-                    <a href={member.links.github} className={styles.iconLink} target="_blank" rel="noreferrer" aria-label="GitHub">
-                      <GithubIcon />
-                    </a>
-                  )}
-                  {member.links.linkedin && (
-                    <a href={member.links.linkedin} className={styles.iconLink} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                      <LinkedinIcon />
-                    </a>
-                  )}
-                </div>
+            <div className={styles.info}>
+              <div className={styles.name}>{member.name}</div>
+              <div className={styles.role}>{member.role}</div>
+              <div className={styles.links}>
+                {member.links.github && (
+                  <a href={member.links.github} className={styles.iconLink} target="_blank" rel="noreferrer" aria-label="GitHub">
+                    <GithubIcon />
+                  </a>
+                )}
+                {member.links.linkedin && (
+                  <a href={member.links.linkedin} className={styles.iconLink} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                    <LinkedinIcon />
+                  </a>
+                )}
               </div>
-              <p className={styles.bio}>{member.bio}</p>
             </div>
           </div>
         ))}

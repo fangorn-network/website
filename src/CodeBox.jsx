@@ -4,53 +4,47 @@ import styles from './CodeBox.module.css';
 const TABS = ['publish', 'consume', 'schema'];
 
 const PLAIN = {
-  publish: `import { Fangorn, FangornConfig } from '@fangorn-network/sdk';
-
-const fangorn = await Fangorn.create({
-  privateKey: '0x...',
-  storage: { pinata: { jwt: '...', gateway: 'https://...' } },
-  encryption: { lit: true },
-  config: FangornConfig.ArbitrumSepolia,
-});
-
-await fangorn.publisher.upload({
-  records: [{
-    tag: 'track-01',
-    fields: {
-      title: 'Track One',
-      artist: 'Alice',
-      audio: { data: audioBytes, fileType: 'audio/mp3' },
-    },
-  }],
-  schemaName: 'fangorn.music',
-  gateway: 'https://...',
-}, 1n);`,
-
-  consume: `import { FangornX402Middleware } from '@fangorn-network/fetch';
-import { FangornConfig } from '@fangorn-network/sdk';
-
-const middleware = await FangornX402Middleware.create({
-  privateKey: '0x...',
-  config: FangornConfig.ArbitrumSepolia,
-  usdcContractAddress: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d',
-  usdcDomainName: 'USD Coin',
-  facilitatorAddress: '0x147c24c5Ea2f1EE1ac42AD16820De23bBba45Ef6',
-  domain: 'your-app.com',
-});
-
-const result = await middleware.fetchResource({
-  privateKey: '0x...',
-  owner: '0x...',
-  schemaName: 'music.track.v1',
-  tag: 'track-01',
-  baseUrl: 'https://your-resource-server.com',
-});
-
-if (result.success) {
-  // result.data → Uint8Array, result.dataString → string
-  console.log(result.dataString);
-}`,
-
+  publish: `
+  import { Fangorn, FangornConfig } from '@fangorn-network/sdk';
+  const fangorn = await Fangorn.create({
+    privateKey: '0x...',
+    storage: { pinata: { jwt: '...', gateway: 'https://...' } },
+    encryption: { lit: true },
+    config: FangornConfig.ArbitrumSepolia,
+  });
+  await fangorn.publisher.upload({
+    records: [{
+      tag: \`track-\${Date.now()}\`,
+      fields: {
+        title: 'Track One',
+        artist: 'Alice',
+        audio: { data: audioBytes, fileType: 'audio/mp3' },
+      },
+    }],
+    schemaName: 'fangorn.music.demo.v0',
+    gateway: 'https://...',
+  }, 1n);
+  `,
+  consume: `
+    import { FangornX402Middleware } from '@fangorn-network/fetch';
+    import { FangornConfig } from '@fangorn-network/sdk';
+    const middleware = await FangornX402Middleware.create({
+      privateKey: '0x...',
+      config: FangornConfig.ArbitrumSepolia,
+      usdcContractAddress: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d',
+      usdcDomainName: 'USD Coin',
+      facilitatorAddress: '0x147c24c5Ea2f1EE1ac42AD16820De23bBba45Ef6',
+      domain: 'localhost',
+    });
+    const result = await middleware.fetchResource({
+      privateKey: '0x...',
+      owner: '0x147c24c5Ea2f1EE1ac42AD16820De23bBba45Ef6',
+      schemaName: 'fangorn.music.demo.v0',
+      tag: 'track-01',
+      baseUrl: 'https://facilitator.fangorn.network',
+    });
+    console.log(JSON.stringify(result))
+  `,
   schema: `const definition: SchemaDefinition = {
   title:  { '@type': 'string' },   // plaintext
   artist: { '@type': 'string' },   // plaintext
@@ -73,22 +67,22 @@ const CODE = {
       <Line n={2} />
       <Line n={3}><Kw>const</Kw> <Fn>fangorn</Fn> <Op>=</Op> <Kw>await</Kw> <Fn>Fangorn</Fn><Op>.</Op><Fn>create</Fn><Op>{'({'}</Op></Line>
       <Line n={4}>&nbsp;&nbsp;<Prop>privateKey</Prop><Op>:</Op> <Str>'0x...'</Str><Op>,</Op></Line>
-      <Line n={5}>&nbsp;&nbsp;<Prop>storage</Prop><Op>:</Op> <Op>{'{'}</Op> <Prop>pinata</Prop><Op>:</Op> <Op>{'{'}</Op> <Prop>jwt</Prop><Op>:</Op> <Str>'...'</Str><Op>,</Op> <Prop>gateway</Prop><Op>:</Op> <Str>'https://...'</Str> <Op>{'}'}</Op> <Op>{'}'}</Op><Op>,</Op></Line>
+      <Line n={5}>&nbsp;&nbsp;<Prop>storage</Prop><Op>:</Op> <Op>{'{'}</Op> <Prop>pinata</Prop><Op>:</Op> <Op>{'{'}</Op> <Prop>jwt</Prop><Op>:</Op> <Str>'...'</Str><Op>,</Op> <Prop>gateway</Prop><Op>:</Op> <Str>'...'</Str> <Op>{'}'}</Op> <Op>{'}'}</Op><Op>,</Op></Line>
       <Line n={6}>&nbsp;&nbsp;<Prop>encryption</Prop><Op>:</Op> <Op>{'{'}</Op> <Prop>lit</Prop><Op>:</Op> <Kw>true</Kw> <Op>{'}'}</Op><Op>,</Op></Line>
       <Line n={7}>&nbsp;&nbsp;<Prop>config</Prop><Op>:</Op> <Fn>FangornConfig</Fn><Op>.</Op><Fn>ArbitrumSepolia</Fn><Op>,</Op></Line>
       <Line n={8}><Op>{'}'}</Op><Op>);</Op></Line>
       <Line n={9} />
-      <Line n={10}><Kw>await</Kw> <Fn>fangorn</Fn><Op>.</Op><Fn>publisher</Fn><Op>.</Op><Fn>upload</Fn><Op>{'({'}</Op></Line>
+      <Line n={10}><Kw>const</Kw> <Fn>result</Fn> <Op>=</Op> <Kw>await</Kw> <Fn>fangorn</Fn><Op>.</Op><Fn>publisher</Fn><Op>.</Op><Fn>upload</Fn><Op>{'({'}</Op></Line>
       <Line n={11}>&nbsp;&nbsp;<Prop>records</Prop><Op>:</Op> <Op>[{'{'}</Op></Line>
-      <Line n={12}>&nbsp;&nbsp;&nbsp;&nbsp;<Prop>tag</Prop><Op>:</Op> <Str>'track-01'</Str><Op>,</Op></Line>
+      <Line n={10}>&nbsp;&nbsp;&nbsp;&nbsp;<Prop>tag</Prop><Op>:</Op> <Str>{`\`track-\${Date.now()}\``}</Str><Op>,</Op></Line>
       <Line n={13}>&nbsp;&nbsp;&nbsp;&nbsp;<Prop>fields</Prop><Op>:</Op> <Op>{'{'}</Op></Line>
       <Line n={14}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Prop>title</Prop><Op>:</Op> <Str>'Track One'</Str><Op>,</Op></Line>
       <Line n={15}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Prop>artist</Prop><Op>:</Op> <Str>'Alice'</Str><Op>,</Op></Line>
       <Line n={16}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Prop>audio</Prop><Op>:</Op> <Op>{'{'}</Op> <Prop>data</Prop><Op>:</Op> <Fn>audioBytes</Fn><Op>,</Op> <Prop>fileType</Prop><Op>:</Op> <Str>'audio/mp3'</Str> <Op>{'}'}</Op><Op>,</Op></Line>
       <Line n={17}>&nbsp;&nbsp;&nbsp;&nbsp;<Op>{'}'}</Op><Op>,</Op></Line>
       <Line n={18}>&nbsp;&nbsp;<Op>{'}'}</Op><Op>],</Op></Line>
-      <Line n={19}>&nbsp;&nbsp;<Prop>schemaName</Prop><Op>:</Op> <Str>'fangorn.music'</Str><Op>,</Op></Line>
-      <Line n={20}>&nbsp;&nbsp;<Prop>gateway</Prop><Op>:</Op> <Str>'https://...'</Str><Op>,</Op></Line>
+      <Line n={19}>&nbsp;&nbsp;<Prop>schemaName</Prop><Op>:</Op> <Str>'fangorn.music.demo.v0'</Str><Op>,</Op></Line>
+      <Line n={20}>&nbsp;&nbsp;<Prop>gateway</Prop><Op>:</Op> <Str>'https://ipfs.io'</Str><Op>,</Op></Line>
       <Line n={21}><Op>{'}'}</Op><Op>,</Op> <Num>1n</Num><Op>);</Op><Cursor /></Line>
     </pre>
   ),
@@ -103,21 +97,18 @@ const CODE = {
       <Line n={7}>&nbsp;&nbsp;<Prop>usdcContractAddress</Prop><Op>:</Op> <Str>'0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d'</Str><Op>,</Op></Line>
       <Line n={8}>&nbsp;&nbsp;<Prop>usdcDomainName</Prop><Op>:</Op> <Str>'USD Coin'</Str><Op>,</Op></Line>
       <Line n={9}>&nbsp;&nbsp;<Prop>facilitatorAddress</Prop><Op>:</Op> <Str>'0x147c24c5Ea2f1EE1ac42AD16820De23bBba45Ef6'</Str><Op>,</Op></Line>
-      <Line n={10}>&nbsp;&nbsp;<Prop>domain</Prop><Op>:</Op> <Str>'your-app.com'</Str><Op>,</Op></Line>
+      <Line n={10}>&nbsp;&nbsp;<Prop>domain</Prop><Op>:</Op> <Str>'localhost'</Str><Op>,</Op></Line>
       <Line n={11}><Op>{'}'}</Op><Op>);</Op></Line>
       <Line n={12} />
       <Line n={13}><Kw>const</Kw> <Fn>result</Fn> <Op>=</Op> <Kw>await</Kw> <Fn>middleware</Fn><Op>.</Op><Fn>fetchResource</Fn><Op>{'({'}</Op></Line>
       <Line n={14}>&nbsp;&nbsp;<Prop>privateKey</Prop><Op>:</Op> <Str>'0x...'</Str><Op>,</Op></Line>
-      <Line n={15}>&nbsp;&nbsp;<Prop>owner</Prop><Op>:</Op> <Str>'0x...'</Str><Op>,</Op></Line>
-      <Line n={16}>&nbsp;&nbsp;<Prop>schemaName</Prop><Op>:</Op> <Str>'music.track.v1'</Str><Op>,</Op></Line>
+      <Line n={15}>&nbsp;&nbsp;<Prop>owner</Prop><Op>:</Op> <Str>'0x147c24c5Ea2f1EE1ac42AD16820De23bBba45Ef6'</Str><Op>,</Op></Line>
+      <Line n={16}>&nbsp;&nbsp;<Prop>schemaName</Prop><Op>:</Op> <Str>'fangorn.music.demo.v0'</Str><Op>,</Op></Line>
       <Line n={17}>&nbsp;&nbsp;<Prop>tag</Prop><Op>:</Op> <Str>'track-01'</Str><Op>,</Op></Line>
-      <Line n={18}>&nbsp;&nbsp;<Prop>baseUrl</Prop><Op>:</Op> <Str>'https://your-resource-server.com'</Str><Op>,</Op></Line>
+      <Line n={18}>&nbsp;&nbsp;<Prop>baseUrl</Prop><Op>:</Op> <Str>'https://facilitator.fangorn.network'</Str><Op>,</Op></Line>
       <Line n={19}><Op>{'}'}</Op><Op>);</Op></Line>
       <Line n={20} />
-      <Line n={21}><Kw>if</Kw> <Op>(</Op><Fn>result</Fn><Op>.</Op><Prop>success</Prop><Op>)</Op> <Op>{'{'}</Op></Line>
-      <Line n={22}>&nbsp;&nbsp;<Cm>{'// result.data → Uint8Array, result.dataString → string'}</Cm></Line>
-      <Line n={23}>&nbsp;&nbsp;<Fn>console</Fn><Op>.</Op><Fn>log</Fn><Op>(</Op><Fn>result</Fn><Op>.</Op><Prop>dataString</Prop><Op>);</Op></Line>
-      <Line n={24}><Op>{'}'}</Op></Line>
+      <Line n={21}><Fn>console</Fn><Op>.</Op><Fn>log</Fn><Op>(</Op><Fn>JSON</Fn><Op>.</Op><Fn>stringify</Fn><Op>(</Op><Fn>result</Fn><Op>));</Op></Line>
     </pre>
   ),
   schema: (
