@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Geist:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #08080a;
+  --s1: #0d0d10;
+  --s2: #121215;
+  --s3: #18181c;
+  --line: #1e1e24;
+  --line2: #28282f;
+  --text: #dddbe8;
+  --sub: #6b6880;
+  --dim: #3a3848;
+  --hi: #a78bfa;
+  --hi2: #7c5de8;
+  --g1: #22c55e;
+  --orange: #f97316;
+  --blue: #60a5fa;
+  --pink: #f472b6;
+  --mono: 'Fragment Mono', monospace;
+  --sans: 'Geist', 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; }
+button { cursor: pointer; font-family: var(--sans); }

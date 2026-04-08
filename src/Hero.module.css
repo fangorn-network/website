@@ -1,0 +1,105 @@
+.hero {
+  padding: 88px 32px 80px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.h1 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 16px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sub {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--sub);
+  max-width: 420px;
+  margin: 0 auto 24px;
+}
+
+.installWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.installLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--s2);
+  border: 1px solid var(--line2);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.installLine:hover { border-color: var(--dim); }
+
+.installCmd {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+}
+
+.installCopy {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  padding: 2px 8px;
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  background: none;
+  transition: color 0.15s;
+}
+
+.installCopy:hover { color: var(--sub); }
+
+.btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.btnA {
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--hi);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.btnA:hover { background: var(--hi2); }
+
+.btnB {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--sub);
+  border: 1px solid var(--line2);
+  padding: 10px 22px;
+  border-radius: 6px;
+  background: var(--s2);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnB:hover {
+  border-color: var(--dim);
+  color: var(--text);
+}
+
+@media (max-width: 860px) {
+  .hero { padding: 48px 20px; }
+}
