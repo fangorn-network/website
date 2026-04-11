@@ -14,7 +14,7 @@ const fangorn = await Fangorn.create({
 });
 await fangorn.publisher.upload({
   records: [{
-    tag: \`track-\${Date.now()}\`,
+    name: \`track-\${Date.now()}\`,
     fields: {
       title: 'Track One',
       artist: 'Alice',
@@ -70,7 +70,7 @@ const CODE = {
       <Line n={9} />
       <Line n={10}><Kw>await</Kw> <Fn>fangorn</Fn><Op>.</Op><Fn>publisher</Fn><Op>.</Op><Fn>upload</Fn><Op>{'({'}</Op></Line>
       <Line n={11}>&nbsp;&nbsp;<Prop>records</Prop><Op>:</Op> <Op>[{'{'}</Op></Line>
-      <Line n={12}>&nbsp;&nbsp;&nbsp;&nbsp;<Prop>tag</Prop><Op>:</Op> <Str>{`\`track-\${Date.now()}\``}</Str><Op>,</Op></Line>
+      <Line n={12}>&nbsp;&nbsp;&nbsp;&nbsp;<Prop>name</Prop><Op>:</Op> <Str>{`\`track-\${Date.now()}\``}</Str><Op>,</Op></Line>
       <Line n={13}>&nbsp;&nbsp;&nbsp;&nbsp;<Prop>fields</Prop><Op>:</Op> <Op>{'{'}</Op></Line>
       <Line n={14}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Prop>title</Prop><Op>:</Op> <Str>'Track One'</Str><Op>,</Op></Line>
       <Line n={15}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Prop>artist</Prop><Op>:</Op> <Str>'Alice'</Str><Op>,</Op></Line>
