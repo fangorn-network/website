@@ -4,48 +4,50 @@
 }
 
 .header {
-  padding: 56px 48px 40px;
+  padding: 64px 56px 52px;
   border-bottom: 1px solid var(--line);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 48px;
   align-items: end;
 }
 
 .h2 {
-  font-size: clamp(18px, 2vw, 24px);
+  font-size: clamp(18px, 2vw, 26px);
   font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--text);
-  margin-bottom: 8px;
-  line-height: 1.3;
+  margin-bottom: 10px;
+  line-height: 1.25;
 }
 
 .headerP {
-  font-size: 14px;
-  line-height: 1.8;
+  font-size: 13px;
+  line-height: 1.85;
   color: var(--sub);
   font-weight: 300;
+  max-width: 560px;
 }
 
 .tabs {
   display: flex;
   border-bottom: 1px solid var(--line);
-  background: var(--s1);
   overflow-x: auto;
 }
 
 .tab {
-  font-size: 13px;
-  color: var(--sub);
-  padding: 15px 28px;
-  border-bottom: 2px solid transparent;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 16px 32px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
   background: none;
   white-space: nowrap;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s;
+  cursor: pointer;
 }
 
 .tab:hover {
@@ -61,20 +63,18 @@
   min-height: 400px;
 }
 
-/* Shared layout */
 .twoCol {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 7fr;
 }
 
 .ppL {
-  padding: 48px;
+  padding: 56px;
   border-right: 1px solid var(--line);
 }
 
 .ppR {
-  padding: 48px;
-  background: var(--s1);
+  padding: 48px 56px;
 }
 
 .ppTag {
@@ -82,38 +82,39 @@
   font-size: 10px;
   color: var(--hi);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 18px;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
 }
 
 .ppName {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  line-height: 1.3;
 }
 
 .ppName code {
   font-family: var(--mono);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
   color: var(--hi);
 }
 
 .ppDesc {
-  font-size: 14px;
-  line-height: 1.8;
+  font-size: 13px;
+  line-height: 1.85;
   color: var(--sub);
   font-weight: 300;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 28px;
+  gap: 5px;
+  margin-bottom: 32px;
 }
 
 .pill {
@@ -121,17 +122,19 @@
   font-size: 10px;
   color: var(--dim);
   border: 1px solid var(--line2);
-  padding: 3px 9px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 3px;
 }
 
 .ppLink {
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--hi);
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  transition: color 0.15s;
+  transition: opacity 0.15s;
 }
 
 .ppLink::after {
@@ -140,7 +143,7 @@
 }
 
 .ppLink:hover {
-  color: var(--hi2);
+  opacity: 0.7;
 }
 
 .ic {
@@ -149,57 +152,59 @@
   color: var(--hi);
 }
 
-/* SDK features */
 .featList {
   display: flex;
   flex-direction: column;
 }
 
 .feat {
-  padding: 20px 0;
+  padding: 24px 0;
   border-bottom: 1px solid var(--line);
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
   align-items: start;
 }
 
 .feat:first-child {
-  border-top: 1px solid var(--line);
+  padding-top: 0;
 }
 
-.featBullet {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--hi);
-  margin-top: 7px;
-  flex-shrink: 0;
+.feat:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.featNum {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+  padding-top: 2px;
+  letter-spacing: 0.05em;
 }
 
 .featTitle {
   font-size: 13px;
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
 }
 
 .featDesc {
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.8;
   color: var(--sub);
   font-weight: 300;
 }
 
-/* x402f */
 .phases {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  border-top: 1px solid var(--line);
 }
 
 .phase {
-  padding: 40px 36px;
+  padding: 48px 40px;
   border-right: 1px solid var(--line);
 }
 
@@ -210,23 +215,24 @@
 .phStep {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--dim);
+  color: var(--hi);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .phTitle {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  line-height: 1.3;
 }
 
 .phDesc {
-  font-size: 13px;
-  line-height: 1.75;
+  font-size: 12px;
+  line-height: 1.85;
   color: var(--sub);
   font-weight: 300;
 }
@@ -238,12 +244,12 @@
 }
 
 .x402Prose {
-  padding: 40px 48px;
+  padding: 48px 56px;
   border-right: 1px solid var(--line);
 }
 
 .x402H3 {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text);
   margin-bottom: 8px;
@@ -251,15 +257,15 @@
 }
 
 .x402P {
-  font-size: 13px;
-  line-height: 1.75;
+  font-size: 12px;
+  line-height: 1.85;
   color: var(--sub);
   font-weight: 300;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .x402Code {
-  padding: 40px 48px;
+  padding: 48px 56px;
   background: var(--s1);
 }
 
@@ -269,114 +275,89 @@
   color: var(--dim);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .x402Pre {
   font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.85;
+  font-size: 11.5px;
+  line-height: 1.9;
   color: var(--sub);
   white-space: pre;
 }
 
-/* Agent */
 .agentTop {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--line);
 }
 
 .agentIntro {
-  padding: 48px;
+  padding: 56px;
   border-right: 1px solid var(--line);
 }
 
 .agentTerm {
-  padding: 40px 48px;
+  padding: 48px 56px;
   background: var(--s1);
+  display: flex;
+  align-items: center;
 }
 
 .termMock {
   background: #0c0c0a;
   border: 1px solid var(--line2);
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
+  width: 100%;
 }
 
 .termBar {
   display: flex;
   align-items: center;
-  gap: 6px;
   padding: 10px 14px;
-  border-bottom: 1px solid var(--line);
-  background: var(--s2);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
 }
 
 .termLabel {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--dim);
-  margin-left: 8px;
+  color: rgba(255,255,255,0.25);
+  margin: 0 auto;
 }
 
 .termBody {
-  padding: 16px 18px;
+  padding: 18px 20px;
   font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.9;
+  font-size: 11.5px;
+  line-height: 2;
 }
 
-.tU {
-  color: var(--sub);
-}
-
-.tC {
-  color: var(--text);
-}
-
-.tOk {
-  color: var(--g1);
-}
-
-.tD {
-  color: var(--dim);
-}
-
-.tA {
-  color: var(--hi);
-}
-
-.tBl {
-  color: var(--blue);
-}
+.tU { color: rgba(255,255,255,0.3); }
+.tC { color: rgba(255,255,255,0.85); }
+.tOk { color: #27c93f; }
+.tD { color: rgba(255,255,255,0.35); }
+.tA { color: #7c9ff5; }
+.tBl { color: #7c9ff5; }
 
 .cursor {
   display: inline-block;
-  width: 7px;
-  height: 13px;
-  background: var(--hi);
+  width: 6px;
+  height: 12px;
+  background: rgba(255,255,255,0.5);
   vertical-align: middle;
   margin-left: 2px;
-  animation: blink 1s step-end infinite;
+  animation: blink 1.1s step-end infinite;
 }
 
 @keyframes blink {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .agentFeats {
@@ -386,7 +367,7 @@
 }
 
 .af {
-  padding: 36px 40px;
+  padding: 40px 56px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -395,44 +376,47 @@
   border-right: none;
 }
 
+.af:nth-child(3),
+.af:nth-child(4) {
+  border-bottom: none;
+}
+
 .afN {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--dim);
+  color: var(--hi);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .afTitle {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   letter-spacing: -0.01em;
 }
 
 .afDesc {
-  font-size: 13px;
-  line-height: 1.75;
+  font-size: 12px;
+  line-height: 1.85;
   color: var(--sub);
   font-weight: 300;
 }
 
-/* Music */
 .musicInner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--line);
 }
 
 .musicL {
-  padding: 48px;
+  padding: 56px;
   border-right: 1px solid var(--line);
 }
 
 .musicR {
-  padding: 48px;
+  padding: 56px;
   background: var(--s1);
 }
 
@@ -442,15 +426,16 @@
   color: var(--dim);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .musicStat {
-  padding: 18px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--line);
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  gap: 24px;
 }
 
 .musicStat:first-of-type {
@@ -458,22 +443,23 @@
 }
 
 .msLabel {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--sub);
   font-weight: 300;
 }
 
 .msVal {
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text);
+  text-align: right;
 }
 
 @media (max-width: 860px) {
   .header {
     grid-template-columns: 1fr;
     gap: 12px;
-    padding: 40px 20px 28px;
+    padding: 40px 24px 32px;
   }
 
   .twoCol {
@@ -482,11 +468,12 @@
 
   .ppL {
     border-right: none;
-    padding: 28px 20px;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px;
   }
 
   .ppR {
-    padding: 28px 20px;
+    padding: 32px 24px;
   }
 
   .phases {
@@ -495,6 +482,11 @@
 
   .phase {
     border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .phase:last-child {
+    border-bottom: none;
   }
 
   .x402Bottom {
@@ -503,11 +495,12 @@
 
   .x402Prose {
     border-right: none;
-    padding: 28px 20px;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px;
   }
 
   .x402Code {
-    padding: 28px 20px;
+    padding: 32px 24px;
   }
 
   .agentTop {
@@ -516,11 +509,12 @@
 
   .agentIntro {
     border-right: none;
-    padding: 28px 20px;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px;
   }
 
   .agentTerm {
-    padding: 0 20px 28px;
+    padding: 32px 24px;
   }
 
   .agentFeats {
@@ -529,6 +523,16 @@
 
   .af {
     border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px;
+  }
+
+  .af:last-child {
+    border-bottom: none;
+  }
+
+  .af:nth-child(3) {
+    border-bottom: 1px solid var(--line);
   }
 
   .musicInner {
@@ -537,10 +541,11 @@
 
   .musicL {
     border-right: none;
-    padding: 28px 20px;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px;
   }
 
   .musicR {
-    padding: 28px 20px;
+    padding: 32px 24px;
   }
 }
