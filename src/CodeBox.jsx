@@ -117,6 +117,7 @@ const CODE = {
   ),
   schema: (
     <div className={styles.cli}>
+      <CliLine prompt>npm i -g @fangorn-network/sdk</CliLine>
       <CliLine prompt>fangorn init</CliLine>
       <CliLine prompt>fangorn schema register my.schema.v0</CliLine>
       <CliBlank />
